@@ -11,6 +11,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.os.Build;
 
+import br.com.codinglab.restaurantesufg.modelos.LocalizacaoRestaurante;
+import br.com.codinglab.restaurantesufg.modelos.Restaurante;
+
 
 public class MainActivity extends ActionBarActivity {
 
