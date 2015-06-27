@@ -1,5 +1,6 @@
 package br.com.codinglab.restaurantesufg.main;
 
+import android.graphics.Typeface;
 import android.support.v4.app.FragmentTransaction;
 import android.content.Context;
 import android.support.v4.app.FragmentActivity;
@@ -47,7 +48,7 @@ public class CampusAdapter extends RecyclerView.Adapter<CampusAdapter.ViewHolder
                                                              int viewType) {
         // create a new view
         View v = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.campus_rv_item, parent, false);
+                .inflate(R.layout.item_campus, parent, false);
         ViewHolder vh = new ViewHolder(v);
         return vh;
     }
@@ -56,6 +57,9 @@ public class CampusAdapter extends RecyclerView.Adapter<CampusAdapter.ViewHolder
     public void onBindViewHolder(final ViewHolder holder, final int position) {
         TextView nomeCampus = (TextView) holder.view.findViewById(R.id.nome_do_campus);
         TextView enderecoCampus = (TextView) holder.view.findViewById(R.id.endereco_do_campus);
+        Typeface robotoRegular = Typeface.createFromAsset(context.getAssets(), "Roboto-Regular.ttf");
+        nomeCampus.setTypeface(robotoRegular);
+        enderecoCampus.setTypeface(robotoRegular);
         nomeCampus.setText(listaCampus.get(position).toString());
         enderecoCampus.setText(listaEnderecos.get(position).toString());
         holder.view.setOnClickListener(new View.OnClickListener() {

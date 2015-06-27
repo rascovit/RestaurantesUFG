@@ -1,6 +1,7 @@
 package br.com.codinglab.restaurantesufg.main;
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -50,7 +51,7 @@ public class RestaurantesAdapter extends RecyclerView.Adapter<RestaurantesAdapte
                                                              int viewType) {
         // create a new view
         View v = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_lista_restaurante, parent, false);
+                .inflate(R.layout.item_restaurante, parent, false);
         ViewHolder vh = new ViewHolder(v);
         return vh;
     }
@@ -61,10 +62,17 @@ public class RestaurantesAdapter extends RecyclerView.Adapter<RestaurantesAdapte
         TextView tipoRestaurante = (TextView) holder.view.findViewById(R.id.textViewTipoRestaurante);
         TextView valorMinimoRestaurante = (TextView) holder.view.findViewById(R.id.textViewValorMinimoRestaurante);
         TextView distanciaRestaurante = (TextView) holder.view.findViewById(R.id.textViewDistanciaRestaurante);
+        Typeface robotoRegular = Typeface.createFromAsset(context.getAssets(), "Roboto-Regular.ttf");
+
         nomeRestaurante.setText(listaNomes.get(position).toString());
         tipoRestaurante.setText(listaTipos.get(position).toString());
         valorMinimoRestaurante.setText(listaValores.get(position).toString());
         distanciaRestaurante.setText(listaDistancias.get(position).toString());
+
+        nomeRestaurante.setTypeface(robotoRegular);
+        tipoRestaurante.setTypeface(robotoRegular);
+        valorMinimoRestaurante.setTypeface(robotoRegular);
+        distanciaRestaurante.setTypeface(robotoRegular);
     }
 
     @Override
