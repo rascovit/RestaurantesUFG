@@ -9,18 +9,19 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import br.com.codinglab.restaurantesufg.R;
 
 /**
  * Created by thiagodurante on 26/06/15.
  */
-public class RestaurantesAdapter extends RecyclerView.Adapter<RestaurantesAdapter.ViewHolder>{
+public class RestaurantesAdapter extends RecyclerView.Adapter<RestaurantesAdapter.ViewHolder> {
 
     private ArrayList<String> listaNomes;
     private ArrayList<String> listaTipos;
     private ArrayList<String> listaValores;
-    private ArrayList<String> listaDistancias;
+    private HashMap<Integer, ArrayList<String>> listaDistanciasTempos;
     private Context context;
 
     // Provide a reference to the views for each data item
@@ -37,12 +38,12 @@ public class RestaurantesAdapter extends RecyclerView.Adapter<RestaurantesAdapte
 
     // Provide a suitable constructor (depends on the kind of dataset)
     public RestaurantesAdapter(Context context, ArrayList<String> listaNomes, ArrayList<String> listaTipos, ArrayList<String> listaValores,
-                               ArrayList<String> listaDistancias) {
+                               HashMap<Integer, ArrayList<String>> listaDistanciasTempos) {
         this.context = context;
         this.listaNomes = listaNomes;
         this.listaTipos = listaTipos;
         this.listaValores = listaValores;
-        this.listaDistancias = listaDistancias;
+        this.listaDistanciasTempos = listaDistanciasTempos;
     }
 
     // Create new views (invoked by the layout manager)
@@ -67,7 +68,7 @@ public class RestaurantesAdapter extends RecyclerView.Adapter<RestaurantesAdapte
         nomeRestaurante.setText(listaNomes.get(position).toString());
         tipoRestaurante.setText(listaTipos.get(position).toString());
         valorMinimoRestaurante.setText(listaValores.get(position).toString());
-        distanciaRestaurante.setText(listaDistancias.get(position).toString());
+        distanciaRestaurante.setText("aprox. " + listaDistanciasTempos.get(position).get(0) + " - " + listaDistanciasTempos.get(position).get(1));
 
         nomeRestaurante.setTypeface(robotoRegular);
         tipoRestaurante.setTypeface(robotoRegular);

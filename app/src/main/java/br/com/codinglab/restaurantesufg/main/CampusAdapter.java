@@ -1,9 +1,9 @@
 package br.com.codinglab.restaurantesufg.main;
 
-import android.graphics.Typeface;
-import android.support.v4.app.FragmentTransaction;
 import android.content.Context;
+import android.graphics.Typeface;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,7 +17,7 @@ import br.com.codinglab.restaurantesufg.R;
 /**
  * Created by thiagodurante on 26/06/15.
  */
-public class CampusAdapter extends RecyclerView.Adapter<CampusAdapter.ViewHolder>{
+public class CampusAdapter extends RecyclerView.Adapter<CampusAdapter.ViewHolder> {
 
     private ArrayList<String> listaCampus;
     private ArrayList<String> listaEnderecos;

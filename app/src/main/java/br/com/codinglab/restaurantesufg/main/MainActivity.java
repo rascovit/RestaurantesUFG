@@ -1,5 +1,6 @@
 package br.com.codinglab.restaurantesufg.main;
 
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
@@ -11,12 +12,16 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.android.gms.common.api.GoogleApiClient;
+
 import java.util.ArrayList;
 
 import br.com.codinglab.restaurantesufg.R;
 
 
 public class MainActivity extends ActionBarActivity {
+
+    private GoogleApiClient googleApiClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,7 +34,6 @@ public class MainActivity extends ActionBarActivity {
                     .commit();
         }
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -61,6 +65,8 @@ public class MainActivity extends ActionBarActivity {
         private RecyclerView campusRecyclerView;
         private RecyclerView.Adapter campusAdapter;
         private RecyclerView.LayoutManager campusLayoutManager;
+        private LocationManager locationManager;
+        private String locationProvider;
 
         public InicioFragment() {
         }
@@ -68,7 +74,6 @@ public class MainActivity extends ActionBarActivity {
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_main, container, false);
-
 
             ArrayList<String> campus = new ArrayList<>();
             campus.add("Câmpus Colemar Natal e Silva");
@@ -83,7 +88,6 @@ public class MainActivity extends ActionBarActivity {
             enderecosCampus.add("Avenida Dario Sampaio");
             enderecosCampus.add("Avenida Jataí");
             enderecosCampus.add("Rua das amendoeiras");
-
 
             // Referenciando a RV
             campusRecyclerView = (RecyclerView) rootView.findViewById(R.id.campus_recycler_view);
