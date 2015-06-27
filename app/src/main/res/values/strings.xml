@@ -1,5 +1,13 @@
 <resources>
     <string name="app_name">RestaurantesUFG</string>
-    <string name="hello_world">Hello world!</string>
-    <string name="action_settings">Settings</string>
+    <string name="nomeRestaurante">Nome do restaurante</string>
+    <string name="tipoRestaurante">Tipo do restaurante</string>
+    <string name="valorMinimoRestaurante">Valor mínimo do restaurante</string>
+    <string name="distanciaRestaurante">Distância do restaurante</string>
+    <string name="nomeCampus">Campus</string>
+    <string name="enderecoCampus">Endereço</string>
+    <string name="action_settings">Configurações</string>
+
+<!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
