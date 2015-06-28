@@ -28,8 +28,4 @@ public abstract class Cardapio {
     public ArrayList<ItemRefeicao> getRefeicoes() {
         return refeicoes;
     }
-
-    public void addRefeicao(ItemRefeicao itemRefeicao ){
-        refeicoes.add(itemRefeicao);
-    }
 }

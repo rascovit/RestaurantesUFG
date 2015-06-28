@@ -1,5 +1,7 @@
 package br.com.codinglab.restaurantesufg.modelos;
 
+import java.util.ArrayList;
+
 /**
  * Created by PC MASTER RACE on 26/06/2015.
  */
@@ -8,9 +10,14 @@ public class Restaurante {
     private String nomeRestaurante;
     private double valorMinino;
 
-    private CardapioJantar cardapioJantar;
-    private CardapioAlmoco cardapioAlmoco;
-    private CardapioCafeDaManha cardapioCafe;
+    private Horario horarioCafe;
+    private Horario horarioAlmoco;
+    private Horario horarioJantar;
+
+
+    private ArrayList<CardapioJantar> cardapioJantar;
+    private ArrayList<CardapioAlmoco> cardapioAlmoco;
+    private ArrayList<CardapioCafeDaManha> cardapioCafe;
 
     private boolean temJantar;
     private boolean temAlmoco;
@@ -45,50 +52,64 @@ public class Restaurante {
         return localizacaoRestaurante;
     }
 
-    public CardapioJantar getCardapioJantar() {
-        return cardapioJantar;
-    }
+    public ArrayList<CardapioJantar> getCardapioJantar() { return cardapioJantar;}
 
-    public CardapioAlmoco getCardapioAlmoco() {
+    public ArrayList<CardapioAlmoco> getCardapioAlmoco() {
         return cardapioAlmoco;
     }
 
-    public CardapioCafeDaManha getCardapioCafe() {
+    public ArrayList<CardapioCafeDaManha> getCardapioCafe() {
         return cardapioCafe;
     }
 
-    public void setCardapioJantar(CardapioJantar cardapioJantar) {
+    public Horario getHorarioCafe() {
+        return horarioCafe;
+    }
+
+    public Horario getHorarioAlmoco() {
+        return horarioAlmoco;
+    }
+
+    public Horario getHorarioJantar() {
+        return horarioJantar;
+    }
+
+    public boolean temJantar() {
+        return temJantar;
+    }
+
+    public boolean temAlmoco() {
+        return temAlmoco;
+    }
+
+    public boolean temCafeDaManha() {
+        return temCafeDaManha;
+    }
+
+    public void setHorarioCafe(Horario horarioCafe) {
+        this.horarioCafe = horarioCafe;
+    }
+
+    public void setHorarioAlmoco(Horario horarioAlmoco) {
+        this.horarioAlmoco = horarioAlmoco;
+    }
+
+    public void setHorarioJantar(Horario horarioJantar) {
+        this.horarioJantar = horarioJantar;
+    }
+
+    public void setCardapioJantar(ArrayList<CardapioJantar> cardapioJantar) {
         this.cardapioJantar = cardapioJantar;
         this.temJantar = true;
     }
 
-    public void setCardapioAlmoco(CardapioAlmoco cardapioAlmoco) {
+    public void setCardapioAlmoco(ArrayList<CardapioAlmoco> cardapioAlmoco) {
         this.cardapioAlmoco = cardapioAlmoco;
         this.temAlmoco = true;
     }
 
-    public void setCardapioCafe(CardapioCafeDaManha cardapioCafe) {
+    public void setCardapioCafe(ArrayList<CardapioCafeDaManha> cardapioCafe) {
         this.cardapioCafe = cardapioCafe;
         this.temCafeDaManha = true;
     }
-
-    public void addRefeicaoJantar(ItemRefeicao itemRefeicao){
-        cardapioJantar.addRefeicao(itemRefeicao);
-    }
-    public void addRefeicaoAlmoco(ItemRefeicao itemRefeicao){
-        cardapioAlmoco.addRefeicao(itemRefeicao);
-    }
-    public void addRefeicaoCafe(ItemRefeicao itemRefeicao){
-        cardapioCafe.addRefeicao(itemRefeicao);
-    }
-
-    public void addSobremesaJantar(ItemSobremesa itemSobremesa){
-        cardapioJantar.addSobremesa(itemSobremesa);
-    }
-    public void addSobremesaAlmoco(ItemSobremesa itemSobremesa){
-        cardapioAlmoco.addSobremesa(itemSobremesa);
-    }
-
-
-
 }

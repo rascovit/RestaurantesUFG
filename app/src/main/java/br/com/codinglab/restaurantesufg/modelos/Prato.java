@@ -9,7 +9,7 @@ public class Prato {
     private String nome;
     private String descricao;
 
-    public Prato(String tipo, String nome, String descricao) {
+    public Prato(String nome, String descricao,String tipo) {
         this.tipo = tipo;
         this.nome = nome;
         this.descricao = descricao;

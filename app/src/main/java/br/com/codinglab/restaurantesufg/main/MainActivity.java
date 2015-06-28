@@ -15,8 +15,11 @@ import android.view.ViewGroup;
 import com.google.android.gms.common.api.GoogleApiClient;
 
 import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
 
 import br.com.codinglab.restaurantesufg.R;
+import br.com.codinglab.restaurantesufg.modelos.Restaurante;
+import br.com.codinglab.restaurantesufg.utils.RestaurantesAsyncTask;
 
 
 public class MainActivity extends ActionBarActivity {
@@ -74,6 +77,14 @@ public class MainActivity extends ActionBarActivity {
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_main, container, false);
+
+            try {
+                ArrayList<Restaurante> lista = new RestaurantesAsyncTask().execute("campus2").get();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            } catch (ExecutionException e) {
+                e.printStackTrace();
+            }
 
             ArrayList<String> campus = new ArrayList<>();
             campus.add("Câmpus Colemar Natal e Silva");

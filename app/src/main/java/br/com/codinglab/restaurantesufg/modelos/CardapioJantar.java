@@ -8,24 +8,18 @@ import java.util.ArrayList;
 public class CardapioJantar extends Cardapio {
 
     private ArrayList<ItemSobremesa> sobremesas;
-    private boolean sobremesasDisponiveis;
 
     public CardapioJantar(String diaDaSemana, String data, ArrayList<ItemRefeicao> refeicoes) {
         super(diaDaSemana, data, refeicoes);
-        sobremesasDisponiveis = false;
+        sobremesas = new ArrayList<>();
     }
 
     public CardapioJantar(String diaDaSemana, String data, ArrayList<ItemRefeicao> refeicoes, ArrayList<ItemSobremesa> sobremesas){
         super(diaDaSemana, data, refeicoes);
         this.sobremesas = sobremesas;
-        sobremesasDisponiveis = true;
-    }
-
-    public void addSobremesa(ItemSobremesa itemSobremesa ){
-        sobremesas.add(itemSobremesa);
     }
 
     public boolean temSobremesa(){
-        return sobremesasDisponiveis;
+        return !sobremesas.isEmpty();
     }
 }
