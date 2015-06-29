@@ -1,18 +1,11 @@
-package br.com.codinglab.restaurantesufg.utils;
+package br.com.codinglab.restaurantesufg.main;
 
 import android.os.AsyncTask;
-import android.util.Log;
 
-import org.apache.http.HttpResponse;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.protocol.HTTP;
-import org.apache.http.util.EntityUtils;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
 import br.com.codinglab.restaurantesufg.modelos.CardapioAlmoco;
@@ -24,11 +17,12 @@ import br.com.codinglab.restaurantesufg.modelos.ItemSobremesa;
 import br.com.codinglab.restaurantesufg.modelos.LocalizacaoRestaurante;
 import br.com.codinglab.restaurantesufg.modelos.Prato;
 import br.com.codinglab.restaurantesufg.modelos.Restaurante;
+import br.com.codinglab.restaurantesufg.utils.Handler;
 
 /**
  * Created by PC MASTER RACE on 28/06/2015.
  */
-public class RestaurantesAsyncTask extends AsyncTask<String,Void,ArrayList<Restaurante>> {
+public class RestaurantesAsyncTask extends AsyncTask<String, Void, ArrayList<Restaurante>> {
 
     @Override
     protected ArrayList<Restaurante> doInBackground(String... params) {
@@ -37,42 +31,25 @@ public class RestaurantesAsyncTask extends AsyncTask<String,Void,ArrayList<Resta
         String url = "http://codinglab.com.br/samuel/restaurantes.php?campus=" + campus;
         String jsonResposta = "";
         ArrayList<Restaurante> listaRestaurantes = new ArrayList<>();
+        Handler handler = new Handler();
+        jsonResposta = handler.makeServiceCall(url, Handler.GET);
 
-
-        DefaultHttpClient httpClient = new DefaultHttpClient();
-        HttpGet httpGet = new HttpGet(url);
-        try {
-            HttpResponse httpResponse = httpClient.execute(httpGet);
-            if(httpResponse.getStatusLine().getStatusCode() == 200){
-                jsonResposta = EntityUtils.toString(httpResponse.getEntity(),HTTP.UTF_8);
-            }else{
-                // req HTTP deu errado
-                return null;
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        if(jsonResposta != ""){
+        if (jsonResposta != "") {
 
             try {
                 JSONObject jsonPrincipal = new JSONObject(jsonResposta);
                 String serverStatus = jsonPrincipal.getString("status");
 
-                if(serverStatus == "OK"){
-
-
+                if (serverStatus == "OK") {
 
                     JSONArray jsonArrayRestaurantes = jsonPrincipal.getJSONArray("restaurantes");
 
-                    for(int i = 0; i < jsonArrayRestaurantes.length(); i++) {
+                    for (int i = 0; i < jsonArrayRestaurantes.length(); i++) {
                         JSONObject jsonRestaurante = jsonArrayRestaurantes.getJSONObject(i);
-
 
                         int idRestaurante = jsonRestaurante.getInt("id");
                         String nomeRestaurante = jsonRestaurante.getString("nome");
                         double valorMinimo = jsonRestaurante.getDouble("valor-minimo");
-
 
                         JSONObject jsonObject = jsonRestaurante.getJSONObject("localizacao");
                         String endereco = jsonObject.getString("endereco");
@@ -81,11 +58,8 @@ public class RestaurantesAsyncTask extends AsyncTask<String,Void,ArrayList<Resta
                         String latitude = String.valueOf(jsonObject.getString("latitude"));
                         String longitude = String.valueOf(jsonObject.getString("longitude"));
 
-
                         LocalizacaoRestaurante localizacaoRestaurante = new LocalizacaoRestaurante(latitude, longitude, endereco, campusRestaurante, pontoReferencia);
                         Restaurante restaurante = new Restaurante(idRestaurante, nomeRestaurante, valorMinimo, localizacaoRestaurante);
-
-
 
                         jsonObject = jsonRestaurante.getJSONObject("horarios");
 
@@ -94,7 +68,6 @@ public class RestaurantesAsyncTask extends AsyncTask<String,Void,ArrayList<Resta
                             String inicio = jsonObject.getJSONObject("cafe-da-manha").getString("inicio");
                             String fim = jsonObject.getJSONObject("cafe-da-manha").getString("fim");
                             restaurante.setHorarioCafe(new Horario(inicio, fim));
-
 
                             JSONArray cardapioCafeDaManha = jsonRestaurante.getJSONObject("cardapio").getJSONArray("cafe-da-manha");
 
@@ -228,7 +201,7 @@ public class RestaurantesAsyncTask extends AsyncTask<String,Void,ArrayList<Resta
                         }
                         listaRestaurantes.add(restaurante);
                     }
-                }else{
+                } else {
                     // server respondeu um erro;
                     return null;
                 }
@@ -236,7 +209,7 @@ public class RestaurantesAsyncTask extends AsyncTask<String,Void,ArrayList<Resta
                 e.printStackTrace();
             }
 
-        }else{
+        } else {
             // Json vazio
             return null;
         }
@@ -245,6 +218,6 @@ public class RestaurantesAsyncTask extends AsyncTask<String,Void,ArrayList<Resta
 
     @Override
     protected void onPostExecute(ArrayList<Restaurante> restaurantes) {
-        super.onPostExecute(restaurantes);
+
     }
 }

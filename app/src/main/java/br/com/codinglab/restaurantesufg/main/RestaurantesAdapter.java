@@ -23,6 +23,8 @@ public class RestaurantesAdapter extends RecyclerView.Adapter<RestaurantesAdapte
     private ArrayList<String> listaValores;
     private HashMap<Integer, ArrayList<String>> listaDistanciasTempos;
     private Context context;
+    private static final int DISTANCIA_ATE_RESTAURANTE = 0;
+    private static final int TEMPO_ATE_RESTAURANTE = 1;
 
     // Provide a reference to the views for each data item
     // Complex data items may need more than one view per item, and
@@ -68,7 +70,7 @@ public class RestaurantesAdapter extends RecyclerView.Adapter<RestaurantesAdapte
         nomeRestaurante.setText(listaNomes.get(position).toString());
         tipoRestaurante.setText(listaTipos.get(position).toString());
         valorMinimoRestaurante.setText(listaValores.get(position).toString());
-        distanciaRestaurante.setText("aprox. " + listaDistanciasTempos.get(position).get(0) + " - " + listaDistanciasTempos.get(position).get(1));
+        distanciaRestaurante.setText(listaDistanciasTempos.get(position).get(DISTANCIA_ATE_RESTAURANTE) + "  " + listaDistanciasTempos.get(position).get(TEMPO_ATE_RESTAURANTE));
 
         nomeRestaurante.setTypeface(robotoRegular);
         tipoRestaurante.setTypeface(robotoRegular);

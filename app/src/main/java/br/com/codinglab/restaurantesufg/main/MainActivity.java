@@ -1,6 +1,5 @@
 package br.com.codinglab.restaurantesufg.main;
 
-import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
@@ -19,7 +18,6 @@ import java.util.concurrent.ExecutionException;
 
 import br.com.codinglab.restaurantesufg.R;
 import br.com.codinglab.restaurantesufg.modelos.Restaurante;
-import br.com.codinglab.restaurantesufg.utils.RestaurantesAsyncTask;
 
 
 public class MainActivity extends ActionBarActivity {
@@ -68,8 +66,6 @@ public class MainActivity extends ActionBarActivity {
         private RecyclerView campusRecyclerView;
         private RecyclerView.Adapter campusAdapter;
         private RecyclerView.LayoutManager campusLayoutManager;
-        private LocationManager locationManager;
-        private String locationProvider;
 
         public InicioFragment() {
         }
@@ -79,13 +75,14 @@ public class MainActivity extends ActionBarActivity {
             View rootView = inflater.inflate(R.layout.fragment_main, container, false);
 
             try {
-                ArrayList<Restaurante> lista = new RestaurantesAsyncTask().execute("campus2").get();
+                ArrayList<Restaurante> listaRestaurantes = new RestaurantesAsyncTask().execute("campus2").get();
             } catch (InterruptedException e) {
                 e.printStackTrace();
             } catch (ExecutionException e) {
                 e.printStackTrace();
             }
 
+            //MOCK DE CAMPUS UNIVERSITÁRIOS
             ArrayList<String> campus = new ArrayList<>();
             campus.add("Câmpus Colemar Natal e Silva");
             campus.add("Câmpus Samambaia");
