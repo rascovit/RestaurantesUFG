@@ -6,6 +6,8 @@ package br.com.codinglab.restaurantesufg.tabs;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
@@ -15,6 +17,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import br.com.codinglab.restaurantesufg.R;
+import br.com.codinglab.restaurantesufg.main.MapaFragment;
 
 /**
  * A basic sample which shows how to use {@link com.example.android.common.view.SlidingTabLayout}
@@ -129,6 +132,22 @@ public class SlidingTabsBasicFragment extends Fragment {
             // Retrieve a TextView from the inflated View, and update it's text
             TextView title = (TextView) view.findViewById(R.id.item_title);
             title.setText(String.valueOf(position + 1));
+            title.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    MapaFragment mapaFragment = new MapaFragment();
+                    /*Bundle informacoesRestaurante = new Bundle();
+                    double[] coordenadasRestaurante = new double[2];
+                    coordenadasRestaurante[0] = -16.602029;
+                    coordenadasRestaurante[1] = -49.262208;
+                    informacoesRestaurante.putDoubleArray("coordenadas", coordenadasRestaurante);
+                    mapaFragment.setArguments(informacoesRestaurante);*/
+                    FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
+                    fragmentTransaction.replace(R.id.container, mapaFragment);
+                    fragmentTransaction.addToBackStack(null);
+                    fragmentTransaction.commit();
+                }
+            });
 
             //Log.i(LOG_TAG, "instantiateItem() [position: " + position + "]");
 

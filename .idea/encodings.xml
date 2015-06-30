@@ -4,6 +4,7 @@
     <file url="file://$PROJECT_DIR$/app/build.gradle" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/src/main/java/br/com/codinglab/restaurantesufg/main/CampusAdapter.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/src/main/java/br/com/codinglab/restaurantesufg/main/RestaurantesAdapter.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/br/com/codinglab/restaurantesufg/main/RestaurantesAsyncTask.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/src/main/java/br/com/codinglab/restaurantesufg/utils/Handler.java" charset="UTF-8" />
   </component>
 </project>
