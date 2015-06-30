@@ -2,6 +2,8 @@ package br.com.codinglab.restaurantesufg.main;
 
 import android.content.Context;
 import android.graphics.Typeface;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +14,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import br.com.codinglab.restaurantesufg.R;
+import br.com.codinglab.restaurantesufg.tabs.SlidingTabsBasicFragment;
 
 /**
  * Created by thiagodurante on 26/06/15.
@@ -76,6 +79,18 @@ public class RestaurantesAdapter extends RecyclerView.Adapter<RestaurantesAdapte
         tipoRestaurante.setTypeface(robotoRegular);
         valorMinimoRestaurante.setTypeface(robotoRegular);
         distanciaRestaurante.setTypeface(robotoRegular);
+
+        // TABS
+        holder.view.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                SlidingTabsBasicFragment slidingTabsBasicFragment = new SlidingTabsBasicFragment();
+                FragmentTransaction fragmentTransaction = ((FragmentActivity) context).getSupportFragmentManager().beginTransaction();
+                fragmentTransaction.replace(R.id.container, slidingTabsBasicFragment);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
+            }
+        });
     }
 
     @Override
