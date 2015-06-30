@@ -11,8 +11,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.google.android.gms.common.api.GoogleApiClient;
-
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
@@ -21,8 +19,6 @@ import br.com.codinglab.restaurantesufg.modelos.Restaurante;
 
 
 public class MainActivity extends ActionBarActivity {
-
-    private GoogleApiClient googleApiClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,7 +71,7 @@ public class MainActivity extends ActionBarActivity {
             View rootView = inflater.inflate(R.layout.fragment_main, container, false);
 
             try {
-                ArrayList<Restaurante> listaRestaurantes = new RestaurantesAsyncTask().execute("campus2").get();
+                ArrayList<Restaurante> listaRestaurantes = new RestaurantesAsyncTask(getActivity()).execute("campus2").get();
             } catch (InterruptedException e) {
                 e.printStackTrace();
             } catch (ExecutionException e) {

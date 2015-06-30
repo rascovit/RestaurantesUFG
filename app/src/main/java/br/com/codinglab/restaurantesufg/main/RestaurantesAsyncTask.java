@@ -1,5 +1,7 @@
 package br.com.codinglab.restaurantesufg.main;
 
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.os.AsyncTask;
 
 import org.json.JSONArray;
@@ -23,6 +25,21 @@ import br.com.codinglab.restaurantesufg.utils.Handler;
  * Created by PC MASTER RACE on 28/06/2015.
  */
 public class RestaurantesAsyncTask extends AsyncTask<String, Void, ArrayList<Restaurante>> {
+
+    private Context contexto;
+    private ProgressDialog progressDialog;
+
+    public RestaurantesAsyncTask(Context contexto) {
+        this.contexto = contexto;
+    }
+
+    @Override
+    protected void onPreExecute() {
+        progressDialog = new ProgressDialog(contexto);
+        progressDialog.setTitle("Informações");
+        progressDialog.setMessage("Carregando informações...");
+        progressDialog.show();
+    }
 
     @Override
     protected ArrayList<Restaurante> doInBackground(String... params) {
@@ -218,6 +235,6 @@ public class RestaurantesAsyncTask extends AsyncTask<String, Void, ArrayList<Res
 
     @Override
     protected void onPostExecute(ArrayList<Restaurante> restaurantes) {
-
+        progressDialog.dismiss();
     }
 }
