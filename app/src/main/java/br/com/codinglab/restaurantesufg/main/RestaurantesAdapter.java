@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import br.com.codinglab.restaurantesufg.R;
+import br.com.codinglab.restaurantesufg.modelos.Restaurante;
 import br.com.codinglab.restaurantesufg.tabs.SlidingTabsBasicFragment;
 
 /**
@@ -25,6 +26,7 @@ public class RestaurantesAdapter extends RecyclerView.Adapter<RestaurantesAdapte
     private ArrayList<String> listaTipos;
     private ArrayList<String> listaValores;
     private HashMap<Integer, ArrayList<String>> listaDistanciasTempos;
+    ArrayList<Restaurante> restaurantes;
     private Context context;
     private static final int DISTANCIA_ATE_RESTAURANTE = 0;
     private static final int TEMPO_ATE_RESTAURANTE = 1;
@@ -43,12 +45,13 @@ public class RestaurantesAdapter extends RecyclerView.Adapter<RestaurantesAdapte
 
     // Provide a suitable constructor (depends on the kind of dataset)
     public RestaurantesAdapter(Context context, ArrayList<String> listaNomes, ArrayList<String> listaTipos, ArrayList<String> listaValores,
-                               HashMap<Integer, ArrayList<String>> listaDistanciasTempos) {
+                               HashMap<Integer, ArrayList<String>> listaDistanciasTempos, ArrayList<Restaurante> restaurantes) {
         this.context = context;
         this.listaNomes = listaNomes;
         this.listaTipos = listaTipos;
         this.listaValores = listaValores;
         this.listaDistanciasTempos = listaDistanciasTempos;
+        this.restaurantes = restaurantes;
     }
 
     // Create new views (invoked by the layout manager)
@@ -70,10 +73,15 @@ public class RestaurantesAdapter extends RecyclerView.Adapter<RestaurantesAdapte
         TextView distanciaRestaurante = (TextView) holder.view.findViewById(R.id.textViewDistanciaRestaurante);
         Typeface robotoRegular = Typeface.createFromAsset(context.getAssets(), "Roboto-Regular.ttf");
 
-        nomeRestaurante.setText(listaNomes.get(position).toString());
-        tipoRestaurante.setText(listaTipos.get(position).toString());
-        valorMinimoRestaurante.setText(listaValores.get(position).toString());
-        distanciaRestaurante.setText(listaDistanciasTempos.get(position).get(DISTANCIA_ATE_RESTAURANTE) + "  " + listaDistanciasTempos.get(position).get(TEMPO_ATE_RESTAURANTE));
+        nomeRestaurante.setText(restaurantes.get(position).getNomeRestaurante());
+        tipoRestaurante.setText(restaurantes.get(position).getEstiloDeServir());
+        valorMinimoRestaurante.setText("Refeições a partir de R$ " + String.valueOf(restaurantes.get(position).getValorMinino()));
+        distanciaRestaurante.setText(restaurantes.get(position).getLocalizacaoRestaurante().getDistancia() + "  " + restaurantes.get(position).getLocalizacaoRestaurante().getTempoViagem());
+
+        //nomeRestaurante.setText(listaNomes.get(position).toString());
+        //tipoRestaurante.setText(listaTipos.get(position).toString());
+        //valorMinimoRestaurante.setText(listaValores.get(position).toString());
+        //distanciaRestaurante.setText(listaDistanciasTempos.get(position).get(DISTANCIA_ATE_RESTAURANTE) + "  " + listaDistanciasTempos.get(position).get(TEMPO_ATE_RESTAURANTE));
 
         nomeRestaurante.setTypeface(robotoRegular);
         tipoRestaurante.setTypeface(robotoRegular);
@@ -95,6 +103,6 @@ public class RestaurantesAdapter extends RecyclerView.Adapter<RestaurantesAdapte
 
     @Override
     public int getItemCount() {
-        return listaNomes.size();
+        return restaurantes.size();
     }
 }

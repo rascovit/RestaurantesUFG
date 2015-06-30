@@ -16,6 +16,9 @@ public class LocalizacaoRestaurante extends Localizacao{
         this.enderecoRestaurante = enderecoRestaurante;
         this.campus = campus;
         this.pontoDeReferencia = pontoDeReferencia;
+        this.distanciaKM = "0 KM";
+        this.tempViagem = "0 minutos";
+
     }
 
     public void setDistancia(String distanceTexto) {

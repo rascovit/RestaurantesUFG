@@ -9,6 +9,7 @@ public class Restaurante {
     private int id;
     private String nomeRestaurante;
     private double valorMinino;
+    private String estiloDeServir;
 
     private Horario horarioCafe;
     private Horario horarioAlmoco;
@@ -25,10 +26,11 @@ public class Restaurante {
 
     private LocalizacaoRestaurante localizacaoRestaurante;
 
-    public Restaurante(int id, String nomeRestaurante, double valorMinino, LocalizacaoRestaurante localizacaoRestaurante) {
+    public Restaurante(int id, String nomeRestaurante, double valorMinino,String estiloDeServir, LocalizacaoRestaurante localizacaoRestaurante) {
         this.id = id;
         this.nomeRestaurante = nomeRestaurante;
         this.valorMinino = valorMinino;
+        this.estiloDeServir = estiloDeServir;
         this.localizacaoRestaurante = localizacaoRestaurante;
         this.temJantar = false;
         this.temAlmoco = false;
@@ -46,6 +48,10 @@ public class Restaurante {
 
     public double getValorMinino() {
         return valorMinino;
+    }
+
+    public String getEstiloDeServir() {
+        return estiloDeServir;
     }
 
     public LocalizacaoRestaurante getLocalizacaoRestaurante() {

@@ -24,8 +24,11 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.concurrent.ExecutionException;
 
 import br.com.codinglab.restaurantesufg.R;
+import br.com.codinglab.restaurantesufg.modelos.LocalizacaoRestaurante;
+import br.com.codinglab.restaurantesufg.modelos.Restaurante;
 import br.com.codinglab.restaurantesufg.utils.Handler;
 
 /**
@@ -40,15 +43,12 @@ public class RestaurantesFragment extends Fragment implements LocationListener {
     private LocationManager locationManager;
     private String locationProvider;
     private Handler handlerRequisicoes;
+    ArrayList<Restaurante> listaRestaurantes;
     private ArrayList<String> nomesRestaurantes;
     private ArrayList<String> tiposRestaurantes;
     private ArrayList<String> valoresRestaurantes;
     private ArrayList<String> coordenadasRestaurantes;
     private ArrayList<String> tempoDistancia;
-
-    public RestaurantesFragment() {
-
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -78,6 +78,13 @@ public class RestaurantesFragment extends Fragment implements LocationListener {
             });
             builder.setNegativeButton("Não", null);
             builder.show();
+        }
+        try {
+            listaRestaurantes = new RestaurantesAsyncTask(getActivity()).execute("campus2").get();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
         }
 
         //MOCK DE RESTAURANTES
@@ -118,7 +125,7 @@ public class RestaurantesFragment extends Fragment implements LocationListener {
         restaurantesLayoutManager = new LinearLayoutManager(getActivity());
         restaurantesRecyclerView.setLayoutManager(restaurantesLayoutManager);
         // Criando e especificando um Adapter para a RV
-        restaurantesAdapter = new RestaurantesAdapter(getActivity(), nomesRestaurantes, tiposRestaurantes, valoresRestaurantes, distanciaTempoAteLocal);
+        restaurantesAdapter = new RestaurantesAdapter(getActivity(), nomesRestaurantes, tiposRestaurantes, valoresRestaurantes, distanciaTempoAteLocal, listaRestaurantes);
         restaurantesRecyclerView.setAdapter(restaurantesAdapter);
 
         return rootView;
@@ -153,7 +160,35 @@ public class RestaurantesFragment extends Fragment implements LocationListener {
             tempoDistancia.clear();
             //LIMPA O MAPA DE TEMPOS E DISTANCIAS DOS RESTAURANTES
             distanciaTempoAteLocal.clear();
-            for (int i = 0; i < coordenadasRestaurantes.size(); i++) {
+
+
+            for(int i = 0; i < listaRestaurantes.size(); i++){
+                String par = listaRestaurantes.get(i).getLocalizacaoRestaurante().getLatitude() + "," + listaRestaurantes.get(i).getLocalizacaoRestaurante().getLongitude();
+                String urlPesquisa = "https://maps.googleapis.com/maps/api/distancematrix/json?origins=" + params[0].getLatitude() + "," + params[0].getLongitude() + "&destinations=" + par + "&mode=driving&language=pt-BR";
+                String respostaJSON = handlerRequisicoes.makeServiceCall(urlPesquisa, Handler.GET);
+                try {
+
+                    JSONObject jsonObject = new JSONObject(respostaJSON);
+                    JSONObject rows = jsonObject.getJSONArray("rows").getJSONObject(0);
+                    JSONObject elements = rows.getJSONArray("elements").getJSONObject(0);
+                    JSONObject distancia = elements.getJSONObject("distance");
+                    String distanciaEmKM = distancia.optString("text");
+                    JSONObject tempoAteLocal = elements.getJSONObject("duration");
+                    String tempoEstimado = tempoAteLocal.optString("text");
+
+                    listaRestaurantes.get(i).getLocalizacaoRestaurante().setDistancia(distanciaEmKM);
+                    listaRestaurantes.get(i).getLocalizacaoRestaurante().setTempViagem(tempoEstimado);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
+
+
+
+
+
+            /*for (int i = 0; i < coordenadasRestaurantes.size(); i++) {
                 String urlPesquisa = "https://maps.googleapis.com/maps/api/distancematrix/json?origins=" + params[0].getLatitude() + "," + params[0].getLongitude() + "&destinations=" + coordenadasRestaurantes.get(i) + "&mode=driving&language=pt-BR";
                 String respostaJSON = handlerRequisicoes.makeServiceCall(urlPesquisa, Handler.GET);
                 try {
@@ -170,7 +205,7 @@ public class RestaurantesFragment extends Fragment implements LocationListener {
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-            }
+            }*/
             return distanciaTempoAteLocal;
         }
 

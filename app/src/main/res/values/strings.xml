@@ -2,7 +2,7 @@
     <string name="app_name">RestaurantesUFG</string>
     <string name="nomeRestaurante">Nome do restaurante</string>
     <string name="tipoRestaurante">Tipo do restaurante</string>
-    <string name="valorMinimoRestaurante">Valor mínimo do restaurante</string>
+    <string name="valorMinimoRestaurante">Refeições a partir de R$ </string>
     <string name="distanciaRestaurante">Distância do restaurante</string>
     <string name="nomeCampus">Campus</string>
     <string name="enderecoCampus">Endereço</string>
