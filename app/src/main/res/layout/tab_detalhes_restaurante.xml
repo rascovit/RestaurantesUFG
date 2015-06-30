@@ -26,8 +26,6 @@
                 android:layout_height="180dp"
                 android:id="@+id/restauranteDetalhesImg_imageView" />
 
-
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -78,7 +76,7 @@
                             android:layout_width="80dp"
                             android:layout_height="80dp"
                             android:id="@+id/cafeDaManha_imageView"
-                            android:src="@drawable/Cafe"/>
+                            android:src="@drawable/cafe"/>
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -112,7 +110,7 @@
                             android:layout_width="80dp"
                             android:layout_height="80dp"
                             android:id="@+id/almoco_imageView"
-                            android:src="@drawable/Almoco"/>
+                            android:src="@drawable/almoco"/>
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -146,7 +144,7 @@
                             android:layout_width="80dp"
                             android:layout_height="80dp"
                             android:id="@+id/jantar_imageView"
-                            android:src="@drawable/Jantar"/>
+                            android:src="@drawable/jantar"/>
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -197,14 +195,11 @@
 
                 </LinearLayout>
 
-
             </LinearLayout>
 
-
         </LinearLayout>
+
     </ScrollView>
-
-
 
 </android.support.v7.widget.CardView>
 
