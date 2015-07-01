@@ -1,81 +1,86 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
     android:layout_height="match_parent"
-    android:layout_marginLeft="8dp"
-    android:layout_marginRight="8dp">
+    android:layout_width="match_parent">
 
-    <android.support.v7.widget.CardView
+    <RelativeLayout
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/cardViewRestaurante"
-        android:padding="16dp"
-        android:layout_marginBottom="8dp">
+        android:layout_height="match_parent"
+        android:layout_marginBottom="8dp"
+        android:layout_marginRight="16dp">
 
-        <LinearLayout
-            android:layout_height="wrap_content"
+
+        <com.pkmmte.view.CircularImageView
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="8dp"
+            android:src="@drawable/restaurante"
+            app:border="true"
+            app:border_color="#EFEBE9"
+            app:border_width="1dp"
+            app:shadow="true"
+            android:id="@+id/view" />
+
+        <TextView
             android:layout_width="wrap_content"
-            android:orientation="horizontal">
+            android:layout_height="wrap_content"
+            android:text="@string/nomeRestaurante"
+            android:id="@+id/textViewNomeRestaurante"
+            android:paddingLeft="16dp"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="#DF000000"
+            android:layout_alignTop="@+id/view"
+            android:layout_toRightOf="@+id/view"
+            android:layout_toEndOf="@+id/view" />
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:paddingLeft="8dp"
-                android:layout_gravity="center_vertical">
-                <ImageView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:id="@+id/imageViewLogoRestaurante"
-                    android:src="@mipmap/ic_launcher"/>
-            </LinearLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="16dp"
+            android:text="@string/tipoRestaurante"
+            android:id="@+id/textViewTipoRestaurante"
+            android:textSize="14sp"
+            android:textColor="#8C000000"
+            android:layout_below="@+id/textViewNomeRestaurante"
+            android:layout_toRightOf="@+id/view"
+            android:layout_toEndOf="@+id/view" />
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/valorMinimoRestaurante"
+            android:id="@+id/textViewValorMinimoRestaurante"
+            android:textSize="14sp"
+            android:textColor="#8C000000"
+            android:paddingLeft="16dp"
+            android:layout_below="@+id/textViewTipoRestaurante"
+            android:layout_toRightOf="@+id/view"
+            android:layout_toEndOf="@+id/view" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/nomeRestaurante"
-                    android:id="@+id/textViewNomeRestaurante"
-                    android:textSize="16sp"
-                    android:paddingLeft="8dp"
-                    android:textColor="#DF000000"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/distanciaRestaurante"
+            android:id="@+id/textViewDistanciaRestaurante"
+            android:textSize="14sp"
+            android:textColor="#8C000000"
+            android:paddingLeft="16dp"
+            android:layout_below="@+id/textViewValorMinimoRestaurante"
+            android:layout_toRightOf="@+id/view"
+            android:layout_toEndOf="@+id/view" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/tipoRestaurante"
-                    android:id="@+id/textViewTipoRestaurante"
-                    android:textSize="16sp"
-                    android:paddingLeft="8dp"
-                    android:textColor="#8C000000"/>
+    </RelativeLayout>
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/valorMinimoRestaurante"
-                    android:id="@+id/textViewValorMinimoRestaurante"
-                    android:textSize="16sp"
-                    android:paddingLeft="8dp"
-                    android:textColor="#8C000000" />
+    <View android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="#38000000"
+        android:layout_marginTop="8dp"
+        android:layout_marginLeft="112dp"
+        android:layout_marginBottom="8dp"/>
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/distanciaRestaurante"
-                    android:id="@+id/textViewDistanciaRestaurante"
-                    android:textSize="16sp"
-                    android:paddingLeft="8dp"
-                    android:textColor="#8C000000" />
+</LinearLayout>
 
-            </LinearLayout>
-        </LinearLayout>
-
-
-
-
-    </android.support.v7.widget.CardView>
-</RelativeLayout>

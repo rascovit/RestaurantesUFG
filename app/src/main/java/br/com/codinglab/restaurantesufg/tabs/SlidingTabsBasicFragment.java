@@ -156,6 +156,8 @@ public class SlidingTabsBasicFragment extends Fragment {
             }
             if (position == 2){
                 // Inflate a new layout from our resources
+
+                /*
                 view = getActivity().getLayoutInflater().inflate(R.layout.tab_mapa, container, false);
                 mapa = ((SupportMapFragment) getActivity().getSupportFragmentManager().findFragmentById(R.id.mapa_restaurantes)).getMap();
                 mapa.setMyLocationEnabled(true);
@@ -171,7 +173,7 @@ public class SlidingTabsBasicFragment extends Fragment {
                         .build();                   // Creates a CameraPosition from the builder
                 mapa.animateCamera(CameraUpdateFactory.newCameraPosition(posicaoCamera));
                 // Add the newly created View to the ViewPager
-                container.addView(view,position);
+                container.addView(view,position);*/
             }
             // Return the View
             return view;

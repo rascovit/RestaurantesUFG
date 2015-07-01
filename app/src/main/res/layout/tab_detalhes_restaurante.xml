@@ -49,6 +49,7 @@
                         android:textSize="24sp"
                         android:id="@+id/nomeRestaurante_textView"
                         android:textStyle="bold"
+                        android:textColor="#DF000000"
                         android:layout_centerVertical="true"
                         android:layout_alignParentLeft="true"
                         android:layout_alignParentStart="true" />
