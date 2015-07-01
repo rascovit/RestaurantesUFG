@@ -73,6 +73,12 @@ public class SlidingTabsBasicFragment extends Fragment {
         // it's PagerAdapter set.
         mSlidingTabLayout = (SlidingTabLayout) view.findViewById(R.id.sliding_tabs);
         mSlidingTabLayout.setDistributeEvenly(true);
+        mSlidingTabLayout.setCustomTabColorizer(new SlidingTabLayout.TabColorizer() {
+            @Override
+            public int getIndicatorColor(int position) {
+                return getResources().getColor(R.color.primaryColorDark);
+            }
+        });
         mSlidingTabLayout.setViewPager(mViewPager);
         // END_INCLUDE (setup_slidingtablayout)
     }
@@ -85,6 +91,8 @@ public class SlidingTabsBasicFragment extends Fragment {
      * {@link SlidingTabLayout}.
      */
     class SamplePagerAdapter extends PagerAdapter {
+
+        String[] tabText = getResources().getStringArray(R.array.tabs);
 
         /**
          * @return the number of pages to display
@@ -113,7 +121,7 @@ public class SlidingTabsBasicFragment extends Fragment {
          */
         @Override
         public CharSequence getPageTitle(int position) {
-            return "Item " + (position + 1);
+            return tabText[position];
         }
         // END_INCLUDE (pageradapter_getpagetitle)
 
@@ -123,9 +131,31 @@ public class SlidingTabsBasicFragment extends Fragment {
          */
         @Override
         public Object instantiateItem(ViewGroup container, int position) {
+            View view = null;
+
+            if(position == 0){
+                // Inflate a new layout from our resources
+                view = getActivity().getLayoutInflater().inflate(R.layout.tab_detalhes_restaurante, container, false);
+                // Add the newly created View to the ViewPager
+                container.addView(view,position);
+            }
+            if(position == 1){
+                // Inflate a new layout from our resources
+                view = getActivity().getLayoutInflater().inflate(R.layout.tab_cardapio, container, false);
+                // Add the newly created View to the ViewPager
+                container.addView(view,position);
+            }
+            if (position == 2){
+                // Inflate a new layout from our resources
+                //view = getActivity().getLayoutInflater().inflate(R.layout.pager_item, container, false);
+                // Add the newly created View to the ViewPager
+                //container.addView(view,2);
+            }
+
+            /*
+
             // Inflate a new layout from our resources
-            View view = getActivity().getLayoutInflater().inflate(R.layout.pager_item,
-                    container, false);
+            View view = getActivity().getLayoutInflater().inflate(R.layout.pager_item, container, false);
             // Add the newly created View to the ViewPager
             container.addView(view);
 
@@ -141,13 +171,13 @@ public class SlidingTabsBasicFragment extends Fragment {
                     coordenadasRestaurante[0] = -16.602029;
                     coordenadasRestaurante[1] = -49.262208;
                     informacoesRestaurante.putDoubleArray("coordenadas", coordenadasRestaurante);
-                    mapaFragment.setArguments(informacoesRestaurante);*/
+                    mapaFragment.setArguments(informacoesRestaurante);
                     FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
                     fragmentTransaction.replace(R.id.container, mapaFragment);
                     fragmentTransaction.addToBackStack(null);
                     fragmentTransaction.commit();
                 }
-            });
+            });*/
 
             //Log.i(LOG_TAG, "instantiateItem() [position: " + position + "]");
 
