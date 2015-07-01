@@ -2,6 +2,7 @@ package br.com.codinglab.restaurantesufg.main;
 
 import android.content.Context;
 import android.graphics.Typeface;
+import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.RecyclerView;
@@ -78,11 +79,6 @@ public class RestaurantesAdapter extends RecyclerView.Adapter<RestaurantesAdapte
         valorMinimoRestaurante.setText("Refeições a partir de R$ " + String.valueOf(restaurantes.get(position).getValorMinino()));
         distanciaRestaurante.setText(restaurantes.get(position).getLocalizacaoRestaurante().getDistancia() + "  " + restaurantes.get(position).getLocalizacaoRestaurante().getTempoViagem());
 
-        //nomeRestaurante.setText(listaNomes.get(position).toString());
-        //tipoRestaurante.setText(listaTipos.get(position).toString());
-        //valorMinimoRestaurante.setText(listaValores.get(position).toString());
-        //distanciaRestaurante.setText(listaDistanciasTempos.get(position).get(DISTANCIA_ATE_RESTAURANTE) + "  " + listaDistanciasTempos.get(position).get(TEMPO_ATE_RESTAURANTE));
-
         nomeRestaurante.setTypeface(robotoRegular);
         tipoRestaurante.setTypeface(robotoRegular);
         valorMinimoRestaurante.setTypeface(robotoRegular);
@@ -93,6 +89,14 @@ public class RestaurantesAdapter extends RecyclerView.Adapter<RestaurantesAdapte
             @Override
             public void onClick(View v) {
                 SlidingTabsBasicFragment slidingTabsBasicFragment = new SlidingTabsBasicFragment();
+                Bundle informacoes = new Bundle();
+                String[] coordenadas = new String[]{restaurantes.get(position).getLocalizacaoRestaurante().getLatitude(),
+                        restaurantes.get(position).getLocalizacaoRestaurante().getLongitude()};
+                informacoes.putStringArray("coordenadasRestaurante", coordenadas);
+                informacoes.putString("nomeRestaurante", restaurantes.get(position).getNomeRestaurante());
+                informacoes.putString("enderecoRestaurante", restaurantes.get(position).getLocalizacaoRestaurante().getEnderecoRestaurante());
+                slidingTabsBasicFragment.setArguments(informacoes);
+
                 FragmentTransaction fragmentTransaction = ((FragmentActivity) context).getSupportFragmentManager().beginTransaction();
                 fragmentTransaction.replace(R.id.container, slidingTabsBasicFragment);
                 fragmentTransaction.addToBackStack(null);

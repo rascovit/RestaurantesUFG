@@ -6,18 +6,20 @@ package br.com.codinglab.restaurantesufg.tabs;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
+
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.CameraPosition;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 
 import br.com.codinglab.restaurantesufg.R;
-import br.com.codinglab.restaurantesufg.main.MapaFragment;
 
 /**
  * A basic sample which shows how to use {@link com.example.android.common.view.SlidingTabLayout}
@@ -27,6 +29,10 @@ import br.com.codinglab.restaurantesufg.main.MapaFragment;
 public class SlidingTabsBasicFragment extends Fragment {
 
     static final String LOG_TAG = "SlidingTabsBasicFragment";
+    private GoogleMap mapa;
+    private String[] coordenadasRestaurantes;
+    private String nomeRestaurante;
+    private String enderecoRestaurante;
 
     /**
      * A custom {@link ViewPager} title strip which looks much like Tabs present in Android v4.0 and
@@ -47,6 +53,9 @@ public class SlidingTabsBasicFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_sample, container, false);
+        coordenadasRestaurantes = getArguments().getStringArray("coordenadasRestaurante");
+        nomeRestaurante = getArguments().getString("nomeRestaurante");
+        enderecoRestaurante = getArguments().getString("enderecoRestaurante");
         return rootView;
     }
 
@@ -147,40 +156,23 @@ public class SlidingTabsBasicFragment extends Fragment {
             }
             if (position == 2){
                 // Inflate a new layout from our resources
-                //view = getActivity().getLayoutInflater().inflate(R.layout.pager_item, container, false);
+                view = getActivity().getLayoutInflater().inflate(R.layout.tab_mapa, container, false);
+                mapa = ((SupportMapFragment) getActivity().getSupportFragmentManager().findFragmentById(R.id.mapa_restaurantes)).getMap();
+                mapa.setMyLocationEnabled(true);
+                LatLng localizacaoRestaurante = new LatLng(Double.parseDouble(coordenadasRestaurantes[0]), Double.parseDouble(coordenadasRestaurantes[1]));
+                mapa.addMarker(new MarkerOptions()
+                        .position(localizacaoRestaurante)
+                        .snippet(enderecoRestaurante)
+                        .title(nomeRestaurante)).showInfoWindow();
+                mapa.animateCamera(CameraUpdateFactory.zoomTo(14), 1000, null);
+                CameraPosition posicaoCamera = new CameraPosition.Builder()
+                        .target(localizacaoRestaurante)      // Sets the center of the map to Mountain View
+                        .zoom(15)                   // Sets the zoom
+                        .build();                   // Creates a CameraPosition from the builder
+                mapa.animateCamera(CameraUpdateFactory.newCameraPosition(posicaoCamera));
                 // Add the newly created View to the ViewPager
-                //container.addView(view,2);
+                container.addView(view,position);
             }
-
-            /*
-
-            // Inflate a new layout from our resources
-            View view = getActivity().getLayoutInflater().inflate(R.layout.pager_item, container, false);
-            // Add the newly created View to the ViewPager
-            container.addView(view);
-
-            // Retrieve a TextView from the inflated View, and update it's text
-            TextView title = (TextView) view.findViewById(R.id.item_title);
-            title.setText(String.valueOf(position + 1));
-            title.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    MapaFragment mapaFragment = new MapaFragment();
-                    /*Bundle informacoesRestaurante = new Bundle();
-                    double[] coordenadasRestaurante = new double[2];
-                    coordenadasRestaurante[0] = -16.602029;
-                    coordenadasRestaurante[1] = -49.262208;
-                    informacoesRestaurante.putDoubleArray("coordenadas", coordenadasRestaurante);
-                    mapaFragment.setArguments(informacoesRestaurante);
-                    FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
-                    fragmentTransaction.replace(R.id.container, mapaFragment);
-                    fragmentTransaction.addToBackStack(null);
-                    fragmentTransaction.commit();
-                }
-            });*/
-
-            //Log.i(LOG_TAG, "instantiateItem() [position: " + position + "]");
-
             // Return the View
             return view;
         }
