@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
+import android.view.InflateException;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,6 +35,7 @@ public class SlidingTabsBasicFragment extends Fragment {
     private String[] coordenadasRestaurantes;
     private String nomeRestaurante;
     private String enderecoRestaurante;
+    private static View view;
 
     /**
      * A custom {@link ViewPager} title strip which looks much like Tabs present in Android v4.0 and
@@ -93,6 +96,12 @@ public class SlidingTabsBasicFragment extends Fragment {
     }
     // END_INCLUDE (fragment_onviewcreated)
 
+    @Override
+    public void onDestroy() {
+        Log.d("OK", "OK");
+        mViewPager.removeView(view);
+    }
+
     /**
      * The {@link android.support.v4.view.PagerAdapter} used to display pages in this sample.
      * The individual pages are simple and just display two lines of text. The important section of
@@ -138,10 +147,10 @@ public class SlidingTabsBasicFragment extends Fragment {
          * Instantiate the {@link View} which should be displayed at {@code position}. Here we
          * inflate a layout from the apps resources and then change the text view to signify the position.
          */
+
         @Override
         public Object instantiateItem(ViewGroup container, int position) {
-            View view = null;
-
+            //View view = null;
             if(position == 0){
                 // Inflate a new layout from our resources
                 view = getActivity().getLayoutInflater().inflate(R.layout.tab_detalhes_restaurante, container, false);
@@ -154,10 +163,7 @@ public class SlidingTabsBasicFragment extends Fragment {
                 // Add the newly created View to the ViewPager
                 container.addView(view,position);
             }
-            if (position == 2){
-                // Inflate a new layout from our resources
-
-                /*
+            if (position == 2 && mapa == null){
                 view = getActivity().getLayoutInflater().inflate(R.layout.tab_mapa, container, false);
                 mapa = ((SupportMapFragment) getActivity().getSupportFragmentManager().findFragmentById(R.id.mapa_restaurantes)).getMap();
                 mapa.setMyLocationEnabled(true);
@@ -173,8 +179,9 @@ public class SlidingTabsBasicFragment extends Fragment {
                         .build();                   // Creates a CameraPosition from the builder
                 mapa.animateCamera(CameraUpdateFactory.newCameraPosition(posicaoCamera));
                 // Add the newly created View to the ViewPager
-                container.addView(view,position);*/
+                container.addView(view,position);
             }
+
             // Return the View
             return view;
         }
@@ -186,8 +193,6 @@ public class SlidingTabsBasicFragment extends Fragment {
         @Override
         public void destroyItem(ViewGroup container, int position, Object object) {
             container.removeView((View) object);
-            //Log.i(LOG_TAG, "destroyItem() [position: " + position + "]");
         }
-
     }
 }
