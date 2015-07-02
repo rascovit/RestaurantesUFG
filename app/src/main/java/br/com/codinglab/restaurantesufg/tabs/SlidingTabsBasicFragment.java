@@ -24,8 +24,10 @@ import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-import br.com.codinglab.restaurantesufg.R;
+
 import br.com.codinglab.restaurantesufg.modelos.Restaurante;
+
+import br.com.codinglab.restaurantesufg.R;
 
 /**
  * A basic sample which shows how to use {@link com.example.android.common.view.SlidingTabLayout}
