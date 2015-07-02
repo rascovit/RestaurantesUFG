@@ -4,6 +4,7 @@ package br.com.codinglab.restaurantesufg.tabs;
  * Created by thiagodurante on 29/06/15.
  */
 
+import android.app.ActionBar;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.PagerAdapter;
@@ -56,6 +57,7 @@ public class SlidingTabsBasicFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_sample, container, false);
+
         coordenadasRestaurantes = getArguments().getStringArray("coordenadasRestaurante");
         nomeRestaurante = getArguments().getString("nomeRestaurante");
         enderecoRestaurante = getArguments().getString("enderecoRestaurante");
@@ -88,7 +90,7 @@ public class SlidingTabsBasicFragment extends Fragment {
         mSlidingTabLayout.setCustomTabColorizer(new SlidingTabLayout.TabColorizer() {
             @Override
             public int getIndicatorColor(int position) {
-                return getResources().getColor(R.color.primaryColorDark);
+                return getResources().getColor(R.color.accentColor);
             }
         });
         mSlidingTabLayout.setViewPager(mViewPager);
@@ -100,6 +102,7 @@ public class SlidingTabsBasicFragment extends Fragment {
     public void onDestroy() {
         Log.d("OK", "OK");
         mViewPager.removeView(view);
+        super.onDestroy();
     }
 
     /**

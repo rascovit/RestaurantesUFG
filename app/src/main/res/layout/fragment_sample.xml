@@ -6,8 +6,11 @@
 
     <br.com.codinglab.restaurantesufg.tabs.SlidingTabLayout
         android:id="@+id/sliding_tabs"
+        android:background="@color/primaryColor"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:theme="@style/Base.ThemeOverlay.AppCompat.Dark"
+        android:elevation="2dp"/>
 
     <android.support.v4.view.ViewPager
         android:layout_width="match_parent"
