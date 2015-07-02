@@ -4,16 +4,17 @@ package br.com.codinglab.restaurantesufg.tabs;
  * Created by thiagodurante on 29/06/15.
  */
 
-import android.app.ActionBar;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
-import android.view.InflateException;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,10 +25,8 @@ import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-
-import br.com.codinglab.restaurantesufg.modelos.Restaurante;
-
 import br.com.codinglab.restaurantesufg.R;
+import br.com.codinglab.restaurantesufg.modelos.Restaurante;
 
 /**
  * A basic sample which shows how to use {@link com.example.android.common.view.SlidingTabLayout}
@@ -44,7 +43,10 @@ public class SlidingTabsBasicFragment extends Fragment {
     private static View view;
 
     //OBJETO RESTAURANTE
-    Restaurante restaurante;
+    private Restaurante restaurante;
+
+    //RATINGBAR
+    private RatingBar ratingBar;
 
     /**
      * A custom {@link ViewPager} title strip which looks much like Tabs present in Android v4.0 and
@@ -72,7 +74,6 @@ public class SlidingTabsBasicFragment extends Fragment {
         restaurante = (Restaurante) getArguments().getSerializable("objetoRestaurante");
 
         Log.d("OBJETO", restaurante.getNomeRestaurante());
-
 
         return rootView;
     }
@@ -188,6 +189,31 @@ public class SlidingTabsBasicFragment extends Fragment {
                 pontoDeReferenciaTextView.setText(restaurante.getLocalizacaoRestaurante().getPontoDeReferencia());
                 TextView estiloDeServirTextView = (TextView) view.findViewById(R.id.estiloDeServir_textView);
                 estiloDeServirTextView.setText(restaurante.getEstiloDeServir());
+
+                // RATING BAR
+                ratingBar = (RatingBar) view.findViewById(R.id.ratingBar);
+                SharedPreferences sharedPreferences = getActivity().getSharedPreferences("settings", Context.MODE_PRIVATE);
+
+
+                String favorito = sharedPreferences.getString(restaurante.getNomeRestaurante(), "naoInicializado");
+                if(favorito.equals("favorito")){
+                    ratingBar.setRating(1);
+                }
+
+                ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+                    public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
+                        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("settings", Context.MODE_PRIVATE);
+                        SharedPreferences.Editor editor = sharedPreferences.edit();
+                        if (ratingBar.getRating() == 0) {
+                            editor.putString(restaurante.getNomeRestaurante(), "naoFavorito").commit();
+                            Toast.makeText(getActivity(), "Removido com sucesso dos favoritos!", Toast.LENGTH_SHORT).show();
+                        } else {
+                            editor.putString(restaurante.getNomeRestaurante(), "favorito").commit();
+                            Toast.makeText(getActivity(), "Adicionado com sucesso aos favoritos!", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+                ratingBar.setClickable(true);
             }
             if(position == 1){
                 // Inflate a new layout from our resources

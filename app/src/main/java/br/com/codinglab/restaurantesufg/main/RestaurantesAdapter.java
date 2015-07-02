@@ -1,6 +1,7 @@
 package br.com.codinglab.restaurantesufg.main;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
@@ -106,6 +107,18 @@ public class RestaurantesAdapter extends RecyclerView.Adapter<RestaurantesAdapte
                 fragmentTransaction.commit();
             }
         });
+
+        //SHAREDPREFERENCES PRA SETAR TUDO COMO NÃO FAVORITO
+        SharedPreferences sharedPreferences = context.getSharedPreferences("settings", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        //editor.clear().commit();
+
+        String favorito = sharedPreferences.getString(restaurantes.get(position).getNomeRestaurante(), "naoInicializado");
+        if(restaurantes.get(position).getNomeRestaurante().equals("Estação Reune") && favorito.equals("naoInicializado")){
+            editor.putString(restaurantes.get(position).getNomeRestaurante(), "favorito");
+            editor.commit();
+        }
+
     }
 
     @Override
