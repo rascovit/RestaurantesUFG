@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Segunda-feira [01/01/2001]"
+        android:layout_marginTop="16dp"
+        android:layout_marginLeft="16dp"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:textColor="#DF000000"
+        android:id="@+id/diaDaSemana"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:gravity="center_horizontal|left" />
+
+
+    <!-- INÍCIO CAFÉ DA MANHÃ -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="8dp"
+        android:id="@+id/cafeDaManha_LinearLayout"
+        android:layout_below="@+id/diaDaSemana"
+        android:layout_alignLeft="@+id/diaDaSemana"
+         >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textSize="14dp"
+            android:text="Café de Manhã"
+            android:layout_marginBottom="8dp"
+            android:textStyle="bold"
+            android:id="@+id/textView4" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/cafeDaManha_recyclerView"
+            android:scrollbars="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="100dp" />
+
+    </LinearLayout>
+    <!-- FIM CAFÉ DA MANHÃ -->
+
+    <!-- INÍCIO ALMOÇO -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="8dp"
+        android:id="@+id/almoco_LinearLayout"
+        android:layout_below="@+id/cafeDaManha_LinearLayout"
+        android:layout_alignLeft="@+id/diaDaSemana">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textSize="14dp"
+            android:text="Almoço"
+            android:layout_marginBottom="8dp"
+            android:textStyle="bold"
+            android:id="@+id/textView5" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/almoco_recyclerView"
+            android:scrollbars="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="100dp" />
+
+    </LinearLayout>
+    <!-- FIM ALMOÇO -->
+
+    <!-- INÍCIO JANTAR -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="8dp"
+        android:id="@+id/jantar_LinearLayout"
+        android:layout_below="@+id/almoco_LinearLayout"
+        android:layout_alignLeft="@+id/diaDaSemana">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textSize="14dp"
+            android:text="Jantar"
+            android:layout_marginBottom="8dp"
+            android:textStyle="bold"
+            android:id="@+id/textView6" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/jantar_recyclerView"
+            android:scrollbars="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="100dp" />
+
+    </LinearLayout>
+    <!-- FIM JANTAR -->
+
+</RelativeLayout>
