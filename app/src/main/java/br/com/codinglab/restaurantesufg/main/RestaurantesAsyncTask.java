@@ -69,7 +69,6 @@ public class RestaurantesAsyncTask extends AsyncTask<String, Void, ArrayList<Res
                         String nomeRestaurante = jsonRestaurante.getString("nome");
                         double valorMinimo = jsonRestaurante.getDouble("valor-minimo");
                         String estiloDeServir = jsonRestaurante.getString("estilo-de-servir");
-
                         JSONObject jsonObject = jsonRestaurante.getJSONObject("localizacao");
                         String endereco = jsonObject.getString("endereco");
                         String campusRestaurante = jsonObject.getString("campus");

@@ -14,6 +14,8 @@ import android.view.InflateException;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -23,6 +25,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import br.com.codinglab.restaurantesufg.R;
+import br.com.codinglab.restaurantesufg.modelos.Restaurante;
 
 /**
  * A basic sample which shows how to use {@link com.example.android.common.view.SlidingTabLayout}
@@ -37,6 +40,9 @@ public class SlidingTabsBasicFragment extends Fragment {
     private String nomeRestaurante;
     private String enderecoRestaurante;
     private static View view;
+
+    //OBJETO RESTAURANTE
+    Restaurante restaurante;
 
     /**
      * A custom {@link ViewPager} title strip which looks much like Tabs present in Android v4.0 and
@@ -54,13 +60,18 @@ public class SlidingTabsBasicFragment extends Fragment {
      * resources.
      */
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_sample, container, false);
 
         coordenadasRestaurantes = getArguments().getStringArray("coordenadasRestaurante");
-        nomeRestaurante = getArguments().getString("nomeRestaurante");
-        enderecoRestaurante = getArguments().getString("enderecoRestaurante");
+        //nomeRestaurante = getArguments().getString("nomeRestaurante");
+        //enderecoRestaurante = getArguments().getString("enderecoRestaurante");
+
+        restaurante = (Restaurante) getArguments().getSerializable("objetoRestaurante");
+
+        Log.d("OBJETO", restaurante.getNomeRestaurante());
+
+
         return rootView;
     }
 
@@ -155,10 +166,26 @@ public class SlidingTabsBasicFragment extends Fragment {
         public Object instantiateItem(ViewGroup container, int position) {
             //View view = null;
             if(position == 0){
-                // Inflate a new layout from our resources
                 view = getActivity().getLayoutInflater().inflate(R.layout.tab_detalhes_restaurante, container, false);
-                // Add the newly created View to the ViewPager
-                container.addView(view,position);
+                container.addView(view, position);
+
+                // COMPLETANDO OS DADOS NA TELA
+                TextView nomeRestauranteTextView = (TextView) view.findViewById(R.id.nomeRestaurante_textView);
+                nomeRestauranteTextView.setText(restaurante.getNomeRestaurante());
+                TextView restauranteEnderecoTextView = (TextView) view.findViewById(R.id.restauranteEndereco_textView);
+                restauranteEnderecoTextView.setText(restaurante.getLocalizacaoRestaurante().getEnderecoRestaurante() + ". " +restaurante.getLocalizacaoRestaurante().getCampus());
+                TextView cafeDaManhaTextView = (TextView) view.findViewById(R.id.cafeDaManha_textView);
+                cafeDaManhaTextView.setText(restaurante.getHorarioCafe().getInicio() + " às " +restaurante.getHorarioCafe().getFim());
+                TextView almocoTextView = (TextView) view.findViewById(R.id.almoco_textView);
+                almocoTextView.setText(restaurante.getHorarioAlmoco().getInicio() + " às " +restaurante.getHorarioAlmoco().getFim());
+                TextView jantarTextView = (TextView) view.findViewById(R.id.jantar_textView);
+                jantarTextView.setText(restaurante.getHorarioJantar().getInicio() + " às " +restaurante.getHorarioJantar().getFim());
+                TextView restauranteValorMinimoTextView = (TextView) view.findViewById(R.id.restauranteValorMinimo_textView);
+                restauranteValorMinimoTextView.setText("Refeições à partir de R$" +restaurante.getValorMinino());
+                TextView pontoDeReferenciaTextView = (TextView) view.findViewById(R.id.pontoDeReferencia_textView);
+                pontoDeReferenciaTextView.setText(restaurante.getLocalizacaoRestaurante().getPontoDeReferencia());
+                TextView estiloDeServirTextView = (TextView) view.findViewById(R.id.estiloDeServir_textView);
+                estiloDeServirTextView.setText(restaurante.getEstiloDeServir());
             }
             if(position == 1){
                 // Inflate a new layout from our resources
