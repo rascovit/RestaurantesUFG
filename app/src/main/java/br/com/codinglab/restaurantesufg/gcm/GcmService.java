@@ -26,17 +26,13 @@ public class GcmService extends IntentService {
 
     public static final String TAG = "GCM Demo";
 
-    /**
-     * Creates an IntentService.  Invoked by your subclass's constructor.
-     *
-     * @param name Used to name the worker thread, important only for debugging.
-     */
-    public GcmService(String name) {
-        super(name);
+    public GcmService() {
+        super("GcmService");
     }
 
     @Override
     protected void onHandleIntent(Intent intent) {
+        Log.i(TAG,"Message Received");
 
         Bundle extras = intent.getExtras();
         GoogleCloudMessaging gcm = GoogleCloudMessaging.getInstance(this);
@@ -63,7 +59,7 @@ public class GcmService extends IntentService {
                             + "/5 @ " + SystemClock.elapsedRealtime());
                     try {
 
-                        Thread.sleep(5000);
+                        Thread.sleep(500);
 
                     } catch (InterruptedException e) {
 
@@ -91,7 +87,7 @@ public class GcmService extends IntentService {
                 new Intent(this, MainActivity.class), 0);
 
         NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this).setSmallIcon(R.drawable.ic_star)
-                .setContentTitle("GCM Notification")
+                .setContentTitle(getString(R.string.app_name))
                 .setStyle(new NotificationCompat.BigTextStyle()
                         .bigText(msg))
                 .setContentText(msg);

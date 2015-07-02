@@ -180,6 +180,7 @@ public class MainActivity extends ActionBarActivity {
     private String getRegistrationId(Context context) {
 
         final SharedPreferences prefs = getGcmPreferences(context);
+        //prefs.edit().remove(PROPERTY_REG_ID).commit();
 
         String registrationId = prefs.getString(PROPERTY_REG_ID, "");
         if (registrationId.isEmpty()) {
@@ -246,7 +247,7 @@ public class MainActivity extends ActionBarActivity {
 
             @Override
             protected void onPostExecute(String msg) {
-                //mDisplay.append(msg + "\n");
+                Log.i(TAG, msg);
             }
         }.execute(null, null, null);
 
