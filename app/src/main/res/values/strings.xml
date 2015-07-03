@@ -7,13 +7,12 @@
     <string name="nomeCampus">Campus</string>
     <string name="enderecoCampus">Endereço</string>
     <string name="action_settings">Configurações</string>
+    <string name="descricaoPrato">Descrição do Prato</string>
+    <string name="nomePrato">Nome do Prato</string>
+    <string name="precoPrato">R$23.48</string>
     <string-array name="tabs">
         <item>Detalhes</item>
         <item>Cardápio</item>
         <item>Mapa</item>
     </string-array>
-
-
-<!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

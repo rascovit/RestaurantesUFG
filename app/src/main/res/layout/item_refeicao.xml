@@ -21,21 +21,21 @@
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:textStyle="bold"
-                android:text="Nome do Prato"
+                android:text="@string/nomePrato"
                 android:id="@+id/nomePrato" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="R$23.48"
+                android:text="@string/precoPrato"
                 android:id="@+id/precoPrato" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="Descrição do Prato"
+                android:text="@string/descricaoPrato"
                 android:id="@+id/descricaoPrato" />
 
         </LinearLayout>
@@ -54,6 +54,7 @@
 
     </RelativeLayout>
 
+    <!-- DIVIDER DA LISTA -->
     <View android:layout_width="match_parent"
         android:layout_height="1px"
         android:background="#38000000"

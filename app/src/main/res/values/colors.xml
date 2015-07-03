@@ -2,6 +2,6 @@
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
     <color name="primaryColor">#FC9601</color>
     <color name="primaryColorDark">#fffc8000</color>
-    <color name="accentColor">#2D2A32</color>
+    <color name="accentColor">#ffffffff</color>
 
 </resources>

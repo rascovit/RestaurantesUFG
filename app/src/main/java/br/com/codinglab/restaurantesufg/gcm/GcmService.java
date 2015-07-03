@@ -15,7 +15,6 @@ import com.google.android.gms.gcm.GoogleCloudMessaging;
 
 import br.com.codinglab.restaurantesufg.R;
 import br.com.codinglab.restaurantesufg.main.MainActivity;
-import br.com.codinglab.restaurantesufg.main.RestaurantesFragment;
 
 /**
  * Created by PC MASTER RACE on 01/07/2015.
@@ -70,9 +69,9 @@ public class GcmService extends IntentService {
                 SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences("settings", Context.MODE_PRIVATE);
                 String restauranteId = String.valueOf(extras.getString("message"));
                 if(sharedPreferences.contains(restauranteId)){
-                    sendNotification("Restaurante: " + restauranteId + " recebeu atualizaÁıes de card·pio.");
+                    sendNotification("Restaurante: " + restauranteId + " recebeu atualiza√ß√µes de card√°pio.");
                 }else{
-                    sendNotification("NotificaÁ„o n„o lhe interessa");
+                    sendNotification("Notifica√ß√£o n√£o lhe interessa");
                 }
 
                 Log.i(TAG, "Completed work @ " + SystemClock.elapsedRealtime());

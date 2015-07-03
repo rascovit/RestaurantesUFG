@@ -1,7 +1,6 @@
 package br.com.codinglab.restaurantesufg.main;
 
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
@@ -30,6 +29,7 @@ public class RestaurantesAdapter extends RecyclerView.Adapter<RestaurantesAdapte
     private Context context;
     private static final int DISTANCIA_ATE_RESTAURANTE = 0;
     private static final int TEMPO_ATE_RESTAURANTE = 1;
+    public static boolean inflouMapa = false;
 
     // Provide a reference to the views for each data item
     // Complex data items may need more than one view per item, and
@@ -89,7 +89,6 @@ public class RestaurantesAdapter extends RecyclerView.Adapter<RestaurantesAdapte
                 informacoes.putStringArray("coordenadasRestaurante", coordenadas);
                 informacoes.putString("nomeRestaurante", restaurantes.get(position).getNomeRestaurante());
                 informacoes.putString("enderecoRestaurante", restaurantes.get(position).getLocalizacaoRestaurante().getEnderecoRestaurante());
-
                 informacoes.putSerializable("objetoRestaurante", restaurantes.get(position));
 
                 slidingTabsBasicFragment.setArguments(informacoes);

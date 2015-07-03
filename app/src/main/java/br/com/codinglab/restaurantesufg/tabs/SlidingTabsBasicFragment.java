@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
@@ -41,6 +42,7 @@ public class SlidingTabsBasicFragment extends Fragment {
     private String nomeRestaurante;
     private String enderecoRestaurante;
     private static View view;
+    private boolean inflouMapa = false;
 
     //OBJETO RESTAURANTE
     private Restaurante restaurante;
@@ -66,15 +68,9 @@ public class SlidingTabsBasicFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_sample, container, false);
-
         coordenadasRestaurantes = getArguments().getStringArray("coordenadasRestaurante");
-        //nomeRestaurante = getArguments().getString("nomeRestaurante");
-        //enderecoRestaurante = getArguments().getString("enderecoRestaurante");
-
         restaurante = (Restaurante) getArguments().getSerializable("objetoRestaurante");
-
-        Log.d("OBJETO", restaurante.getNomeRestaurante());
-
+        setRetainInstance(true);
         return rootView;
     }
 
@@ -114,9 +110,17 @@ public class SlidingTabsBasicFragment extends Fragment {
 
     @Override
     public void onDestroy() {
-        Log.d("OK", "OK");
         mViewPager.removeView(view);
         super.onDestroy();
+    }
+
+    public void onDestroyView()
+    {
+        super.onDestroyView();
+        Fragment fragment = (getFragmentManager().findFragmentById(R.id.mapa_restaurantes));
+        FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+        ft.remove(fragment);
+        ft.commit();
     }
 
     /**
@@ -194,7 +198,6 @@ public class SlidingTabsBasicFragment extends Fragment {
                 ratingBar = (RatingBar) view.findViewById(R.id.ratingBar);
                 SharedPreferences sharedPreferences = getActivity().getSharedPreferences("settings", Context.MODE_PRIVATE);
 
-
                 if(sharedPreferences.contains(String.valueOf(restaurante.getId()))){
                     ratingBar.setRating(1);
                 }
@@ -220,7 +223,8 @@ public class SlidingTabsBasicFragment extends Fragment {
                 // Add the newly created View to the ViewPager
                 container.addView(view,position);
             }
-            if (position == 2 && mapa == null){
+            if (position == 2 && !inflouMapa) {
+                inflouMapa = true;
                 view = getActivity().getLayoutInflater().inflate(R.layout.tab_mapa, container, false);
                 mapa = ((SupportMapFragment) getActivity().getSupportFragmentManager().findFragmentById(R.id.mapa_restaurantes)).getMap();
                 mapa.setMyLocationEnabled(true);
