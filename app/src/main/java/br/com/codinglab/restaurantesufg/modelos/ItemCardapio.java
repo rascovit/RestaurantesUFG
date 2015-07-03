@@ -7,6 +7,8 @@ public abstract class ItemCardapio {
 
     private double precoPrato;
     private Prato prato;
+    private String servidoDia;
+    private String servidoNo; //café da manhã ou almoço ou jantar
 
     public ItemCardapio(double precoPrato, Prato prato) {
         this.precoPrato = precoPrato;
@@ -21,5 +23,19 @@ public abstract class ItemCardapio {
         return prato;
     }
 
+    public String getServidoDia() {
+        return servidoDia;
+    }
 
+    public void setServidoDia(String servidoDia) {
+        this.servidoDia = servidoDia;
+    }
+
+    public String getServidoNo() {
+        return servidoNo;
+    }
+
+    public void setServidoNo(String servidoNo) {
+        this.servidoNo = servidoNo;
+    }
 }

@@ -33,6 +33,8 @@ public class CardapioAdapter extends RecyclerView.Adapter<CardapioAdapter.ViewHo
         if(restaurante.temCafeDaManha()){
             for(int i=0; i<restaurante.getCardapioCafe().size(); i++){
                 for(int j=0; j<restaurante.getCardapioCafe().get(i).getRefeicoes().size(); j++){
+                    restaurante.getCardapioCafe().get(i).getRefeicoes().get(j).setServidoNo("Café da manhã");
+                    restaurante.getCardapioCafe().get(i).getRefeicoes().get(j).setServidoDia(restaurante.getCardapioCafe().get(i).getData());
                     itensCardapio.add(restaurante.getCardapioCafe().get(i).getRefeicoes().get(j));
                 }
             }
@@ -40,10 +42,14 @@ public class CardapioAdapter extends RecyclerView.Adapter<CardapioAdapter.ViewHo
         if(restaurante.temAlmoco()){
             for(int i=0; i<restaurante.getCardapioAlmoco().size(); i++){
                 for(int j=0; j<restaurante.getCardapioAlmoco().get(i).getRefeicoes().size(); j++){
+                    restaurante.getCardapioAlmoco().get(i).getRefeicoes().get(j).setServidoNo("Almoço");
+                    restaurante.getCardapioAlmoco().get(i).getRefeicoes().get(j).setServidoDia(restaurante.getCardapioAlmoco().get(i).getData());
                     itensCardapio.add(restaurante.getCardapioAlmoco().get(i).getRefeicoes().get(j));
                 }
                 if(restaurante.getCardapioAlmoco().get(i).temSobremesa()){
                     for(int j=0; j<restaurante.getCardapioAlmoco().get(i).getSobremesas().size(); j++){
+                        restaurante.getCardapioAlmoco().get(i).getSobremesas().get(j).setServidoNo("Sobremesa");
+                        restaurante.getCardapioAlmoco().get(i).getSobremesas().get(j).setServidoDia(restaurante.getCardapioAlmoco().get(i).getData());
                         itensCardapio.add(restaurante.getCardapioAlmoco().get(i).getSobremesas().get(j));
                     }
                 }
@@ -52,10 +58,14 @@ public class CardapioAdapter extends RecyclerView.Adapter<CardapioAdapter.ViewHo
         if(restaurante.temJantar()){
             for(int i=0; i<restaurante.getCardapioJantar().size(); i++){
                 for(int j=0; j<restaurante.getCardapioJantar().get(i).getRefeicoes().size(); j++){
+                    restaurante.getCardapioJantar().get(i).getRefeicoes().get(j).setServidoNo("Jantar");
+                    restaurante.getCardapioJantar().get(i).getRefeicoes().get(j).setServidoDia(restaurante.getCardapioJantar().get(i).getData());
                     itensCardapio.add(restaurante.getCardapioJantar().get(i).getRefeicoes().get(j));
                 }
                 if(restaurante.getCardapioJantar().get(i).temSobremesa()){
                     for(int j=0; j<restaurante.getCardapioJantar().get(i).getSobremesas().size(); j++){
+                        restaurante.getCardapioJantar().get(i).getSobremesas().get(j).setServidoNo("Sobremesa");
+                        restaurante.getCardapioJantar().get(i).getSobremesas().get(j).setServidoDia(restaurante.getCardapioJantar().get(i).getData());
                         itensCardapio.add(restaurante.getCardapioJantar().get(i).getSobremesas().get(j));
                     }
                 }
@@ -93,7 +103,7 @@ public class CardapioAdapter extends RecyclerView.Adapter<CardapioAdapter.ViewHo
 
         nomeDoPratoTextView.setText(itensCardapio.get(position).getPrato().getNome());
         descricaoDoPratoTextView.setText(itensCardapio.get(position).getPrato().getDescricao());
-        precoDoPratoTextView.setText("R$ " +Double.toString(itensCardapio.get(position).getPrecoPrato()));
+        precoDoPratoTextView.setText("R$ " +Double.toString(itensCardapio.get(position).getPrecoPrato()) + " -  " +itensCardapio.get(position).getServidoDia() + " - " +itensCardapio.get(position).getServidoNo());
         tipoDoPratoTextView.setText(itensCardapio.get(position).getPrato().getTipo());
 
         nomeDoPratoTextView.setTypeface(robotoRegular);
