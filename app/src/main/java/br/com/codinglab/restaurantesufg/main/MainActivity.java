@@ -31,6 +31,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import br.com.codinglab.restaurantesufg.R;
+import br.com.codinglab.restaurantesufg.modelos.Campus;
 
 
 public class MainActivity extends ActionBarActivity {
@@ -125,6 +126,14 @@ public class MainActivity extends ActionBarActivity {
         public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_main, container, false);
 
+            ArrayList<Campus> listaCampus = new ArrayList<>();
+
+            listaCampus.add(new Campus("Câmpus Colemar Natal e Silva",1,"Avenida Universitária"));
+            listaCampus.add(new Campus("Câmpus Samambaia", 2, "Avenida Samambaia"));
+            listaCampus.add(new Campus("Câmpus Goiás", 3, "Avenida Dario Sampaio"));
+            listaCampus.add(new Campus("Câmpus Jataí",4,"Avenida Jataí"));
+            listaCampus.add(new Campus("Câmpus Catalão",5,"Rua das Amendoeiras"));
+
 
             //MOCK DE CAMPUS UNIVERSITÁRIOS
             ArrayList<String> campus = new ArrayList<>();
@@ -156,15 +165,13 @@ public class MainActivity extends ActionBarActivity {
             campusRecyclerView.setLayoutManager(campusLayoutManager);
 
             // Criando e especificando um Adapter para a RV
-            campusAdapter = new CampusAdapter(getActivity(), campus, enderecosCampus, campusId);
+            campusAdapter = new CampusAdapter(getActivity(), listaCampus);
             campusRecyclerView.setAdapter(campusAdapter);
 
             return rootView;
         }
 
     }
-
-
 
 
 

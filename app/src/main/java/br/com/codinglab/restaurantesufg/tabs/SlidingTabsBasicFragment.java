@@ -195,8 +195,7 @@ public class SlidingTabsBasicFragment extends Fragment {
                 SharedPreferences sharedPreferences = getActivity().getSharedPreferences("settings", Context.MODE_PRIVATE);
 
 
-                String favorito = sharedPreferences.getString(restaurante.getNomeRestaurante(), "naoInicializado");
-                if(favorito.equals("favorito")){
+                if(sharedPreferences.contains(String.valueOf(restaurante.getId()))){
                     ratingBar.setRating(1);
                 }
 
@@ -205,10 +204,10 @@ public class SlidingTabsBasicFragment extends Fragment {
                         SharedPreferences sharedPreferences = getActivity().getSharedPreferences("settings", Context.MODE_PRIVATE);
                         SharedPreferences.Editor editor = sharedPreferences.edit();
                         if (ratingBar.getRating() == 0) {
-                            editor.putString(restaurante.getNomeRestaurante(), "naoFavorito").commit();
+                            editor.remove(String.valueOf(restaurante.getId())).commit();
                             Toast.makeText(getActivity(), "Removido com sucesso dos favoritos!", Toast.LENGTH_SHORT).show();
                         } else {
-                            editor.putString(restaurante.getNomeRestaurante(), "favorito").commit();
+                            editor.putString(String.valueOf(restaurante.getId()),"favorito").commit();
                             Toast.makeText(getActivity(), "Adicionado com sucesso aos favoritos!", Toast.LENGTH_SHORT).show();
                         }
                     }

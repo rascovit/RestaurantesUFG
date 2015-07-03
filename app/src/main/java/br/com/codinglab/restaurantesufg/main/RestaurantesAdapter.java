@@ -24,9 +24,7 @@ import br.com.codinglab.restaurantesufg.tabs.SlidingTabsBasicFragment;
  */
 public class RestaurantesAdapter extends RecyclerView.Adapter<RestaurantesAdapter.ViewHolder> {
 
-    private ArrayList<String> listaNomes;
-    private ArrayList<String> listaTipos;
-    private ArrayList<String> listaValores;
+
     private HashMap<Integer, ArrayList<String>> listaDistanciasTempos;
     ArrayList<Restaurante> restaurantes;
     private Context context;
@@ -46,13 +44,8 @@ public class RestaurantesAdapter extends RecyclerView.Adapter<RestaurantesAdapte
     }
 
     // Provide a suitable constructor (depends on the kind of dataset)
-    public RestaurantesAdapter(Context context, ArrayList<String> listaNomes, ArrayList<String> listaTipos, ArrayList<String> listaValores,
-                               HashMap<Integer, ArrayList<String>> listaDistanciasTempos, ArrayList<Restaurante> restaurantes) {
+    public RestaurantesAdapter(Context context, ArrayList<Restaurante> restaurantes) {
         this.context = context;
-        this.listaNomes = listaNomes;
-        this.listaTipos = listaTipos;
-        this.listaValores = listaValores;
-        this.listaDistanciasTempos = listaDistanciasTempos;
         this.restaurantes = restaurantes;
     }
 
@@ -109,15 +102,6 @@ public class RestaurantesAdapter extends RecyclerView.Adapter<RestaurantesAdapte
         });
 
         //SHAREDPREFERENCES PRA SETAR TUDO COMO NÃO FAVORITO
-        SharedPreferences sharedPreferences = context.getSharedPreferences("settings", Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        //editor.clear().commit();
-
-        String favorito = sharedPreferences.getString(restaurantes.get(position).getNomeRestaurante(), "naoInicializado");
-        if(restaurantes.get(position).getNomeRestaurante().equals("Estação Reune") && favorito.equals("naoInicializado")){
-            editor.putString(restaurantes.get(position).getNomeRestaurante(), "favorito");
-            editor.commit();
-        }
 
     }
 
