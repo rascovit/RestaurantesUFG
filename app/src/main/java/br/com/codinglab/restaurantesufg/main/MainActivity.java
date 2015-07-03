@@ -1,7 +1,6 @@
 package br.com.codinglab.restaurantesufg.main;
 
 import android.annotation.TargetApi;
-import android.app.ActionBar;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
@@ -9,7 +8,6 @@ import android.content.pm.PackageManager;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
-import android.service.notification.StatusBarNotification;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -30,12 +28,9 @@ import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.gcm.GoogleCloudMessaging;
 
 import java.io.IOException;
-import java.sql.Connection;
 import java.util.ArrayList;
-import java.util.concurrent.ExecutionException;
 
 import br.com.codinglab.restaurantesufg.R;
-import br.com.codinglab.restaurantesufg.modelos.Restaurante;
 
 
 public class MainActivity extends ActionBarActivity {
@@ -54,6 +49,10 @@ public class MainActivity extends ActionBarActivity {
     static final String TAG = "GCM Demo";
     private Toolbar toolbar;
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+    }
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     @Override
@@ -135,6 +134,13 @@ public class MainActivity extends ActionBarActivity {
             campus.add("Câmpus Jataí");
             campus.add("Câmpus Catalão");
 
+            ArrayList<Integer> campusId = new ArrayList<>();
+            campusId.add(1);
+            campusId.add(2);
+            campusId.add(3);
+            campusId.add(4);
+            campusId.add(5);
+
             ArrayList<String> enderecosCampus = new ArrayList<>();
             enderecosCampus.add("Avenida Universitária");
             enderecosCampus.add("Avenida Samambaia");
@@ -150,7 +156,7 @@ public class MainActivity extends ActionBarActivity {
             campusRecyclerView.setLayoutManager(campusLayoutManager);
 
             // Criando e especificando um Adapter para a RV
-            campusAdapter = new CampusAdapter(getActivity(), campus, enderecosCampus);
+            campusAdapter = new CampusAdapter(getActivity(), campus, enderecosCampus, campusId);
             campusRecyclerView.setAdapter(campusAdapter);
 
             return rootView;

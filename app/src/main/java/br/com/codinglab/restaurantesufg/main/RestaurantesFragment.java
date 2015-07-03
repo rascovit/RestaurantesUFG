@@ -27,7 +27,6 @@ import java.util.HashMap;
 import java.util.concurrent.ExecutionException;
 
 import br.com.codinglab.restaurantesufg.R;
-import br.com.codinglab.restaurantesufg.modelos.LocalizacaoRestaurante;
 import br.com.codinglab.restaurantesufg.modelos.Restaurante;
 import br.com.codinglab.restaurantesufg.utils.Handler;
 
@@ -49,6 +48,7 @@ public class RestaurantesFragment extends Fragment implements LocationListener {
     private ArrayList<String> valoresRestaurantes;
     private ArrayList<String> coordenadasRestaurantes;
     private ArrayList<String> tempoDistancia;
+    private ArrayList<Integer> campusId;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -80,6 +80,7 @@ public class RestaurantesFragment extends Fragment implements LocationListener {
             builder.show();
         }
         try {
+
             listaRestaurantes = new RestaurantesAsyncTask(getActivity()).execute("campus2").get();
         } catch (InterruptedException e) {
             e.printStackTrace();

@@ -19,6 +19,7 @@ import br.com.codinglab.restaurantesufg.R;
  */
 public class CampusAdapter extends RecyclerView.Adapter<CampusAdapter.ViewHolder> {
 
+    private ArrayList<Integer> campusId;
     private ArrayList<String> listaCampus;
     private ArrayList<String> listaEnderecos;
     private Context context;
@@ -36,10 +37,11 @@ public class CampusAdapter extends RecyclerView.Adapter<CampusAdapter.ViewHolder
     }
 
     // Provide a suitable constructor (depends on the kind of dataset)
-    public CampusAdapter(Context context, ArrayList<String> listaCampus, ArrayList<String> listaEnderecos) {
+    public CampusAdapter(Context context, ArrayList<String> listaCampus, ArrayList<String> listaEnderecos, ArrayList<Integer> campusId) {
         this.context = context;
         this.listaCampus = listaCampus;
         this.listaEnderecos = listaEnderecos;
+        this.campusId = campusId;
     }
 
     // Create new views (invoked by the layout manager)

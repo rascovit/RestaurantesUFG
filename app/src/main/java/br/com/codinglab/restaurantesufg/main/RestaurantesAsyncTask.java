@@ -55,7 +55,651 @@ public class RestaurantesAsyncTask extends AsyncTask<String, Void, ArrayList<Res
         if (jsonResposta != "") {
 
             try {
-                jsonResposta = "{ \"status\" : \"OK\", \"restaurantes\" : [ { \"id\" : 101022, \"nome\" : \"Estação Reune\", \"valor-minimo\" : 14.99, \"estilo-de-servir\" : \"Por Kilo\", \"localizacao\" : { \"endereco\" : \"Alameda Palmeiras\", \"campus\" : \"Campus II - Samanbaia\", \"ponto-de-referencia\" : \"Atrás do Centro de Aulas Baru\", \"latitude\" : -16.603447, \"longitude\" : -49.266078 }, \"horarios\" : { \"cafe-da-manha\" : { \"inicio\" : \"06:30\", \"fim\" : \"06:30\" }, \"almoco\" : { \"inicio\" : \"11:00\", \"fim\" : \"15:00\" }, \"jantar\" : { \"inicio\" : \"18:00\", \"fim\" : \"23:00\" } }, \"cardapio\" : { \"cafe-da-manha\" : [ { \"dia-da-semana\" : \"Segunda-Feira\", \"data\" : \"29/06/2015\", \"refeicoes\" : [ { \"preco\" : 5.00, \"prato\" : { \"nome\" : \"Prato 1\", \"descricao\" : \"Descrição Prato 1\", \"tipo\" : \"Comum\" } }, { \"preco\" : 3.00, \"prato\" : { \"nome\" : \"Prato 2\", \"descricao\" : \"Descrição Prato 2\", \"tipo\" : \"Comum\" } }, { \"preco\" : 4.00, \"prato\" : { \"nome\" : \"Prato 3\", \"descricao\" : \"Descrição Prato 3\", \"tipo\" : \"Vegetariano\" } } ] }, { \"dia-da-semana\" : \"Terça-Feira\", \"data\" : \"30/06/2015\", \"refeicoes\" : [ { \"preco\" : 5.00, \"prato\" : { \"nome\" : \"Prato 1\", \"descricao\" : \"Descrição Prato 1\", \"tipo\" : \"Comum\" } }, { \"preco\" : 3.00, \"prato\" : { \"nome\" : \"Prato 2\", \"descricao\" : \"Descrição Prato 2\", \"tipo\" : \"Comum\" } }, { \"preco\" : 4.00, \"prato\" : { \"nome\" : \"Prato 3\", \"descricao\" : \"Descrição Prato 3\", \"tipo\" : \"Vegetariano\" } } ] } ], \"almoco\" : [ { \"dia-da-semana\" : \"Segunda-Feira\", \"data\" : \"29/06/2015\", \"refeicoes\" : [ { \"preco\" : 5.00, \"prato\" : { \"nome\" : \"Prato 1\", \"descricao\" : \"Descrição Prato 1\", \"tipo\" : \"Comum\" } }, { \"preco\" : 3.00, \"prato\" : { \"nome\" : \"Prato 2\", \"descricao\" : \"Descrição Prato 2\", \"tipo\" : \"Comum\" } }, { \"preco\" : 4.00, \"prato\" : { \"nome\" : \"Prato 3\", \"descricao\" : \"Descrição Prato 3\", \"tipo\" : \"Vegetariano\" } } ], \"sobremesas\" : [ { \"preco\" : 5.00, \"prato\" : { \"nome\" : \"Sobremesa 1\", \"descricao\" : \"Descrição sobremesa 1\", \"tipo\" : \"Comum\" } }, { \"preco\" : 3.00, \"prato\" : { \"nome\" : \"Sobremesa 2\", \"descricao\" : \"Descrição sobremesa 2\", \"tipo\" : \"Comum\" } }, { \"preco\" : 4.00, \"prato\" : { \"nome\" : \"Sobremesa 3\", \"descricao\" : \"Descrição sobremesa 3\", \"tipo\" : \"Vegetariano\" } } ] }, { \"dia-da-semana\" : \"Terça-Feira\", \"data\" : \"30/06/2015\", \"refeicoes\" : [ { \"preco\" : 5.00, \"prato\" : { \"nome\" : \"Prato 1\", \"descricao\" : \"Descrição Prato 1\", \"tipo\" : \"Comum\" } }, { \"preco\" : 3.00, \"prato\" : { \"nome\" : \"Prato 2\", \"descricao\" : \"Descrição Prato 2\", \"tipo\" : \"Comum\" } }, { \"preco\" : 4.00, \"prato\" : { \"nome\" : \"Prato 3\", \"descricao\" : \"Descrição Prato 3\", \"tipo\" : \"Vegetariano\" } } ], \"sobremesas\" : [ { \"preco\" : 5.00, \"prato\" : { \"nome\" : \"Sobremesa 1\", \"descricao\" : \"Descrição sobremesa 1\", \"tipo\" : \"Comum\" } }, { \"preco\" : 3.00, \"prato\" : { \"nome\" : \"Sobremesa 2\", \"descricao\" : \"Descrição sobremesa 2\", \"tipo\" : \"Comum\" } }, { \"preco\" : 4.00, \"prato\" : { \"nome\" : \"Sobremesa 3\", \"descricao\" : \"Descrição sobremesa 3\", \"tipo\" : \"Vegetariano\" } } ] } ], \"jantar\" : [ { \"dia-da-semana\" : \"Segunda-Feira\", \"data\" : \"29/06/2015\", \"refeicoes\" : [ { \"preco\" : 5.00, \"prato\" : { \"nome\" : \"Prato 1\", \"descricao\" : \"Descrição Prato 1\", \"tipo\" : \"Comum\" } }, { \"preco\" : 3.00, \"prato\" : { \"nome\" : \"Prato 2\", \"descricao\" : \"Descrição Prato 2\", \"tipo\" : \"Comum\" } }, { \"preco\" : 4.00, \"prato\" : { \"nome\" : \"Prato 3\", \"descricao\" : \"Descrição Prato 3\", \"tipo\" : \"Vegetariano\" } } ], \"sobremesas\" : [ { \"preco\" : 5.00, \"prato\" : { \"nome\" : \"Sobremesa 1\", \"descricao\" : \"Descrição sobremesa 1\", \"tipo\" : \"Comum\" } }, { \"preco\" : 3.00, \"prato\" : { \"nome\" : \"Sobremesa 2\", \"descricao\" : \"Descrição sobremesa 2\", \"tipo\" : \"Comum\" } }, { \"preco\" : 4.00, \"prato\" : { \"nome\" : \"Sobremesa 3\", \"descricao\" : \"Descrição sobremesa 3\", \"tipo\" : \"Vegetariano\" } } ] }, { \"dia-da-semana\" : \"Terça-Feira\", \"data\" : \"30/06/2015\", \"refeicoes\" : [ { \"preco\" : 5.00, \"prato\" : { \"nome\" : \"Prato 1\", \"descricao\" : \"Descrição Prato 1\", \"tipo\" : \"Comum\" } }, { \"preco\" : 3.00, \"prato\" : { \"nome\" : \"Prato 2\", \"descricao\" : \"Descrição Prato 2\", \"tipo\" : \"Comum\" } }, { \"preco\" : 4.00, \"prato\" : { \"nome\" : \"Prato 3\", \"descricao\" : \"Descrição Prato 3\", \"tipo\" : \"Vegetariano\" } } ], \"sobremesas\" : [ { \"preco\" : 5.00, \"prato\" : { \"nome\" : \"Sobremesa 1\", \"descricao\" : \"Descrição sobremesa 1\", \"tipo\" : \"Comum\" } }, { \"preco\" : 3.00, \"prato\" : { \"nome\" : \"Sobremesa 2\", \"descricao\" : \"Descrição sobremesa 2\", \"tipo\" : \"Comum\" } }, { \"preco\" : 4.00, \"prato\" : { \"nome\" : \"Sobremesa 3\", \"descricao\" : \"Descrição sobremesa 3\", \"tipo\" : \"Vegetariano\" } } ] } ] } }, { \"id\" : 125547, \"nome\" : \"Restaurante Universitário\", \"valor-minimo\" : 3.50, \"estilo-de-servir\" : \"A la carte\", \"localizacao\" : { \"endereco\" : \"Alameda Palmeiras\", \"campus\" : \"Campus II - Samanbaia\", \"ponto-de-referencia\" : \"Próximo a agência da Caixa Econômica.\", \"latitude\" : -16.601942, \"longitude\" : -49.261731 }, \"horarios\" : { \"cafe-da-manha\" : { \"inicio\" : \"06:30\", \"fim\" : \"06:30\" }, \"almoco\" : { \"inicio\" : \"11:00\", \"fim\" : \"15:00\" }, \"jantar\" : { \"inicio\" : \"18:00\", \"fim\" : \"23:00\" } }, \"cardapio\" : { \"cafe-da-manha\" : [ { \"dia-da-semana\" : \"Segunda-Feira\", \"data\" : \"29/06/2015\", \"refeicoes\" : [ { \"preco\" : 5.00, \"prato\" : { \"nome\" : \"Prato 1\", \"descricao\" : \"Descrição Prato 1\", \"tipo\" : \"Comum\" } }, { \"preco\" : 3.00, \"prato\" : { \"nome\" : \"Prato 2\", \"descricao\" : \"Descrição Prato 2\", \"tipo\" : \"Comum\" } }, { \"preco\" : 4.00, \"prato\" : { \"nome\" : \"Prato 3\", \"descricao\" : \"Descrição Prato 3\", \"tipo\" : \"Vegetariano\" } } ] }, { \"dia-da-semana\" : \"Terça-Feira\", \"data\" : \"30/06/2015\", \"refeicoes\" : [ { \"preco\" : 5.00, \"prato\" : { \"nome\" : \"Prato 1\", \"descricao\" : \"Descrição Prato 1\", \"tipo\" : \"Comum\" } }, { \"preco\" : 3.00, \"prato\" : { \"nome\" : \"Prato 2\", \"descricao\" : \"Descrição Prato 2\", \"tipo\" : \"Comum\" } }, { \"preco\" : 4.00, \"prato\" : { \"nome\" : \"Prato 3\", \"descricao\" : \"Descrição Prato 3\", \"tipo\" : \"Vegetariano\" } } ] } ], \"almoco\" : [ { \"dia-da-semana\" : \"Segunda-Feira\", \"data\" : \"29/06/2015\", \"refeicoes\" : [ { \"preco\" : 5.00, \"prato\" : { \"nome\" : \"Prato 1\", \"descricao\" : \"Descrição Prato 1\", \"tipo\" : \"Comum\" } }, { \"preco\" : 3.00, \"prato\" : { \"nome\" : \"Prato 2\", \"descricao\" : \"Descrição Prato 2\", \"tipo\" : \"Comum\" } }, { \"preco\" : 4.00, \"prato\" : { \"nome\" : \"Prato 3\", \"descricao\" : \"Descrição Prato 3\", \"tipo\" : \"Vegetariano\" } } ], \"sobremesas\" : [ { \"preco\" : 5.00, \"prato\" : { \"nome\" : \"Sobremesa 1\", \"descricao\" : \"Descrição sobremesa 1\", \"tipo\" : \"Comum\" } }, { \"preco\" : 3.00, \"prato\" : { \"nome\" : \"Sobremesa 2\", \"descricao\" : \"Descrição sobremesa 2\", \"tipo\" : \"Comum\" } }, { \"preco\" : 4.00, \"prato\" : { \"nome\" : \"Sobremesa 3\", \"descricao\" : \"Descrição sobremesa 3\", \"tipo\" : \"Vegetariano\" } } ] }, { \"dia-da-semana\" : \"Terça-Feira\", \"data\" : \"30/06/2015\", \"refeicoes\" : [ { \"preco\" : 5.00, \"prato\" : { \"nome\" : \"Prato 1\", \"descricao\" : \"Descrição Prato 1\", \"tipo\" : \"Comum\" } }, { \"preco\" : 3.00, \"prato\" : { \"nome\" : \"Prato 2\", \"descricao\" : \"Descrição Prato 2\", \"tipo\" : \"Comum\" } }, { \"preco\" : 4.00, \"prato\" : { \"nome\" : \"Prato 3\", \"descricao\" : \"Descrição Prato 3\", \"tipo\" : \"Vegetariano\" } } ], \"sobremesas\" : [ { \"preco\" : 5.00, \"prato\" : { \"nome\" : \"Sobremesa 1\", \"descricao\" : \"Descrição sobremesa 1\", \"tipo\" : \"Comum\" } }, { \"preco\" : 3.00, \"prato\" : { \"nome\" : \"Sobremesa 2\", \"descricao\" : \"Descrição sobremesa 2\", \"tipo\" : \"Comum\" } }, { \"preco\" : 4.00, \"prato\" : { \"nome\" : \"Sobremesa 3\", \"descricao\" : \"Descrição sobremesa 3\", \"tipo\" : \"Vegetariano\" } } ] } ], \"jantar\" : [ { \"dia-da-semana\" : \"Segunda-Feira\", \"data\" : \"29/06/2015\", \"refeicoes\" : [ { \"preco\" : 5.00, \"prato\" : { \"nome\" : \"Prato 1\", \"descricao\" : \"Descrição Prato 1\", \"tipo\" : \"Comum\" } }, { \"preco\" : 3.00, \"prato\" : { \"nome\" : \"Prato 2\", \"descricao\" : \"Descrição Prato 2\", \"tipo\" : \"Comum\" } }, { \"preco\" : 4.00, \"prato\" : { \"nome\" : \"Prato 3\", \"descricao\" : \"Descrição Prato 3\", \"tipo\" : \"Vegetariano\" } } ], \"sobremesas\" : [ { \"preco\" : 5.00, \"prato\" : { \"nome\" : \"Sobremesa 1\", \"descricao\" : \"Descrição sobremesa 1\", \"tipo\" : \"Comum\" } }, { \"preco\" : 3.00, \"prato\" : { \"nome\" : \"Sobremesa 2\", \"descricao\" : \"Descrição sobremesa 2\", \"tipo\" : \"Comum\" } }, { \"preco\" : 4.00, \"prato\" : { \"nome\" : \"Sobremesa 3\", \"descricao\" : \"Descrição sobremesa 3\", \"tipo\" : \"Vegetariano\" } } ] }, { \"dia-da-semana\" : \"Terça-Feira\", \"data\" : \"30/06/2015\", \"refeicoes\" : [ { \"preco\" : 5.00, \"prato\" : { \"nome\" : \"Prato 1\", \"descricao\" : \"Descrição Prato 1\", \"tipo\" : \"Comum\" } }, { \"preco\" : 3.00, \"prato\" : { \"nome\" : \"Prato 2\", \"descricao\" : \"Descrição Prato 2\", \"tipo\" : \"Comum\" } }, { \"preco\" : 4.00, \"prato\" : { \"nome\" : \"Prato 3\", \"descricao\" : \"Descrição Prato 3\", \"tipo\" : \"Vegetariano\" } } ], \"sobremesas\" : [ { \"preco\" : 5.00, \"prato\" : { \"nome\" : \"Sobremesa 1\", \"descricao\" : \"Descrição sobremesa 1\", \"tipo\" : \"Comum\" } }, { \"preco\" : 3.00, \"prato\" : { \"nome\" : \"Sobremesa 2\", \"descricao\" : \"Descrição sobremesa 2\", \"tipo\" : \"Comum\" } }, { \"preco\" : 4.00, \"prato\" : { \"nome\" : \"Sobremesa 3\", \"descricao\" : \"Descrição sobremesa 3\", \"tipo\" : \"Vegetariano\" } } ] } ] } } ] }";
+                jsonResposta = "{  \n" +
+                        "    \"status\":\"OK\",\n" +
+                        "    \"restaurantes\":[  \n" +
+                        "        {  \n" +
+                        "            \"id\":101022,\n" +
+                        "            \"nome\":\"Estação Reune\",\n" +
+                        "            \"valor-minimo\":14.99,\n" +
+                        "            \"estilo-de-servir\":\"Por Kilo\",\n" +
+                        "            \"localizacao\":{  \n" +
+                        "                \"endereco\":\"Alameda Palmeiras\",\n" +
+                        "                \"campus\":\"Campus II - Samambaia\",\n" +
+                        "                \"campus-id\": 2,\n" +
+                        "                \"ponto-de-referencia\":\"Atrás do Centro de Aulas Baru\",\n" +
+                        "                \"latitude\":-16.603447,\n" +
+                        "                \"longitude\":-49.266078\n" +
+                        "            },\n" +
+                        "            \"horarios\":{  \n" +
+                        "                \"cafe-da-manha\":{  \n" +
+                        "                    \"inicio\":\"06:30\",\n" +
+                        "                    \"fim\":\"06:30\"\n" +
+                        "                },\n" +
+                        "                \"almoco\":{  \n" +
+                        "                    \"inicio\":\"11:00\",\n" +
+                        "                    \"fim\":\"15:00\"\n" +
+                        "                },\n" +
+                        "                \"jantar\":{  \n" +
+                        "                    \"inicio\":\"18:00\",\n" +
+                        "                    \"fim\":\"23:00\"\n" +
+                        "                }\n" +
+                        "            },\n" +
+                        "            \"cardapio\":{  \n" +
+                        "                \"cafe-da-manha\":[  \n" +
+                        "                    {  \n" +
+                        "                        \"dia-da-semana\":\"Segunda-Feira\",\n" +
+                        "                        \"data\":\"29/06/2015\",\n" +
+                        "                        \"refeicoes\":[  \n" +
+                        "                            {  \n" +
+                        "                                \"preco\":5.00,\n" +
+                        "                                \"prato\":{  \n" +
+                        "                                    \"nome\":\"Prato 1\",\n" +
+                        "                                    \"descricao\":\"Descrição Prato 1\",\n" +
+                        "                                    \"tipo\":\"Comum\"\n" +
+                        "                                }\n" +
+                        "                            },\n" +
+                        "                            {  \n" +
+                        "                                \"preco\":3.00,\n" +
+                        "                                \"prato\":{  \n" +
+                        "                                    \"nome\":\"Prato 2\",\n" +
+                        "                                    \"descricao\":\"Descrição Prato 2\",\n" +
+                        "                                    \"tipo\":\"Comum\"\n" +
+                        "                                }\n" +
+                        "                            },\n" +
+                        "                            {  \n" +
+                        "                                \"preco\":4.00,\n" +
+                        "                                \"prato\":{  \n" +
+                        "                                    \"nome\":\"Prato 3\",\n" +
+                        "                                    \"descricao\":\"Descrição Prato 3\",\n" +
+                        "                                    \"tipo\":\"Vegetariano\"\n" +
+                        "                                }\n" +
+                        "                            }\n" +
+                        "                        ]\n" +
+                        "                    },\n" +
+                        "                    {  \n" +
+                        "                        \"dia-da-semana\":\"Terça-Feira\",\n" +
+                        "                        \"data\":\"30/06/2015\",\n" +
+                        "                        \"refeicoes\":[  \n" +
+                        "                            {  \n" +
+                        "                                \"preco\":5.00,\n" +
+                        "                                \"prato\":{  \n" +
+                        "                                    \"nome\":\"Prato 1\",\n" +
+                        "                                    \"descricao\":\"Descrição Prato 1\",\n" +
+                        "                                    \"tipo\":\"Comum\"\n" +
+                        "                                }\n" +
+                        "                            },\n" +
+                        "                            {  \n" +
+                        "                                \"preco\":3.00,\n" +
+                        "                                \"prato\":{  \n" +
+                        "                                    \"nome\":\"Prato 2\",\n" +
+                        "                                    \"descricao\":\"Descrição Prato 2\",\n" +
+                        "                                    \"tipo\":\"Comum\"\n" +
+                        "                                }\n" +
+                        "                            },\n" +
+                        "                            {  \n" +
+                        "                                \"preco\":4.00,\n" +
+                        "                                \"prato\":{  \n" +
+                        "                                    \"nome\":\"Prato 3\",\n" +
+                        "                                    \"descricao\":\"Descrição Prato 3\",\n" +
+                        "                                    \"tipo\":\"Vegetariano\"\n" +
+                        "                                }\n" +
+                        "                            }\n" +
+                        "                        ]\n" +
+                        "                    }\n" +
+                        "                ],\n" +
+                        "                \"almoco\":[  \n" +
+                        "                    {  \n" +
+                        "                        \"dia-da-semana\":\"Segunda-Feira\",\n" +
+                        "                        \"data\":\"29/06/2015\",\n" +
+                        "                        \"refeicoes\":[  \n" +
+                        "                            {  \n" +
+                        "                                \"preco\":5.00,\n" +
+                        "                                \"prato\":{  \n" +
+                        "                                    \"nome\":\"Prato 1\",\n" +
+                        "                                    \"descricao\":\"Descrição Prato 1\",\n" +
+                        "                                    \"tipo\":\"Comum\"\n" +
+                        "                                }\n" +
+                        "                            },\n" +
+                        "                            {  \n" +
+                        "                                \"preco\":3.00,\n" +
+                        "                                \"prato\":{  \n" +
+                        "                                    \"nome\":\"Prato 2\",\n" +
+                        "                                    \"descricao\":\"Descrição Prato 2\",\n" +
+                        "                                    \"tipo\":\"Comum\"\n" +
+                        "                                }\n" +
+                        "                            },\n" +
+                        "                            {  \n" +
+                        "                                \"preco\":4.00,\n" +
+                        "                                \"prato\":{  \n" +
+                        "                                    \"nome\":\"Prato 3\",\n" +
+                        "                                    \"descricao\":\"Descrição Prato 3\",\n" +
+                        "                                    \"tipo\":\"Vegetariano\"\n" +
+                        "                                }\n" +
+                        "                            }\n" +
+                        "                        ],\n" +
+                        "                        \"sobremesas\":[  \n" +
+                        "                            {  \n" +
+                        "                                \"preco\":5.00,\n" +
+                        "                                \"prato\":{  \n" +
+                        "                                    \"nome\":\"Sobremesa 1\",\n" +
+                        "                                    \"descricao\":\"Descrição sobremesa 1\",\n" +
+                        "                                    \"tipo\":\"Comum\"\n" +
+                        "                                }\n" +
+                        "                            },\n" +
+                        "                            {  \n" +
+                        "                                \"preco\":3.00,\n" +
+                        "                                \"prato\":{  \n" +
+                        "                                    \"nome\":\"Sobremesa 2\",\n" +
+                        "                                    \"descricao\":\"Descrição sobremesa 2\",\n" +
+                        "                                    \"tipo\":\"Comum\"\n" +
+                        "                                }\n" +
+                        "                            },\n" +
+                        "                            {  \n" +
+                        "                                \"preco\":4.00,\n" +
+                        "                                \"prato\":{  \n" +
+                        "                                    \"nome\":\"Sobremesa 3\",\n" +
+                        "                                    \"descricao\":\"Descrição sobremesa 3\",\n" +
+                        "                                    \"tipo\":\"Vegetariano\"\n" +
+                        "                                }\n" +
+                        "                            }\n" +
+                        "                        ]\n" +
+                        "                    },\n" +
+                        "                    {  \n" +
+                        "                        \"dia-da-semana\":\"Terça-Feira\",\n" +
+                        "                        \"data\":\"30/06/2015\",\n" +
+                        "                        \"refeicoes\":[  \n" +
+                        "                            {  \n" +
+                        "                                \"preco\":5.00,\n" +
+                        "                                \"prato\":{  \n" +
+                        "                                    \"nome\":\"Prato 1\",\n" +
+                        "                                    \"descricao\":\"Descrição Prato 1\",\n" +
+                        "                                    \"tipo\":\"Comum\"\n" +
+                        "                                }\n" +
+                        "                            },\n" +
+                        "                            {  \n" +
+                        "                                \"preco\":3.00,\n" +
+                        "                                \"prato\":{  \n" +
+                        "                                    \"nome\":\"Prato 2\",\n" +
+                        "                                    \"descricao\":\"Descrição Prato 2\",\n" +
+                        "                                    \"tipo\":\"Comum\"\n" +
+                        "                                }\n" +
+                        "                            },\n" +
+                        "                            {  \n" +
+                        "                                \"preco\":4.00,\n" +
+                        "                                \"prato\":{  \n" +
+                        "                                    \"nome\":\"Prato 3\",\n" +
+                        "                                    \"descricao\":\"Descrição Prato 3\",\n" +
+                        "                                    \"tipo\":\"Vegetariano\"\n" +
+                        "                                }\n" +
+                        "                            }\n" +
+                        "                        ],\n" +
+                        "                        \"sobremesas\":[  \n" +
+                        "                            {  \n" +
+                        "                                \"preco\":5.00,\n" +
+                        "                                \"prato\":{  \n" +
+                        "                                    \"nome\":\"Sobremesa 1\",\n" +
+                        "                                    \"descricao\":\"Descrição sobremesa 1\",\n" +
+                        "                                    \"tipo\":\"Comum\"\n" +
+                        "                                }\n" +
+                        "                            },\n" +
+                        "                            {  \n" +
+                        "                                \"preco\":3.00,\n" +
+                        "                                \"prato\":{  \n" +
+                        "                                    \"nome\":\"Sobremesa 2\",\n" +
+                        "                                    \"descricao\":\"Descrição sobremesa 2\",\n" +
+                        "                                    \"tipo\":\"Comum\"\n" +
+                        "                                }\n" +
+                        "                            },\n" +
+                        "                            {  \n" +
+                        "                                \"preco\":4.00,\n" +
+                        "                                \"prato\":{  \n" +
+                        "                                    \"nome\":\"Sobremesa 3\",\n" +
+                        "                                    \"descricao\":\"Descrição sobremesa 3\",\n" +
+                        "                                    \"tipo\":\"Vegetariano\"\n" +
+                        "                                }\n" +
+                        "                            }\n" +
+                        "                        ]\n" +
+                        "                    }\n" +
+                        "                ],\n" +
+                        "                \"jantar\":[  \n" +
+                        "                    {  \n" +
+                        "                        \"dia-da-semana\":\"Segunda-Feira\",\n" +
+                        "                        \"data\":\"29/06/2015\",\n" +
+                        "                        \"refeicoes\":[  \n" +
+                        "                            {  \n" +
+                        "                                \"preco\":5.00,\n" +
+                        "                                \"prato\":{  \n" +
+                        "                                    \"nome\":\"Prato 1\",\n" +
+                        "                                    \"descricao\":\"Descrição Prato 1\",\n" +
+                        "                                    \"tipo\":\"Comum\"\n" +
+                        "                                }\n" +
+                        "                            },\n" +
+                        "                            {  \n" +
+                        "                                \"preco\":3.00,\n" +
+                        "                                \"prato\":{  \n" +
+                        "                                    \"nome\":\"Prato 2\",\n" +
+                        "                                    \"descricao\":\"Descrição Prato 2\",\n" +
+                        "                                    \"tipo\":\"Comum\"\n" +
+                        "                                }\n" +
+                        "                            },\n" +
+                        "                            {  \n" +
+                        "                                \"preco\":4.00,\n" +
+                        "                                \"prato\":{  \n" +
+                        "                                    \"nome\":\"Prato 3\",\n" +
+                        "                                    \"descricao\":\"Descrição Prato 3\",\n" +
+                        "                                    \"tipo\":\"Vegetariano\"\n" +
+                        "                                }\n" +
+                        "                            }\n" +
+                        "                        ],\n" +
+                        "                        \"sobremesas\":[  \n" +
+                        "                            {  \n" +
+                        "                                \"preco\":5.00,\n" +
+                        "                                \"prato\":{  \n" +
+                        "                                    \"nome\":\"Sobremesa 1\",\n" +
+                        "                                    \"descricao\":\"Descrição sobremesa 1\",\n" +
+                        "                                    \"tipo\":\"Comum\"\n" +
+                        "                                }\n" +
+                        "                            },\n" +
+                        "                            {  \n" +
+                        "                                \"preco\":3.00,\n" +
+                        "                                \"prato\":{  \n" +
+                        "                                    \"nome\":\"Sobremesa 2\",\n" +
+                        "                                    \"descricao\":\"Descrição sobremesa 2\",\n" +
+                        "                                    \"tipo\":\"Comum\"\n" +
+                        "                                }\n" +
+                        "                            },\n" +
+                        "                            {  \n" +
+                        "                                \"preco\":4.00,\n" +
+                        "                                \"prato\":{  \n" +
+                        "                                    \"nome\":\"Sobremesa 3\",\n" +
+                        "                                    \"descricao\":\"Descrição sobremesa 3\",\n" +
+                        "                                    \"tipo\":\"Vegetariano\"\n" +
+                        "                                }\n" +
+                        "                            }\n" +
+                        "                        ]\n" +
+                        "                    },\n" +
+                        "                    {  \n" +
+                        "                        \"dia-da-semana\":\"Terça-Feira\",\n" +
+                        "                        \"data\":\"30/06/2015\",\n" +
+                        "                        \"refeicoes\":[  \n" +
+                        "                            {  \n" +
+                        "                                \"preco\":5.00,\n" +
+                        "                                \"prato\":{  \n" +
+                        "                                    \"nome\":\"Prato 1\",\n" +
+                        "                                    \"descricao\":\"Descrição Prato 1\",\n" +
+                        "                                    \"tipo\":\"Comum\"\n" +
+                        "                                }\n" +
+                        "                            },\n" +
+                        "                            {  \n" +
+                        "                                \"preco\":3.00,\n" +
+                        "                                \"prato\":{  \n" +
+                        "                                    \"nome\":\"Prato 2\",\n" +
+                        "                                    \"descricao\":\"Descrição Prato 2\",\n" +
+                        "                                    \"tipo\":\"Comum\"\n" +
+                        "                                }\n" +
+                        "                            },\n" +
+                        "                            {  \n" +
+                        "                                \"preco\":4.00,\n" +
+                        "                                \"prato\":{  \n" +
+                        "                                    \"nome\":\"Prato 3\",\n" +
+                        "                                    \"descricao\":\"Descrição Prato 3\",\n" +
+                        "                                    \"tipo\":\"Vegetariano\"\n" +
+                        "                                }\n" +
+                        "                            }\n" +
+                        "                        ],\n" +
+                        "                        \"sobremesas\":[  \n" +
+                        "                            {  \n" +
+                        "                                \"preco\":5.00,\n" +
+                        "                                \"prato\":{  \n" +
+                        "                                    \"nome\":\"Sobremesa 1\",\n" +
+                        "                                    \"descricao\":\"Descrição sobremesa 1\",\n" +
+                        "                                    \"tipo\":\"Comum\"\n" +
+                        "                                }\n" +
+                        "                            },\n" +
+                        "                            {  \n" +
+                        "                                \"preco\":3.00,\n" +
+                        "                                \"prato\":{  \n" +
+                        "                                    \"nome\":\"Sobremesa 2\",\n" +
+                        "                                    \"descricao\":\"Descrição sobremesa 2\",\n" +
+                        "                                    \"tipo\":\"Comum\"\n" +
+                        "                                }\n" +
+                        "                            },\n" +
+                        "                            {  \n" +
+                        "                                \"preco\":4.00,\n" +
+                        "                                \"prato\":{  \n" +
+                        "                                    \"nome\":\"Sobremesa 3\",\n" +
+                        "                                    \"descricao\":\"Descrição sobremesa 3\",\n" +
+                        "                                    \"tipo\":\"Vegetariano\"\n" +
+                        "                                }\n" +
+                        "                            }\n" +
+                        "                        ]\n" +
+                        "                    }\n" +
+                        "                ]\n" +
+                        "            }\n" +
+                        "        },\n" +
+                        "        {  \n" +
+                        "            \"id\":125547,\n" +
+                        "            \"nome\":\"Restaurante Universitário\",\n" +
+                        "            \"valor-minimo\":3.50,\n" +
+                        "            \"estilo-de-servir\":\"A la carte\",\n" +
+                        "            \"localizacao\":{  \n" +
+                        "                \"endereco\":\"Alameda Palmeiras\",\n" +
+                        "                \"campus\":\"Campus II - Samambaia\",\n" +
+                        "                \"campus-id\": 2,\n" +
+                        "                \"ponto-de-referencia\":\"Próximo a agência da Caixa Econômica.\",\n" +
+                        "                \"latitude\":-16.601942,\n" +
+                        "                \"longitude\":-49.261731\n" +
+                        "            },\n" +
+                        "            \"horarios\":{  \n" +
+                        "                \"cafe-da-manha\":{  \n" +
+                        "                    \"inicio\":\"06:30\",\n" +
+                        "                    \"fim\":\"06:30\"\n" +
+                        "                },\n" +
+                        "                \"almoco\":{  \n" +
+                        "                    \"inicio\":\"11:00\",\n" +
+                        "                    \"fim\":\"15:00\"\n" +
+                        "                },\n" +
+                        "                \"jantar\":{  \n" +
+                        "                    \"inicio\":\"18:00\",\n" +
+                        "                    \"fim\":\"23:00\"\n" +
+                        "                }\n" +
+                        "            },\n" +
+                        "            \"cardapio\":{  \n" +
+                        "                \"cafe-da-manha\":[  \n" +
+                        "                    {  \n" +
+                        "                        \"dia-da-semana\":\"Segunda-Feira\",\n" +
+                        "                        \"data\":\"29/06/2015\",\n" +
+                        "                        \"refeicoes\":[  \n" +
+                        "                            {  \n" +
+                        "                                \"preco\":5.00,\n" +
+                        "                                \"prato\":{  \n" +
+                        "                                    \"nome\":\"Prato 1\",\n" +
+                        "                                    \"descricao\":\"Descrição Prato 1\",\n" +
+                        "                                    \"tipo\":\"Comum\"\n" +
+                        "                                }\n" +
+                        "                            },\n" +
+                        "                            {  \n" +
+                        "                                \"preco\":3.00,\n" +
+                        "                                \"prato\":{  \n" +
+                        "                                    \"nome\":\"Prato 2\",\n" +
+                        "                                    \"descricao\":\"Descrição Prato 2\",\n" +
+                        "                                    \"tipo\":\"Comum\"\n" +
+                        "                                }\n" +
+                        "                            },\n" +
+                        "                            {  \n" +
+                        "                                \"preco\":4.00,\n" +
+                        "                                \"prato\":{  \n" +
+                        "                                    \"nome\":\"Prato 3\",\n" +
+                        "                                    \"descricao\":\"Descrição Prato 3\",\n" +
+                        "                                    \"tipo\":\"Vegetariano\"\n" +
+                        "                                }\n" +
+                        "                            }\n" +
+                        "                        ]\n" +
+                        "                    },\n" +
+                        "                    {  \n" +
+                        "                        \"dia-da-semana\":\"Terça-Feira\",\n" +
+                        "                        \"data\":\"30/06/2015\",\n" +
+                        "                        \"refeicoes\":[  \n" +
+                        "                            {  \n" +
+                        "                                \"preco\":5.00,\n" +
+                        "                                \"prato\":{  \n" +
+                        "                                    \"nome\":\"Prato 1\",\n" +
+                        "                                    \"descricao\":\"Descrição Prato 1\",\n" +
+                        "                                    \"tipo\":\"Comum\"\n" +
+                        "                                }\n" +
+                        "                            },\n" +
+                        "                            {  \n" +
+                        "                                \"preco\":3.00,\n" +
+                        "                                \"prato\":{  \n" +
+                        "                                    \"nome\":\"Prato 2\",\n" +
+                        "                                    \"descricao\":\"Descrição Prato 2\",\n" +
+                        "                                    \"tipo\":\"Comum\"\n" +
+                        "                                }\n" +
+                        "                            },\n" +
+                        "                            {  \n" +
+                        "                                \"preco\":4.00,\n" +
+                        "                                \"prato\":{  \n" +
+                        "                                    \"nome\":\"Prato 3\",\n" +
+                        "                                    \"descricao\":\"Descrição Prato 3\",\n" +
+                        "                                    \"tipo\":\"Vegetariano\"\n" +
+                        "                                }\n" +
+                        "                            }\n" +
+                        "                        ]\n" +
+                        "                    }\n" +
+                        "                ],\n" +
+                        "                \"almoco\":[  \n" +
+                        "                    {  \n" +
+                        "                        \"dia-da-semana\":\"Segunda-Feira\",\n" +
+                        "                        \"data\":\"29/06/2015\",\n" +
+                        "                        \"refeicoes\":[  \n" +
+                        "                            {  \n" +
+                        "                                \"preco\":5.00,\n" +
+                        "                                \"prato\":{  \n" +
+                        "                                    \"nome\":\"Prato 1\",\n" +
+                        "                                    \"descricao\":\"Descrição Prato 1\",\n" +
+                        "                                    \"tipo\":\"Comum\"\n" +
+                        "                                }\n" +
+                        "                            },\n" +
+                        "                            {  \n" +
+                        "                                \"preco\":3.00,\n" +
+                        "                                \"prato\":{  \n" +
+                        "                                    \"nome\":\"Prato 2\",\n" +
+                        "                                    \"descricao\":\"Descrição Prato 2\",\n" +
+                        "                                    \"tipo\":\"Comum\"\n" +
+                        "                                }\n" +
+                        "                            },\n" +
+                        "                            {  \n" +
+                        "                                \"preco\":4.00,\n" +
+                        "                                \"prato\":{  \n" +
+                        "                                    \"nome\":\"Prato 3\",\n" +
+                        "                                    \"descricao\":\"Descrição Prato 3\",\n" +
+                        "                                    \"tipo\":\"Vegetariano\"\n" +
+                        "                                }\n" +
+                        "                            }\n" +
+                        "                        ],\n" +
+                        "                        \"sobremesas\":[  \n" +
+                        "                            {  \n" +
+                        "                                \"preco\":5.00,\n" +
+                        "                                \"prato\":{  \n" +
+                        "                                    \"nome\":\"Sobremesa 1\",\n" +
+                        "                                    \"descricao\":\"Descrição sobremesa 1\",\n" +
+                        "                                    \"tipo\":\"Comum\"\n" +
+                        "                                }\n" +
+                        "                            },\n" +
+                        "                            {  \n" +
+                        "                                \"preco\":3.00,\n" +
+                        "                                \"prato\":{  \n" +
+                        "                                    \"nome\":\"Sobremesa 2\",\n" +
+                        "                                    \"descricao\":\"Descrição sobremesa 2\",\n" +
+                        "                                    \"tipo\":\"Comum\"\n" +
+                        "                                }\n" +
+                        "                            },\n" +
+                        "                            {  \n" +
+                        "                                \"preco\":4.00,\n" +
+                        "                                \"prato\":{  \n" +
+                        "                                    \"nome\":\"Sobremesa 3\",\n" +
+                        "                                    \"descricao\":\"Descrição sobremesa 3\",\n" +
+                        "                                    \"tipo\":\"Vegetariano\"\n" +
+                        "                                }\n" +
+                        "                            }\n" +
+                        "                        ]\n" +
+                        "                    },\n" +
+                        "                    {  \n" +
+                        "                        \"dia-da-semana\":\"Terça-Feira\",\n" +
+                        "                        \"data\":\"30/06/2015\",\n" +
+                        "                        \"refeicoes\":[  \n" +
+                        "                            {  \n" +
+                        "                                \"preco\":5.00,\n" +
+                        "                                \"prato\":{  \n" +
+                        "                                    \"nome\":\"Prato 1\",\n" +
+                        "                                    \"descricao\":\"Descrição Prato 1\",\n" +
+                        "                                    \"tipo\":\"Comum\"\n" +
+                        "                                }\n" +
+                        "                            },\n" +
+                        "                            {  \n" +
+                        "                                \"preco\":3.00,\n" +
+                        "                                \"prato\":{  \n" +
+                        "                                    \"nome\":\"Prato 2\",\n" +
+                        "                                    \"descricao\":\"Descrição Prato 2\",\n" +
+                        "                                    \"tipo\":\"Comum\"\n" +
+                        "                                }\n" +
+                        "                            },\n" +
+                        "                            {  \n" +
+                        "                                \"preco\":4.00,\n" +
+                        "                                \"prato\":{  \n" +
+                        "                                    \"nome\":\"Prato 3\",\n" +
+                        "                                    \"descricao\":\"Descrição Prato 3\",\n" +
+                        "                                    \"tipo\":\"Vegetariano\"\n" +
+                        "                                }\n" +
+                        "                            }\n" +
+                        "                        ],\n" +
+                        "                        \"sobremesas\":[  \n" +
+                        "                            {  \n" +
+                        "                                \"preco\":5.00,\n" +
+                        "                                \"prato\":{  \n" +
+                        "                                    \"nome\":\"Sobremesa 1\",\n" +
+                        "                                    \"descricao\":\"Descrição sobremesa 1\",\n" +
+                        "                                    \"tipo\":\"Comum\"\n" +
+                        "                                }\n" +
+                        "                            },\n" +
+                        "                            {  \n" +
+                        "                                \"preco\":3.00,\n" +
+                        "                                \"prato\":{  \n" +
+                        "                                    \"nome\":\"Sobremesa 2\",\n" +
+                        "                                    \"descricao\":\"Descrição sobremesa 2\",\n" +
+                        "                                    \"tipo\":\"Comum\"\n" +
+                        "                                }\n" +
+                        "                            },\n" +
+                        "                            {  \n" +
+                        "                                \"preco\":4.00,\n" +
+                        "                                \"prato\":{  \n" +
+                        "                                    \"nome\":\"Sobremesa 3\",\n" +
+                        "                                    \"descricao\":\"Descrição sobremesa 3\",\n" +
+                        "                                    \"tipo\":\"Vegetariano\"\n" +
+                        "                                }\n" +
+                        "                            }\n" +
+                        "                        ]\n" +
+                        "                    }\n" +
+                        "                ],\n" +
+                        "                \"jantar\":[  \n" +
+                        "                    {  \n" +
+                        "                        \"dia-da-semana\":\"Segunda-Feira\",\n" +
+                        "                        \"data\":\"29/06/2015\",\n" +
+                        "                        \"refeicoes\":[  \n" +
+                        "                            {  \n" +
+                        "                                \"preco\":5.00,\n" +
+                        "                                \"prato\":{  \n" +
+                        "                                    \"nome\":\"Prato 1\",\n" +
+                        "                                    \"descricao\":\"Descrição Prato 1\",\n" +
+                        "                                    \"tipo\":\"Comum\"\n" +
+                        "                                }\n" +
+                        "                            },\n" +
+                        "                            {  \n" +
+                        "                                \"preco\":3.00,\n" +
+                        "                                \"prato\":{  \n" +
+                        "                                    \"nome\":\"Prato 2\",\n" +
+                        "                                    \"descricao\":\"Descrição Prato 2\",\n" +
+                        "                                    \"tipo\":\"Comum\"\n" +
+                        "                                }\n" +
+                        "                            },\n" +
+                        "                            {  \n" +
+                        "                                \"preco\":4.00,\n" +
+                        "                                \"prato\":{  \n" +
+                        "                                    \"nome\":\"Prato 3\",\n" +
+                        "                                    \"descricao\":\"Descrição Prato 3\",\n" +
+                        "                                    \"tipo\":\"Vegetariano\"\n" +
+                        "                                }\n" +
+                        "                            }\n" +
+                        "                        ],\n" +
+                        "                        \"sobremesas\":[  \n" +
+                        "                            {  \n" +
+                        "                                \"preco\":5.00,\n" +
+                        "                                \"prato\":{  \n" +
+                        "                                    \"nome\":\"Sobremesa 1\",\n" +
+                        "                                    \"descricao\":\"Descrição sobremesa 1\",\n" +
+                        "                                    \"tipo\":\"Comum\"\n" +
+                        "                                }\n" +
+                        "                            },\n" +
+                        "                            {  \n" +
+                        "                                \"preco\":3.00,\n" +
+                        "                                \"prato\":{  \n" +
+                        "                                    \"nome\":\"Sobremesa 2\",\n" +
+                        "                                    \"descricao\":\"Descrição sobremesa 2\",\n" +
+                        "                                    \"tipo\":\"Comum\"\n" +
+                        "                                }\n" +
+                        "                            },\n" +
+                        "                            {  \n" +
+                        "                                \"preco\":4.00,\n" +
+                        "                                \"prato\":{  \n" +
+                        "                                    \"nome\":\"Sobremesa 3\",\n" +
+                        "                                    \"descricao\":\"Descrição sobremesa 3\",\n" +
+                        "                                    \"tipo\":\"Vegetariano\"\n" +
+                        "                                }\n" +
+                        "                            }\n" +
+                        "                        ]\n" +
+                        "                    },\n" +
+                        "                    {  \n" +
+                        "                        \"dia-da-semana\":\"Terça-Feira\",\n" +
+                        "                        \"data\":\"30/06/2015\",\n" +
+                        "                        \"refeicoes\":[  \n" +
+                        "                            {  \n" +
+                        "                                \"preco\":5.00,\n" +
+                        "                                \"prato\":{  \n" +
+                        "                                    \"nome\":\"Prato 1\",\n" +
+                        "                                    \"descricao\":\"Descrição Prato 1\",\n" +
+                        "                                    \"tipo\":\"Comum\"\n" +
+                        "                                }\n" +
+                        "                            },\n" +
+                        "                            {  \n" +
+                        "                                \"preco\":3.00,\n" +
+                        "                                \"prato\":{  \n" +
+                        "                                    \"nome\":\"Prato 2\",\n" +
+                        "                                    \"descricao\":\"Descrição Prato 2\",\n" +
+                        "                                    \"tipo\":\"Comum\"\n" +
+                        "                                }\n" +
+                        "                            },\n" +
+                        "                            {  \n" +
+                        "                                \"preco\":4.00,\n" +
+                        "                                \"prato\":{  \n" +
+                        "                                    \"nome\":\"Prato 3\",\n" +
+                        "                                    \"descricao\":\"Descrição Prato 3\",\n" +
+                        "                                    \"tipo\":\"Vegetariano\"\n" +
+                        "                                }\n" +
+                        "                            }\n" +
+                        "                        ],\n" +
+                        "                        \"sobremesas\":[  \n" +
+                        "                            {  \n" +
+                        "                                \"preco\":5.00,\n" +
+                        "                                \"prato\":{  \n" +
+                        "                                    \"nome\":\"Sobremesa 1\",\n" +
+                        "                                    \"descricao\":\"Descrição sobremesa 1\",\n" +
+                        "                                    \"tipo\":\"Comum\"\n" +
+                        "                                }\n" +
+                        "                            },\n" +
+                        "                            {  \n" +
+                        "                                \"preco\":3.00,\n" +
+                        "                                \"prato\":{  \n" +
+                        "                                    \"nome\":\"Sobremesa 2\",\n" +
+                        "                                    \"descricao\":\"Descrição sobremesa 2\",\n" +
+                        "                                    \"tipo\":\"Comum\"\n" +
+                        "                                }\n" +
+                        "                            },\n" +
+                        "                            {  \n" +
+                        "                                \"preco\":4.00,\n" +
+                        "                                \"prato\":{  \n" +
+                        "                                    \"nome\":\"Sobremesa 3\",\n" +
+                        "                                    \"descricao\":\"Descrição sobremesa 3\",\n" +
+                        "                                    \"tipo\":\"Vegetariano\"\n" +
+                        "                                }\n" +
+                        "                            }\n" +
+                        "                        ]\n" +
+                        "                    }\n" +
+                        "                ]\n" +
+                        "            }\n" +
+                        "        }\n" +
+                        "    ]\n" +
+                        "}";
                 JSONObject jsonPrincipal = new JSONObject(jsonResposta);
                 String serverStatus = jsonPrincipal.getString("status");
                 if (serverStatus.equals("OK")) {
@@ -75,8 +719,9 @@ public class RestaurantesAsyncTask extends AsyncTask<String, Void, ArrayList<Res
                         String pontoReferencia = jsonObject.getString("ponto-de-referencia");
                         String latitude = String.valueOf(jsonObject.getString("latitude"));
                         String longitude = String.valueOf(jsonObject.getString("longitude"));
+                        int campusId = jsonObject.getInt("campus-id");
 
-                        LocalizacaoRestaurante localizacaoRestaurante = new LocalizacaoRestaurante(latitude, longitude, endereco, campusRestaurante, pontoReferencia);
+                        LocalizacaoRestaurante localizacaoRestaurante = new LocalizacaoRestaurante(latitude, longitude, endereco, campusRestaurante, campusId, pontoReferencia);
                         Restaurante restaurante = new Restaurante(idRestaurante, nomeRestaurante, valorMinimo, estiloDeServir, localizacaoRestaurante);
 
                         jsonObject = jsonRestaurante.getJSONObject("horarios");
