@@ -32,6 +32,7 @@ import java.util.ArrayList;
 
 import br.com.codinglab.restaurantesufg.R;
 import br.com.codinglab.restaurantesufg.modelos.Campus;
+import br.com.codinglab.restaurantesufg.utils.Handler;
 
 
 public class MainActivity extends ActionBarActivity {
@@ -210,7 +211,7 @@ public class MainActivity extends ActionBarActivity {
                     regId = gcm.register(SENDER_ID);
                     msg = "Device registered, registration ID=" + regId;
 
-                    sendRegistrationIdToBackend();
+                    sendRegistrationIdToBackend(regId);
                     storeRegistrationId(context, regId);
                 } catch (IOException ex) {
                     msg = "Error :" + ex.getMessage();
@@ -226,8 +227,10 @@ public class MainActivity extends ActionBarActivity {
 
 
     }
-    private void sendRegistrationIdToBackend() {
-        // Your implementation here.
+    private void sendRegistrationIdToBackend(String regId) {
+        String url = "http://codinglab.com.br/samuel/gcm/salvar_registro.php?regid=" + regId;
+        Handler handler = new Handler();
+        handler.makeServiceCall(url, Handler.GET);
     }
     private void storeRegistrationId(Context context, String regId) {
         final SharedPreferences prefs = getGcmPreferences(context);

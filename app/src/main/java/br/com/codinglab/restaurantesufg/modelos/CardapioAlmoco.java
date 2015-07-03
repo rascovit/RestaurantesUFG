@@ -19,6 +19,10 @@ public class CardapioAlmoco extends Cardapio {
         this.sobremesas = sobremesas;
     }
 
+    public ArrayList<ItemSobremesa> getSobremesas() {
+        return sobremesas;
+    }
+
     public boolean temSobremesa(){
         return !sobremesas.isEmpty();
     }

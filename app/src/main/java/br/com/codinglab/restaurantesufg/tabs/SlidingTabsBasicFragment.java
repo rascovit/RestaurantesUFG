@@ -11,6 +11,8 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -218,10 +220,18 @@ public class SlidingTabsBasicFragment extends Fragment {
                 ratingBar.setClickable(true);
             }
             if(position == 1){
-                // Inflate a new layout from our resources
                 view = getActivity().getLayoutInflater().inflate(R.layout.tab_cardapio, container, false);
-                // Add the newly created View to the ViewPager
+
+
+                RecyclerView cardapioRecyclerView = (RecyclerView) view.findViewById(R.id.cardapio_recyclerView);
+                RecyclerView.LayoutManager cardapioLayoutManager = new LinearLayoutManager(getActivity());
+                RecyclerView.Adapter cardapioAdapter = new CardapioAdapter(restaurante, getActivity());
+
+                cardapioRecyclerView.setAdapter(cardapioAdapter);
+                cardapioRecyclerView.setLayoutManager(cardapioLayoutManager);
+
                 container.addView(view,position);
+
             }
             if (position == 2 && !inflouMapa) {
                 inflouMapa = true;

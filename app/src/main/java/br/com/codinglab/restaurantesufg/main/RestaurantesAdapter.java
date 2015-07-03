@@ -51,8 +51,7 @@ public class RestaurantesAdapter extends RecyclerView.Adapter<RestaurantesAdapte
 
     // Create new views (invoked by the layout manager)
     @Override
-    public RestaurantesAdapter.ViewHolder onCreateViewHolder(final ViewGroup parent,
-                                                             int viewType) {
+    public RestaurantesAdapter.ViewHolder onCreateViewHolder(final ViewGroup parent, int viewType) {
         // create a new view
         View v = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.item_restaurante, parent, false);
