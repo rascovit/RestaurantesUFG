@@ -130,32 +130,9 @@ public class MainActivity extends ActionBarActivity {
 
             listaCampus.add(new Campus("Câmpus Colemar Natal e Silva",1,"Avenida Universitária"));
             listaCampus.add(new Campus("Câmpus Samambaia", 2, "Avenida Samambaia"));
-            listaCampus.add(new Campus("Câmpus Goiás", 3, "Avenida Dario Sampaio"));
+            listaCampus.add(new Campus("Câmpus Goiás Velho", 3, "Avenida Dario Sampaio"));
             listaCampus.add(new Campus("Câmpus Jataí",4,"Avenida Jataí"));
             listaCampus.add(new Campus("Câmpus Catalão",5,"Rua das Amendoeiras"));
-
-
-            //MOCK DE CAMPUS UNIVERSITÁRIOS
-            ArrayList<String> campus = new ArrayList<>();
-            campus.add("Câmpus Colemar Natal e Silva");
-            campus.add("Câmpus Samambaia");
-            campus.add("Câmpus Goiás");
-            campus.add("Câmpus Jataí");
-            campus.add("Câmpus Catalão");
-
-            ArrayList<Integer> campusId = new ArrayList<>();
-            campusId.add(1);
-            campusId.add(2);
-            campusId.add(3);
-            campusId.add(4);
-            campusId.add(5);
-
-            ArrayList<String> enderecosCampus = new ArrayList<>();
-            enderecosCampus.add("Avenida Universitária");
-            enderecosCampus.add("Avenida Samambaia");
-            enderecosCampus.add("Avenida Dario Sampaio");
-            enderecosCampus.add("Avenida Jataí");
-            enderecosCampus.add("Rua das amendoeiras");
 
             // Referenciando a RV
             campusRecyclerView = (RecyclerView) rootView.findViewById(R.id.campus_recycler_view);
@@ -200,9 +177,6 @@ public class MainActivity extends ActionBarActivity {
             Log.i(TAG, "Registration not found.");
             return "";
         }
-        // Check if app was updated; if so, it must clear the registration ID
-        // since the existing regID is not guaranteed to work with the new
-        // app version.
         int registeredVersion = prefs.getInt(PROPERTY_APP_VERSION, Integer.MIN_VALUE);
         int currentVersion = getAppVersion(context);
         if (registeredVersion != currentVersion) {
@@ -217,13 +191,10 @@ public class MainActivity extends ActionBarActivity {
             PackageInfo packageInfo = context.getPackageManager().getPackageInfo(context.getPackageName(), 0);
             return packageInfo.versionCode;
         } catch (PackageManager.NameNotFoundException e) {
-            // should never happen
             throw new RuntimeException("Could not get package name: " + e);
         }
     }
     private SharedPreferences getGcmPreferences(Context context) {
-        // This sample app persists the registration ID in shared preferences, but
-        // how you store the regID in your app is up to you.
         return getSharedPreferences(MainActivity.class.getSimpleName(),Context.MODE_PRIVATE);
     }
     private void registerInBackground() {
@@ -239,21 +210,10 @@ public class MainActivity extends ActionBarActivity {
                     regId = gcm.register(SENDER_ID);
                     msg = "Device registered, registration ID=" + regId;
 
-                    // You should send the registration ID to your server over HTTP, so it
-                    // can use GCM/HTTP or CCS to send messages to your app.
                     sendRegistrationIdToBackend();
-
-                    // For this demo: we don't need to send it because the device will send
-                    // upstream messages to a server that echo back the message using the
-                    // 'from' address in the message.
-
-                    // Persist the regID - no need to register again.
                     storeRegistrationId(context, regId);
                 } catch (IOException ex) {
                     msg = "Error :" + ex.getMessage();
-                    // If there is an error, don't just keep trying to register.
-                    // Require the user to click a button again, or perform
-                    // exponential back-off.
                 }
                 return msg;
             }

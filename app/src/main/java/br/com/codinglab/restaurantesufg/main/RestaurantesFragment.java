@@ -57,7 +57,7 @@ public class RestaurantesFragment extends Fragment implements LocationListener {
         Criteria criteria = new Criteria();
         locationProvider = locationManager.getBestProvider(criteria, false);
         //ATUALIZA O GPS A CADA 5 SEGUNDOS OU A CADA 100 METROS
-        locationManager.requestLocationUpdates(locationProvider, 500, 100, this);
+        locationManager.requestLocationUpdates(locationProvider, 5000, 10, this);
 
         if (!locationManager.isProviderEnabled(locationProvider)) {
             AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());

@@ -63,7 +63,7 @@ public class Handler {
                 httpResponse = httpClient.execute(httpGet);
             }
             httpEntity = httpResponse.getEntity();
-            resposta = EntityUtils.toString(httpEntity, HTTP.UTF_8);
+            resposta = EntityUtils.toString(httpEntity,HTTP.UTF_8);
 
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
