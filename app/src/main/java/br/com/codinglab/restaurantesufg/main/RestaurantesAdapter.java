@@ -90,6 +90,7 @@ public class RestaurantesAdapter extends RecyclerView.Adapter<RestaurantesAdapte
                 informacoes.putString("enderecoRestaurante", restaurantes.get(position).getLocalizacaoRestaurante().getEnderecoRestaurante());
                 informacoes.putSerializable("objetoRestaurante", restaurantes.get(position));
 
+
                 slidingTabsBasicFragment.setArguments(informacoes);
 
                 FragmentTransaction fragmentTransaction = ((FragmentActivity) context).getSupportFragmentManager().beginTransaction();

@@ -39,7 +39,7 @@ import br.com.codinglab.restaurantesufg.modelos.Restaurante;
 public class SlidingTabsBasicFragment extends Fragment {
 
     static final String LOG_TAG = "SlidingTabsBasicFragment";
-    private GoogleMap mapa;
+    private GoogleMap mapa = null;
     private String[] coordenadasRestaurantes;
     private String nomeRestaurante;
     private String enderecoRestaurante;
@@ -236,19 +236,22 @@ public class SlidingTabsBasicFragment extends Fragment {
             if (position == 2 && !inflouMapa) {
                 inflouMapa = true;
                 view = getActivity().getLayoutInflater().inflate(R.layout.tab_mapa, container, false);
-                mapa = ((SupportMapFragment) getActivity().getSupportFragmentManager().findFragmentById(R.id.mapa_restaurantes)).getMap();
-                mapa.setMyLocationEnabled(true);
-                LatLng localizacaoRestaurante = new LatLng(Double.parseDouble(coordenadasRestaurantes[0]), Double.parseDouble(coordenadasRestaurantes[1]));
-                mapa.addMarker(new MarkerOptions()
-                        .position(localizacaoRestaurante)
-                        .snippet(enderecoRestaurante)
-                        .title(nomeRestaurante)).showInfoWindow();
-                mapa.animateCamera(CameraUpdateFactory.zoomTo(14), 1000, null);
-                CameraPosition posicaoCamera = new CameraPosition.Builder()
-                        .target(localizacaoRestaurante)      // Sets the center of the map to Mountain View
-                        .zoom(15)                   // Sets the zoom
-                        .build();                   // Creates a CameraPosition from the builder
-                mapa.animateCamera(CameraUpdateFactory.newCameraPosition(posicaoCamera));
+                if(mapa == null){
+                    mapa = ((SupportMapFragment) getActivity().getSupportFragmentManager().findFragmentById(R.id.mapa_restaurantes)).getMap();
+                    mapa.setMyLocationEnabled(true);
+                    LatLng localizacaoRestaurante = new LatLng(Double.parseDouble(coordenadasRestaurantes[0]), Double.parseDouble(coordenadasRestaurantes[1]));
+                    mapa.addMarker(new MarkerOptions()
+                            .position(localizacaoRestaurante)
+                            .snippet(enderecoRestaurante)
+                            .title(nomeRestaurante)).showInfoWindow();
+                    mapa.animateCamera(CameraUpdateFactory.zoomTo(14), 1000, null);
+                    CameraPosition posicaoCamera = new CameraPosition.Builder()
+                            .target(localizacaoRestaurante)      // Sets the center of the map to Mountain View
+                            .zoom(15)                   // Sets the zoom
+                            .build();                   // Creates a CameraPosition from the builder
+                    mapa.animateCamera(CameraUpdateFactory.newCameraPosition(posicaoCamera));
+                }
+
                 // Add the newly created View to the ViewPager
                 container.addView(view,position);
             }

@@ -1,9 +1,11 @@
 package br.com.codinglab.restaurantesufg.modelos;
 
+import java.io.Serializable;
+
 /**
  * Created by PC MASTER RACE on 26/06/2015.
  */
-public class Prato {
+public class Prato implements Serializable {
 
     private String tipo;
     private String nome;

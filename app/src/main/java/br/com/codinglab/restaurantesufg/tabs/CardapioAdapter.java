@@ -12,6 +12,7 @@ import java.util.ArrayList;
 
 import br.com.codinglab.restaurantesufg.R;
 import br.com.codinglab.restaurantesufg.modelos.ItemCardapio;
+import br.com.codinglab.restaurantesufg.modelos.ItemRefeicao;
 import br.com.codinglab.restaurantesufg.modelos.Restaurante;
 
 /**
@@ -29,47 +30,68 @@ public class CardapioAdapter extends RecyclerView.Adapter<CardapioAdapter.ViewHo
         this.restaurante = restaurante;
         this.context = context;
 
-        // Concatenando itensDeCardapio ao ArrayList
-        if(restaurante.temCafeDaManha()){
-            for(int i=0; i<restaurante.getCardapioCafe().size(); i++){
-                for(int j=0; j<restaurante.getCardapioCafe().get(i).getRefeicoes().size(); j++){
-                    restaurante.getCardapioCafe().get(i).getRefeicoes().get(j).setServidoNo("Café da manhã");
-                    restaurante.getCardapioCafe().get(i).getRefeicoes().get(j).setServidoDia(restaurante.getCardapioCafe().get(i).getData());
-                    itensCardapio.add(restaurante.getCardapioCafe().get(i).getRefeicoes().get(j));
-                }
-            }
-        }
-        if(restaurante.temAlmoco()){
-            for(int i=0; i<restaurante.getCardapioAlmoco().size(); i++){
-                for(int j=0; j<restaurante.getCardapioAlmoco().get(i).getRefeicoes().size(); j++){
-                    restaurante.getCardapioAlmoco().get(i).getRefeicoes().get(j).setServidoNo("Almoço");
-                    restaurante.getCardapioAlmoco().get(i).getRefeicoes().get(j).setServidoDia(restaurante.getCardapioAlmoco().get(i).getData());
-                    itensCardapio.add(restaurante.getCardapioAlmoco().get(i).getRefeicoes().get(j));
-                }
-                if(restaurante.getCardapioAlmoco().get(i).temSobremesa()){
-                    for(int j=0; j<restaurante.getCardapioAlmoco().get(i).getSobremesas().size(); j++){
-                        restaurante.getCardapioAlmoco().get(i).getSobremesas().get(j).setServidoNo("Sobremesa");
-                        restaurante.getCardapioAlmoco().get(i).getSobremesas().get(j).setServidoDia(restaurante.getCardapioAlmoco().get(i).getData());
-                        itensCardapio.add(restaurante.getCardapioAlmoco().get(i).getSobremesas().get(j));
+        boolean cafeTerminou = false;
+        boolean almocoTerminou = false;
+        boolean jantarTerminou = false;
+        int cardapioContador = 0;
+        while(!cafeTerminou || !almocoTerminou || !jantarTerminou){
+            if(restaurante.temCafeDaManha()){
+                if(cardapioContador < restaurante.getCardapioCafe().size()){
+                    ArrayList<ItemRefeicao> listaRefeicoes = restaurante.getCardapioCafe().get(cardapioContador).getRefeicoes();
+                    String dataDeServir = restaurante.getCardapioCafe().get(cardapioContador).getData();
+                    for(int j=0; j<restaurante.getCardapioCafe().get(cardapioContador).getRefeicoes().size(); j++){
+                        listaRefeicoes.get(j).setServidoNo("Café da manhã");
+                        listaRefeicoes.get(j).setServidoDia(dataDeServir);
+                        itensCardapio.add(listaRefeicoes.get(j));
                     }
-                }
+            }else{
+                cafeTerminou = true;
             }
-        }
-        if(restaurante.temJantar()){
-            for(int i=0; i<restaurante.getCardapioJantar().size(); i++){
-                for(int j=0; j<restaurante.getCardapioJantar().get(i).getRefeicoes().size(); j++){
-                    restaurante.getCardapioJantar().get(i).getRefeicoes().get(j).setServidoNo("Jantar");
-                    restaurante.getCardapioJantar().get(i).getRefeicoes().get(j).setServidoDia(restaurante.getCardapioJantar().get(i).getData());
-                    itensCardapio.add(restaurante.getCardapioJantar().get(i).getRefeicoes().get(j));
-                }
-                if(restaurante.getCardapioJantar().get(i).temSobremesa()){
-                    for(int j=0; j<restaurante.getCardapioJantar().get(i).getSobremesas().size(); j++){
-                        restaurante.getCardapioJantar().get(i).getSobremesas().get(j).setServidoNo("Sobremesa");
-                        restaurante.getCardapioJantar().get(i).getSobremesas().get(j).setServidoDia(restaurante.getCardapioJantar().get(i).getData());
-                        itensCardapio.add(restaurante.getCardapioJantar().get(i).getSobremesas().get(j));
+            }else{
+                cafeTerminou = true;
+            }
+
+            if(restaurante.temAlmoco()){
+                if(cardapioContador < restaurante.getCardapioAlmoco().size()){
+                    for(int j=0; j<restaurante.getCardapioAlmoco().get(cardapioContador).getRefeicoes().size(); j++){
+                        restaurante.getCardapioAlmoco().get(cardapioContador).getRefeicoes().get(j).setServidoNo("Almoço");
+                        restaurante.getCardapioAlmoco().get(cardapioContador).getRefeicoes().get(j).setServidoDia(restaurante.getCardapioAlmoco().get(cardapioContador).getData());
+                        itensCardapio.add(restaurante.getCardapioAlmoco().get(cardapioContador).getRefeicoes().get(j));
                     }
+                    for(int j=0; j<restaurante.getCardapioAlmoco().get(cardapioContador).getSobremesas().size(); j++){
+                        restaurante.getCardapioAlmoco().get(cardapioContador).getSobremesas().get(j).setServidoNo("Sobremesa");
+                        restaurante.getCardapioAlmoco().get(cardapioContador).getSobremesas().get(j).setServidoDia(restaurante.getCardapioAlmoco().get(cardapioContador).getData());
+                        itensCardapio.add(restaurante.getCardapioAlmoco().get(cardapioContador).getSobremesas().get(j));
+                    }
+                }else{
+                    almocoTerminou = true;
                 }
+            }else{
+                almocoTerminou = true;
             }
+
+            if(restaurante.temJantar()){
+                if(cardapioContador < restaurante.getCardapioJantar().size()){
+                    for(int j=0; j < restaurante.getCardapioJantar().get(cardapioContador).getRefeicoes().size(); j++){
+                        restaurante.getCardapioJantar().get(cardapioContador).getRefeicoes().get(j).setServidoNo("Jantar");
+                        restaurante.getCardapioJantar().get(cardapioContador).getRefeicoes().get(j).setServidoDia(restaurante.getCardapioJantar().get(cardapioContador).getData());
+                        itensCardapio.add(restaurante.getCardapioJantar().get(cardapioContador).getRefeicoes().get(j));
+                    }
+
+                    for(int j=0; j<restaurante.getCardapioJantar().get(cardapioContador).getSobremesas().size(); j++){
+                        restaurante.getCardapioJantar().get(cardapioContador).getSobremesas().get(j).setServidoNo("Sobremesa");
+                        restaurante.getCardapioJantar().get(cardapioContador).getSobremesas().get(j).setServidoDia(restaurante.getCardapioJantar().get(cardapioContador).getData());
+                        itensCardapio.add(restaurante.getCardapioJantar().get(cardapioContador).getSobremesas().get(j));
+                    }
+                }else{
+                    jantarTerminou = true;
+                }
+
+            }else{
+                jantarTerminou = true;
+            }
+            cardapioContador++;
+
         }
     }
 

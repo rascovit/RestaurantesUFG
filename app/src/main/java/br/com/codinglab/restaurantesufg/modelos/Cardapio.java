@@ -1,11 +1,12 @@
 package br.com.codinglab.restaurantesufg.modelos;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * Created by PC MASTER RACE on 26/06/2015.
  */
-public abstract class Cardapio {
+public abstract class Cardapio implements Serializable {
 
     private String diaDaSemana;
     private String data;
