@@ -7,12 +7,12 @@ package br.com.codinglab.restaurantesufg.modelos;
 public class Campus {
     private String campus;
     private int campusId;
-    private String enderecoCampus;
+    private LocalizacaoCampus localizacaoCampus;
 
     public Campus(String campus, int campusId, String enderecoCampus) {
         this.campus = campus;
         this.campusId = campusId;
-        this.enderecoCampus = enderecoCampus;
+        this.localizacaoCampus = new LocalizacaoCampus(enderecoCampus);
     }
 
     public String getCampus() {
@@ -24,6 +24,6 @@ public class Campus {
     }
 
     public String getEnderecoCampus() {
-        return enderecoCampus;
+        return localizacaoCampus.getEndereco();
     }
 }

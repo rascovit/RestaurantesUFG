@@ -5,7 +5,6 @@ package br.com.codinglab.restaurantesufg.modelos;
  */
 public class LocalizacaoRestaurante extends Localizacao{
 
-    private String enderecoRestaurante;
     private String campus;
     private String pontoDeReferencia;
     private String distanciaKM;
@@ -13,8 +12,7 @@ public class LocalizacaoRestaurante extends Localizacao{
     private int campusId;
 
     public LocalizacaoRestaurante(String latitude, String longitude, String enderecoRestaurante, String campus, int campusId, String pontoDeReferencia) {
-        super(latitude, longitude);
-        this.enderecoRestaurante = enderecoRestaurante;
+        super(latitude, longitude, enderecoRestaurante);
         this.campus = campus;
         this.pontoDeReferencia = pontoDeReferencia;
         this.distanciaKM = "Calculando...";
@@ -32,7 +30,7 @@ public class LocalizacaoRestaurante extends Localizacao{
     }
 
     public String getEnderecoRestaurante() {
-        return enderecoRestaurante;
+        return getEndereco();
     }
 
     public String getCampus() {

@@ -8,10 +8,12 @@ import java.io.Serializable;
 public abstract class Localizacao implements Serializable {
     private String latitude;
     private String longitude;
+    private String endereco;
 
-    public Localizacao(String latitude, String longitude) {
+    public Localizacao(String latitude, String longitude, String endereco) {
         this.latitude = latitude;
         this.longitude = longitude;
+        this.endereco = endereco;
     }
 
     public String getLatitude() {
@@ -20,5 +22,9 @@ public abstract class Localizacao implements Serializable {
 
     public String getLongitude() {
         return longitude;
+    }
+
+    public String getEndereco() {
+        return endereco;
     }
 }

@@ -103,7 +103,7 @@ public class Restaurante implements Serializable{
 
     public void setHorarioJantar(Horario horarioJantar) {
         this.horarioJantar = horarioJantar;
-    }
+        }
 
     public void setCardapioJantar(ArrayList<CardapioJantar> cardapioJantar) {
         this.cardapioJantar = cardapioJantar;
