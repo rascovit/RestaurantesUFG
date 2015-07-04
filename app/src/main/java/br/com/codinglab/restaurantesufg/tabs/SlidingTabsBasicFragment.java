@@ -13,7 +13,6 @@ import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -43,7 +42,7 @@ public class SlidingTabsBasicFragment extends Fragment {
     private String[] coordenadasRestaurantes;
     private String nomeRestaurante;
     private String enderecoRestaurante;
-    private static View view;
+    private View view;
     private boolean inflouMapa = false;
 
     //OBJETO RESTAURANTE
@@ -112,17 +111,19 @@ public class SlidingTabsBasicFragment extends Fragment {
 
     @Override
     public void onDestroy() {
-        mViewPager.removeView(view);
         super.onDestroy();
-    }
+        mViewPager.removeView(view);
 
+    }
+    @Override
     public void onDestroyView()
     {
         super.onDestroyView();
-        Fragment fragment = (getFragmentManager().findFragmentById(R.id.mapa_restaurantes));
-        FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
-        ft.remove(fragment);
-        ft.commit();
+        if(getFragmentManager().findFragmentById(R.id.mapa_restaurantes) != null){
+            Fragment fragment = (getFragmentManager().findFragmentById(R.id.mapa_restaurantes));
+            FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+            ft.remove(fragment).commitAllowingStateLoss();
+        }
     }
 
     /**
@@ -234,12 +235,13 @@ public class SlidingTabsBasicFragment extends Fragment {
 
             }
             if (position == 2 && !inflouMapa) {
+
                 inflouMapa = true;
                 view = getActivity().getLayoutInflater().inflate(R.layout.tab_mapa, container, false);
                 if(mapa == null){
                     mapa = ((SupportMapFragment) getActivity().getSupportFragmentManager().findFragmentById(R.id.mapa_restaurantes)).getMap();
                     mapa.setMyLocationEnabled(true);
-                    LatLng localizacaoRestaurante = new LatLng(Double.parseDouble(coordenadasRestaurantes[0]), Double.parseDouble(coordenadasRestaurantes[1]));
+                    LatLng localizacaoRestaurante = new LatLng(Double.parseDouble(restaurante.getLocalizacaoRestaurante().getLatitude()), Double.parseDouble(restaurante.getLocalizacaoRestaurante().getLongitude()));
                     mapa.addMarker(new MarkerOptions()
                             .position(localizacaoRestaurante)
                             .snippet(enderecoRestaurante)
