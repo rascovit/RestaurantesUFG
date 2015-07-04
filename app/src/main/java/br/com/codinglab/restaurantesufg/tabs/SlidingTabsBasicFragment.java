@@ -196,9 +196,8 @@ public class SlidingTabsBasicFragment extends Fragment {
                 TextView estiloDeServirTextView = (TextView) view.findViewById(R.id.estiloDeServir_textView);
                 estiloDeServirTextView.setText(restaurante.getEstiloDeServir());
 
-                // RATING BAR
+                // BOTÃO 'FAVORITAR RESTAURANTE'
                 botaoFavoritarRestaurante = (FloatingActionButton) view.findViewById(R.id.botaoFavoritarRestaurante);
-                //ratingBar = (RatingBar) view.findViewById(R.id.ratingBar);
                 SharedPreferences sharedPreferences = getActivity().getSharedPreferences("settings", Context.MODE_PRIVATE);
 
                 if(sharedPreferences.contains(String.valueOf(restaurante.getId()))){
@@ -266,7 +265,9 @@ public class SlidingTabsBasicFragment extends Fragment {
          */
         @Override
         public void destroyItem(ViewGroup container, int position, Object object) {
-            //container.removeView((View) object);
+            if (position != 2) {
+                container.removeView((View) object);
+            }
         }
     }
 }
