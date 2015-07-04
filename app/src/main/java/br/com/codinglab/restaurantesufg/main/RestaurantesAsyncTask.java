@@ -3,7 +3,6 @@ package br.com.codinglab.restaurantesufg.main;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
-import android.util.Log;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -29,7 +28,7 @@ public class RestaurantesAsyncTask extends AsyncTask<String, Void, ArrayList<Res
 
     private Context contexto;
     private ProgressDialog progressDialog;
-    private InterfaceAsyncTask interfaceAsyncTask;
+    public InterfaceAsyncTask interfaceAsyncTask;
 
     public RestaurantesAsyncTask(Context contexto, InterfaceAsyncTask interfaceAsyncTask) {
         this.contexto = contexto;

@@ -65,29 +65,11 @@ public class RestaurantesFragment extends Fragment implements LocationListener, 
         locationManager.requestLocationUpdates(locationProvider, 5000, 10, this);
 
         if (!locationManager.isProviderEnabled(locationProvider)) {
-            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-            builder.setTitle("Localização");
-            builder.setMessage("Não foi possível acessar os dados de localização do seu dispositivo. Deseja ativá-los?");
-            builder.setPositiveButton("Sim", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    startActivity(new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS));
-                }
-            });
-            builder.setNegativeButton("Não", null);
-            builder.show();
+            dialogGPSNaoHabilitado().show();
         }
         campusId = getArguments().getInt("campusId");
 
-        restaurantesAsyncTask = new RestaurantesAsyncTask(getActivity(), new InterfaceAsyncTask() {
-            @Override
-            public void obtenhaResultadoAsyncTask(ArrayList<Restaurante> restaurantes) {
-                listaRestaurantes = restaurantes;
-                // Criando e especificando um Adapter para a RV
-                restaurantesAdapter = new RestaurantesAdapter(getActivity(), listaRestaurantes);
-                restaurantesRecyclerView.setAdapter(restaurantesAdapter);
-            }
-        });
+        restaurantesAsyncTask = new RestaurantesAsyncTask(getActivity(), this);
 
         // VERIFICA SE ESTÁ CONECTADO. CASO NÃO, MOSTRA O DIALOG E RETORNA AO FRAGMENT ANTERIOR
         if (estaConectadoInternet()) {
@@ -110,7 +92,7 @@ public class RestaurantesFragment extends Fragment implements LocationListener, 
     @Override
     public void onLocationChanged(Location location) {
         //AO OBTER ALGUMA ATUALIZAÇÃO DE LOCALIZAÇÃO, EXECUTA A ASYNCTASK PARA OBTER DISTANCIAS E TEMPOS ESTIMADOS
-        if (estaConectadoInternet()) {
+        if (estaConectadoInternet() && isResumed()) {
             new AsyncTaskBuscaDistancias().execute(location);
         }
         else {
@@ -135,11 +117,16 @@ public class RestaurantesFragment extends Fragment implements LocationListener, 
     }
 
     @Override
-    public void obtenhaResultadoAsyncTask(ArrayList<Restaurante> restaurantes) {}
+    public void obtenhaResultadoAsyncTask(ArrayList<Restaurante> restaurantes) {
+        listaRestaurantes = restaurantes;
+        // Criando e especificando um Adapter para a RV
+        restaurantesAdapter = new RestaurantesAdapter(getActivity(), listaRestaurantes);
+        restaurantesRecyclerView.setAdapter(restaurantesAdapter);
+    }
 
     // VERIFICA SE O USUÁRIO ESTÁ CONECTADO À INTERNET
     private boolean estaConectadoInternet(){
-        ConnectivityManager connectivity = (ConnectivityManager)getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
+        ConnectivityManager connectivity = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
         if (connectivity != null)
         {
             NetworkInfo[] informacaoRede = connectivity.getAllNetworkInfo();
@@ -161,6 +148,20 @@ public class RestaurantesFragment extends Fragment implements LocationListener, 
 
                     }
                 });
+        return builder.create();
+    }
+
+    private Dialog dialogGPSNaoHabilitado() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setTitle("Localização");
+        builder.setMessage("Não foi possível acessar os dados de localização do seu dispositivo. Deseja ativá-los?");
+        builder.setPositiveButton("Sim", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                startActivity(new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS));
+            }
+        });
+        builder.setNegativeButton("Não", null);
         return builder.create();
     }
 
