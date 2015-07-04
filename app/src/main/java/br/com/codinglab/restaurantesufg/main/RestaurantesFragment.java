@@ -113,9 +113,15 @@ public class RestaurantesFragment extends Fragment implements LocationListener, 
     @Override
     public void obtenhaResultadoAsyncTask(ArrayList<Restaurante> restaurantes) {
         listaRestaurantes = restaurantes;
-        // Criando e especificando um Adapter para a RV
-        restaurantesAdapter = new RestaurantesAdapter(getActivity(), listaRestaurantes);
-        restaurantesRecyclerView.setAdapter(restaurantesAdapter);
+        if (listaRestaurantes.isEmpty()) {
+            dialogNaoHaRestaurantesCadastrados().show();
+            fragmentManager.popBackStack();
+        }
+        else {
+            // Criando e especificando um Adapter para a RV
+            restaurantesAdapter = new RestaurantesAdapter(getActivity(), listaRestaurantes);
+            restaurantesRecyclerView.setAdapter(restaurantesAdapter);
+        }
     }
 
     // VERIFICA SE O USUÁRIO ESTÁ CONECTADO À INTERNET
@@ -137,6 +143,17 @@ public class RestaurantesFragment extends Fragment implements LocationListener, 
     private Dialog dialogNaoEstaConectadoInternet() {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setMessage("Você não está conectado à internet. Por favor, verifique sua conexão.")
+                .setNeutralButton("OK", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+
+                    }
+                });
+        return builder.create();
+    }
+
+    private Dialog dialogNaoHaRestaurantesCadastrados() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setMessage("O campus selecionado não possui restaurantes cadastrados.")
                 .setNeutralButton("OK", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
 
@@ -190,7 +207,9 @@ public class RestaurantesFragment extends Fragment implements LocationListener, 
         @Override
         // ATUALIZA A LISTA DE RESTAURANTES COM O TEMPO E DISTÂNCIA JÁ CALCULADOS
         protected void onPostExecute(Boolean b) {
-            restaurantesAdapter.notifyDataSetChanged();
+            if (restaurantesAdapter != null) {
+                restaurantesAdapter.notifyDataSetChanged();
+            }
         }
     }
 

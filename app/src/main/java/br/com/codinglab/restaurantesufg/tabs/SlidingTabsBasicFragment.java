@@ -69,6 +69,8 @@ public class SlidingTabsBasicFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_sample, container, false);
         restaurante = (Restaurante) getArguments().getSerializable("objetoRestaurante");
+        nomeRestaurante = restaurante.getNomeRestaurante();
+        enderecoRestaurante = restaurante.getLocalizacaoRestaurante().getEnderecoRestaurante();
         setRetainInstance(false);
         return rootView;
     }
@@ -240,16 +242,16 @@ public class SlidingTabsBasicFragment extends Fragment {
                     mapa = ((SupportMapFragment) getActivity().getSupportFragmentManager().findFragmentById(R.id.mapa_restaurantes)).getMap();
                     mapa.setMyLocationEnabled(true);
                     LatLng localizacaoRestaurante = new LatLng(Double.parseDouble(restaurante.getLocalizacaoRestaurante().getLatitude()), Double.parseDouble(restaurante.getLocalizacaoRestaurante().getLongitude()));
-                    mapa.addMarker(new MarkerOptions()
-                            .position(localizacaoRestaurante)
-                            .snippet(enderecoRestaurante)
-                            .title(nomeRestaurante)).showInfoWindow();
                     mapa.animateCamera(CameraUpdateFactory.zoomTo(14), 1000, null);
                     CameraPosition posicaoCamera = new CameraPosition.Builder()
                             .target(localizacaoRestaurante)      // Sets the center of the map to Mountain View
                             .zoom(15)                   // Sets the zoom
                             .build();                   // Creates a CameraPosition from the builder
                     mapa.animateCamera(CameraUpdateFactory.newCameraPosition(posicaoCamera));
+                    mapa.addMarker(new MarkerOptions()
+                            .position(localizacaoRestaurante)
+                            .snippet(enderecoRestaurante)
+                            .title(nomeRestaurante)).showInfoWindow();
                 }
                 // Add the newly created View to the ViewPager
                 container.addView(view);
