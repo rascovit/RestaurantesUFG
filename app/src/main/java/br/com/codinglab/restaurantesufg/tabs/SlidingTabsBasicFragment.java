@@ -175,7 +175,6 @@ public class SlidingTabsBasicFragment extends Fragment {
 
         @Override
         public Object instantiateItem(ViewGroup container, int position) {
-            //View view = null;
             if(position == 0){
                 view = getActivity().getLayoutInflater().inflate(R.layout.tab_detalhes_restaurante, container, false);
                 container.addView(view);
@@ -238,15 +237,15 @@ public class SlidingTabsBasicFragment extends Fragment {
             if (position == 2 && !inflouMapa) {
                 inflouMapa = true;
                 view = getActivity().getLayoutInflater().inflate(R.layout.tab_mapa, container, false);
-                if(mapa == null){
+                if(mapa == null) {
                     mapa = ((SupportMapFragment) getActivity().getSupportFragmentManager().findFragmentById(R.id.mapa_restaurantes)).getMap();
                     mapa.setMyLocationEnabled(true);
                     LatLng localizacaoRestaurante = new LatLng(Double.parseDouble(restaurante.getLocalizacaoRestaurante().getLatitude()), Double.parseDouble(restaurante.getLocalizacaoRestaurante().getLongitude()));
                     mapa.animateCamera(CameraUpdateFactory.zoomTo(14), 1000, null);
                     CameraPosition posicaoCamera = new CameraPosition.Builder()
-                            .target(localizacaoRestaurante)      // Sets the center of the map to Mountain View
-                            .zoom(15)                   // Sets the zoom
-                            .build();                   // Creates a CameraPosition from the builder
+                            .target(localizacaoRestaurante)
+                            .zoom(15)
+                            .build();
                     mapa.animateCamera(CameraUpdateFactory.newCameraPosition(posicaoCamera));
                     mapa.addMarker(new MarkerOptions()
                             .position(localizacaoRestaurante)

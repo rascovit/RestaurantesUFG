@@ -44,13 +44,13 @@ public class GcmService extends IntentService {
 
         if (!extras.isEmpty()) {  // has effect of unparcelling Bundle
             if (GoogleCloudMessaging.MESSAGE_TYPE_SEND_ERROR.equals(messageType)) {
-                sendNotification("Send error: " + extras.toString());
+                sendNotification("Erro: " + extras.toString());
             } else if (GoogleCloudMessaging.MESSAGE_TYPE_DELETED.equals(messageType)) {
-                sendNotification("Deleted messages on server: " + extras.toString());
+                sendNotification("Mensagens deletadas do servidor: " + extras.toString());
             } else if (GoogleCloudMessaging.MESSAGE_TYPE_MESSAGE.equals(messageType)) {
 
                 for (int i = 0; i < 5; i++) {
-                    Log.i(TAG, "Working... " + (i + 1)
+                    Log.i(TAG, "Trabalhando... " + (i + 1)
                             + "/5 @ " + SystemClock.elapsedRealtime());
                     try {
 
@@ -77,10 +77,10 @@ public class GcmService extends IntentService {
                 }
 
 
-                Log.i(TAG, "Completed work @ " + SystemClock.elapsedRealtime());
+                Log.i(TAG, "Completou tarefa @ " + SystemClock.elapsedRealtime());
                 // Post notification of received message.
 
-                Log.i(TAG, "Received: " + extras.toString());
+                Log.i(TAG, "Recebido: " + extras.toString());
             }
         }
         Receiver.completeWakefulIntent(intent);
