@@ -8,7 +8,7 @@ public class LocalizacaoRestaurante extends Localizacao{
     private String campus;
     private String pontoDeReferencia;
     private String distanciaKM;
-    private String tempViagem;
+    private String tempoViagem;
     private int campusId;
 
     public LocalizacaoRestaurante(String latitude, String longitude, String enderecoRestaurante, String campus, int campusId, String pontoDeReferencia) {
@@ -16,7 +16,7 @@ public class LocalizacaoRestaurante extends Localizacao{
         this.campus = campus;
         this.pontoDeReferencia = pontoDeReferencia;
         this.distanciaKM = "Calculando...";
-        this.tempViagem = "";
+        this.tempoViagem = "";
         this.campusId = campusId;
 
     }
@@ -25,8 +25,8 @@ public class LocalizacaoRestaurante extends Localizacao{
         this.distanciaKM = distanceTexto;
     }
 
-    public void setTempViagem(String tempoViagemTexto) {
-        this.tempViagem = tempoViagemTexto;
+    public void setTempoViagem(String tempoViagemTexto) {
+        this.tempoViagem = tempoViagemTexto;
     }
 
     public String getEnderecoRestaurante() {
@@ -46,7 +46,7 @@ public class LocalizacaoRestaurante extends Localizacao{
     }
 
     public String getTempoViagem() {
-        return tempViagem;
+        return tempoViagem;
     }
 
     public int getCampusId() {

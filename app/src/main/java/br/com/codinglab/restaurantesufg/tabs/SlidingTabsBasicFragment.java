@@ -39,9 +39,7 @@ import br.com.codinglab.restaurantesufg.modelos.Restaurante;
  */
 public class SlidingTabsBasicFragment extends Fragment {
 
-    static final String LOG_TAG = "SlidingTabsBasicFragment";
     private GoogleMap mapa = null;
-    private String[] coordenadasRestaurantes;
     private String nomeRestaurante;
     private String enderecoRestaurante;
     private View view;
@@ -71,7 +69,6 @@ public class SlidingTabsBasicFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_sample, container, false);
-        coordenadasRestaurantes = getArguments().getStringArray("coordenadasRestaurante");
         restaurante = (Restaurante) getArguments().getSerializable("objetoRestaurante");
         setRetainInstance(false);
         return rootView;

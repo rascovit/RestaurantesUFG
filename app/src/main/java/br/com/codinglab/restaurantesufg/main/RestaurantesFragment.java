@@ -2,6 +2,7 @@ package br.com.codinglab.restaurantesufg.main;
 
 
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -9,10 +10,13 @@ import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -24,7 +28,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.concurrent.ExecutionException;
 
 import br.com.codinglab.restaurantesufg.R;
 import br.com.codinglab.restaurantesufg.modelos.Restaurante;
@@ -33,8 +36,10 @@ import br.com.codinglab.restaurantesufg.utils.Handler;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class RestaurantesFragment extends Fragment implements LocationListener {
+public class RestaurantesFragment extends Fragment implements LocationListener, InterfaceAsyncTask {
 
+    private FragmentManager fragmentManager;
+    private RestaurantesAsyncTask restaurantesAsyncTask;
     private RecyclerView restaurantesRecyclerView;
     private RecyclerView.Adapter restaurantesAdapter;
     private RecyclerView.LayoutManager restaurantesLayoutManager;
@@ -50,6 +55,7 @@ public class RestaurantesFragment extends Fragment implements LocationListener {
         View rootView = inflater.inflate(R.layout.fragment_restaurantes, container, false);
 
         handlerRequisicoes = new Handler();
+        fragmentManager = getActivity().getSupportFragmentManager();
 
         //INICIALIZAÇÃO DOS SERVIÇOS PARA LOCALIZAÇÃO
         locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
@@ -72,22 +78,31 @@ public class RestaurantesFragment extends Fragment implements LocationListener {
             builder.show();
         }
         campusId = getArguments().getInt("campusId");
-        try {
-            listaRestaurantes = new RestaurantesAsyncTask(getActivity()).execute(String.valueOf(campusId)).get();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
+
+        restaurantesAsyncTask = new RestaurantesAsyncTask(getActivity(), new InterfaceAsyncTask() {
+            @Override
+            public void obtenhaResultadoAsyncTask(ArrayList<Restaurante> restaurantes) {
+                listaRestaurantes = restaurantes;
+                // Criando e especificando um Adapter para a RV
+                restaurantesAdapter = new RestaurantesAdapter(getActivity(), listaRestaurantes);
+                restaurantesRecyclerView.setAdapter(restaurantesAdapter);
+            }
+        });
+
+        // VERIFICA SE ESTÁ CONECTADO. CASO NÃO, MOSTRA O DIALOG E RETORNA AO FRAGMENT ANTERIOR
+        if (estaConectadoInternet()) {
+            restaurantesAsyncTask.execute(String.valueOf(campusId));
         }
+        else {
+            dialogNaoEstaConectadoInternet().show();
+            fragmentManager.popBackStack();
+        }
+
         // Referenciando a RV
         restaurantesRecyclerView = (RecyclerView) rootView.findViewById(R.id.restaurantes_recycler_view);
         // Criando e setando um LayoutManager para a RV
         restaurantesLayoutManager = new LinearLayoutManager(getActivity());
         restaurantesRecyclerView.setLayoutManager(restaurantesLayoutManager);
-        // Criando e especificando um Adapter para a RV
-
-        restaurantesAdapter = new RestaurantesAdapter(getActivity(),listaRestaurantes);
-        restaurantesRecyclerView.setAdapter(restaurantesAdapter);
 
         return rootView;
     }
@@ -95,7 +110,13 @@ public class RestaurantesFragment extends Fragment implements LocationListener {
     @Override
     public void onLocationChanged(Location location) {
         //AO OBTER ALGUMA ATUALIZAÇÃO DE LOCALIZAÇÃO, EXECUTA A ASYNCTASK PARA OBTER DISTANCIAS E TEMPOS ESTIMADOS
-        new AsyncTaskBuscaDistancias().execute(location);
+        if (estaConectadoInternet()) {
+            new AsyncTaskBuscaDistancias().execute(location);
+        }
+        else {
+            dialogNaoEstaConectadoInternet().show();
+            fragmentManager.popBackStack();
+        }
     }
 
     @Override
@@ -113,6 +134,36 @@ public class RestaurantesFragment extends Fragment implements LocationListener {
 
     }
 
+    @Override
+    public void obtenhaResultadoAsyncTask(ArrayList<Restaurante> restaurantes) {}
+
+    // VERIFICA SE O USUÁRIO ESTÁ CONECTADO À INTERNET
+    private boolean estaConectadoInternet(){
+        ConnectivityManager connectivity = (ConnectivityManager)getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
+        if (connectivity != null)
+        {
+            NetworkInfo[] informacaoRede = connectivity.getAllNetworkInfo();
+            if (informacaoRede != null)
+                for (int i = 0; i < informacaoRede.length; i++) {
+                    if (informacaoRede[i].getState() == NetworkInfo.State.CONNECTED) {
+                        return true;
+                    }
+                }
+        }
+        return false;
+    }
+
+    private Dialog dialogNaoEstaConectadoInternet() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setMessage("Você não está conectado à internet. Por favor, verifique sua conexão.")
+                .setNeutralButton("OK", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+
+                    }
+                });
+        return builder.create();
+    }
+
     class AsyncTaskBuscaDistancias extends AsyncTask<Location, Void, Boolean> {
 
         @Override
@@ -124,7 +175,6 @@ public class RestaurantesFragment extends Fragment implements LocationListener {
                 String urlPesquisa = "https://maps.googleapis.com/maps/api/distancematrix/json?origins=" + params[0].getLatitude() + "," + params[0].getLongitude() + "&destinations=" + par + "&mode=driving&language=pt-BR";
                 String respostaJSON = handlerRequisicoes.makeServiceCall(urlPesquisa, Handler.GET);
                 try {
-
                     JSONObject jsonObject = new JSONObject(respostaJSON);
                     JSONObject rows = jsonObject.getJSONArray("rows").getJSONObject(0);
                     JSONObject elements = rows.getJSONArray("elements").getJSONObject(0);
@@ -132,9 +182,8 @@ public class RestaurantesFragment extends Fragment implements LocationListener {
                     String distanciaEmKM = distancia.optString("text");
                     JSONObject tempoAteLocal = elements.getJSONObject("duration");
                     String tempoEstimado = tempoAteLocal.optString("text");
-
                     listaRestaurantes.get(i).getLocalizacaoRestaurante().setDistancia(distanciaEmKM);
-                    listaRestaurantes.get(i).getLocalizacaoRestaurante().setTempViagem(tempoEstimado);
+                    listaRestaurantes.get(i).getLocalizacaoRestaurante().setTempoViagem(tempoEstimado);
                 } catch (JSONException e) {
                     e.printStackTrace();
                     return false;
