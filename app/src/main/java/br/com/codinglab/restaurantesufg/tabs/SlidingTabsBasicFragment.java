@@ -4,20 +4,20 @@ package br.com.codinglab.restaurantesufg.tabs;
  * Created by thiagodurante on 29/06/15.
  */
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -48,8 +48,7 @@ public class SlidingTabsBasicFragment extends Fragment {
     //OBJETO RESTAURANTE
     private Restaurante restaurante;
 
-    //RATINGBAR
-    private RatingBar ratingBar;
+    private FloatingActionButton botaoFavoritarRestaurante;
 
     /**
      * A custom {@link ViewPager} title strip which looks much like Tabs present in Android v4.0 and
@@ -198,27 +197,33 @@ public class SlidingTabsBasicFragment extends Fragment {
                 estiloDeServirTextView.setText(restaurante.getEstiloDeServir());
 
                 // RATING BAR
-                ratingBar = (RatingBar) view.findViewById(R.id.ratingBar);
+                botaoFavoritarRestaurante = (FloatingActionButton) view.findViewById(R.id.botaoFavoritarRestaurante);
+                //ratingBar = (RatingBar) view.findViewById(R.id.ratingBar);
                 SharedPreferences sharedPreferences = getActivity().getSharedPreferences("settings", Context.MODE_PRIVATE);
 
                 if(sharedPreferences.contains(String.valueOf(restaurante.getId()))){
-                    ratingBar.setRating(1);
+                    botaoFavoritarRestaurante.setImageResource(R.mipmap.ic_star_favoritado);
+                    botaoFavoritarRestaurante.setPressed(true);
                 }
 
-                ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
-                    public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
+                botaoFavoritarRestaurante.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
                         SharedPreferences sharedPreferences = getActivity().getSharedPreferences("settings", Context.MODE_PRIVATE);
                         SharedPreferences.Editor editor = sharedPreferences.edit();
-                        if (ratingBar.getRating() == 0) {
+                        if (sharedPreferences.contains(String.valueOf(restaurante.getId()))) {
                             editor.remove(String.valueOf(restaurante.getId())).commit();
-                            Toast.makeText(getActivity(), "Removido com sucesso dos favoritos!", Toast.LENGTH_SHORT).show();
+                            botaoFavoritarRestaurante.setImageResource(R.mipmap.ic_star);
+                            botaoFavoritarRestaurante.setPressed(false);
+                            Toast.makeText(getActivity(), "Removido com sucesso dos favoritos", Toast.LENGTH_SHORT).show();
                         } else {
                             editor.putString(String.valueOf(restaurante.getId()),"favorito").commit();
-                            Toast.makeText(getActivity(), "Adicionado com sucesso aos favoritos!", Toast.LENGTH_SHORT).show();
+                            botaoFavoritarRestaurante.setImageResource(R.mipmap.ic_star_favoritado);
+                            botaoFavoritarRestaurante.setPressed(true);
+                            Toast.makeText(getActivity(), "Adicionado com sucesso aos favoritos", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
-                ratingBar.setClickable(true);
             }
             if(position == 1){
                 view = getActivity().getLayoutInflater().inflate(R.layout.tab_cardapio, container, false);

@@ -92,13 +92,7 @@ public class RestaurantesFragment extends Fragment implements LocationListener, 
     @Override
     public void onLocationChanged(Location location) {
         //AO OBTER ALGUMA ATUALIZAÇÃO DE LOCALIZAÇÃO, EXECUTA A ASYNCTASK PARA OBTER DISTANCIAS E TEMPOS ESTIMADOS
-        if (estaConectadoInternet() && isResumed()) {
-            new AsyncTaskBuscaDistancias().execute(location);
-        }
-        else {
-            dialogNaoEstaConectadoInternet().show();
-            fragmentManager.popBackStack();
-        }
+        new AsyncTaskBuscaDistancias().execute(location);
     }
 
     @Override
