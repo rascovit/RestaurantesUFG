@@ -64,11 +64,9 @@ public class RestaurantesFragment extends Fragment implements LocationListener, 
         //ATUALIZA O GPS A CADA 5 SEGUNDOS OU A CADA 100 METROS DE MOVIMENTO
         locationManager.requestLocationUpdates(locationProvider, 5000, 10, this);
 
-        if (!locationManager.isProviderEnabled(locationProvider)) {
-            dialogGPSNaoHabilitado().show();
-        }
         campusId = getArguments().getInt("campusId");
 
+        // ASYNCTASK QUE RECUPERA OS RESTAURANTES POR CAMPUS SELECIONADO
         restaurantesAsyncTask = new RestaurantesAsyncTask(getActivity(), this);
 
         // VERIFICA SE ESTÁ CONECTADO. CASO NÃO, MOSTRA O DIALOG E RETORNA AO FRAGMENT ANTERIOR
@@ -118,6 +116,9 @@ public class RestaurantesFragment extends Fragment implements LocationListener, 
             fragmentManager.popBackStack();
         }
         else {
+            if (!locationManager.isProviderEnabled(locationProvider)) {
+                dialogGPSNaoHabilitado().show();
+            }
             // Criando e especificando um Adapter para a RV
             restaurantesAdapter = new RestaurantesAdapter(getActivity(), listaRestaurantes);
             restaurantesRecyclerView.setAdapter(restaurantesAdapter);

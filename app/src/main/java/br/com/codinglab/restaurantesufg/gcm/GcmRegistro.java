@@ -44,7 +44,7 @@ public class GcmRegistro {
             if(GooglePlayServicesUtil.isUserRecoverableError(resultCode)){
                 GooglePlayServicesUtil.getErrorDialog(resultCode, activity, PLAY_SERVICES_RESOLUTION_REQUEST).show();
             }else{
-                Toast.makeText(activity, "Dispositivo n„o suportado", Toast.LENGTH_LONG).show();
+                Toast.makeText(activity, "Dispositivo n√£o suportado", Toast.LENGTH_LONG).show();
             }
             return false;
         }
@@ -58,13 +58,13 @@ public class GcmRegistro {
 
         String registrationId = prefs.getString(PROPERTY_REG_ID, "");
         if (registrationId.isEmpty()) {
-            Log.i(TAG, "Registro n„o encontrado.");
+            Log.i(TAG, "Registro n√£o encontrado.");
             return "";
         }
         int registeredVersion = prefs.getInt(PROPERTY_APP_VERSION, Integer.MIN_VALUE);
         int currentVersion = getAppVersion(context);
         if (registeredVersion != currentVersion) {
-            Log.i(TAG, "Vers„o da aplicaÁ„o mudou.");
+            Log.i(TAG, "Vers√£o da aplica√ß√£o mudou.");
             return "";
         }
         return registrationId;
@@ -75,7 +75,7 @@ public class GcmRegistro {
             PackageInfo packageInfo = context.getPackageManager().getPackageInfo(context.getPackageName(), 0);
             return packageInfo.versionCode;
         } catch (PackageManager.NameNotFoundException e) {
-            throw new RuntimeException("N„o conseguiu obter o pacote: " + e);
+            throw new RuntimeException("N√£o conseguiu obter o pacote: " + e);
         }
     }
     public SharedPreferences getGcmPreferences(Context context) {
@@ -118,7 +118,7 @@ public class GcmRegistro {
     public void storeRegistrationId(Context context, String regId) {
         final SharedPreferences prefs = getGcmPreferences(context);
         int appVersion = getAppVersion(context);
-        Log.i(TAG, "Salvando regId na vers„o " + appVersion);
+        Log.i(TAG, "Salvando regId na vers√£o " + appVersion);
         SharedPreferences.Editor editor = prefs.edit();
         editor.putString(PROPERTY_REG_ID, regId);
         editor.putInt(PROPERTY_APP_VERSION, appVersion);
