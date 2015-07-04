@@ -3,7 +3,6 @@ package br.com.codinglab.restaurantesufg.main;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
-import android.util.Log;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -45,7 +44,6 @@ public class RestaurantesAsyncTask extends AsyncTask<String, Void, ArrayList<Res
     @Override
     protected ArrayList<Restaurante> doInBackground(String... params) {
 
-        String campus = params[0];
         String url = "http://www.codinglab.com.br/samuel/restaurantes.json";
         String jsonResposta = "";
         ArrayList<Restaurante> listaRestaurantes = new ArrayList<>();
@@ -122,7 +120,6 @@ public class RestaurantesAsyncTask extends AsyncTask<String, Void, ArrayList<Res
                             String inicio = jsonObject.getJSONObject("almoco").getString("inicio");
                             String fim = jsonObject.getJSONObject("almoco").getString("fim");
                             restaurante.setHorarioAlmoco(new Horario(inicio, fim));
-
 
                             JSONArray jsonCardapioAlmoco = jsonRestaurante.getJSONObject("cardapio").getJSONArray("almoco");
 

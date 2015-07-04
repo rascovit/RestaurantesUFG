@@ -24,7 +24,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.concurrent.ExecutionException;
 
 import br.com.codinglab.restaurantesufg.R;
@@ -56,7 +55,7 @@ public class RestaurantesFragment extends Fragment implements LocationListener {
         locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
         Criteria criteria = new Criteria();
         locationProvider = locationManager.getBestProvider(criteria, false);
-        //ATUALIZA O GPS A CADA 5 SEGUNDOS OU A CADA 100 METROS
+        //ATUALIZA O GPS A CADA 5 SEGUNDOS OU A CADA 100 METROS DE MOVIMENTO
         locationManager.requestLocationUpdates(locationProvider, 5000, 10, this);
 
         if (!locationManager.isProviderEnabled(locationProvider)) {
@@ -145,6 +144,7 @@ public class RestaurantesFragment extends Fragment implements LocationListener {
         }
 
         @Override
+        // ATUALIZA A LISTA DE RESTAURANTES COM O TEMPO E DISTÂNCIA JÁ CALCULADOS
         protected void onPostExecute(Boolean b) {
             restaurantesAdapter.notifyDataSetChanged();
         }

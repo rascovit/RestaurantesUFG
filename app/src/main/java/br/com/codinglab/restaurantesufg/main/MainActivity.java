@@ -152,8 +152,6 @@ public class MainActivity extends ActionBarActivity {
     }
 
 
-
-
     /*CGM*/
     private boolean checkPlayServices(){
         int resultCode = GooglePlayServicesUtil.isGooglePlayServicesAvailable(this);
@@ -161,7 +159,7 @@ public class MainActivity extends ActionBarActivity {
             if(GooglePlayServicesUtil.isUserRecoverableError(resultCode)){
                 GooglePlayServicesUtil.getErrorDialog(resultCode,this,PLAY_SERVICES_RESOLUTION_REQUEST).show();
             }else{
-                Toast.makeText(this,"Dispositivo não suportado",Toast.LENGTH_LONG);
+                Toast.makeText(this,"Dispositivo não suportado",Toast.LENGTH_LONG).show();
             }
             return false;
         }

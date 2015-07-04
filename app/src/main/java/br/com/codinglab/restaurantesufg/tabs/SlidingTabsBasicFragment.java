@@ -4,6 +4,7 @@ package br.com.codinglab.restaurantesufg.tabs;
  * Created by thiagodurante on 29/06/15.
  */
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -13,6 +14,7 @@ import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -71,7 +73,7 @@ public class SlidingTabsBasicFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_sample, container, false);
         coordenadasRestaurantes = getArguments().getStringArray("coordenadasRestaurante");
         restaurante = (Restaurante) getArguments().getSerializable("objetoRestaurante");
-        setRetainInstance(true);
+        setRetainInstance(false);
         return rootView;
     }
 
@@ -109,12 +111,13 @@ public class SlidingTabsBasicFragment extends Fragment {
     }
     // END_INCLUDE (fragment_onviewcreated)
 
-    @Override
+    /*@Override
     public void onDestroy() {
         super.onDestroy();
         mViewPager.removeView(view);
+    }*/
 
-    }
+    
     @Override
     public void onDestroyView()
     {
@@ -177,7 +180,7 @@ public class SlidingTabsBasicFragment extends Fragment {
             //View view = null;
             if(position == 0){
                 view = getActivity().getLayoutInflater().inflate(R.layout.tab_detalhes_restaurante, container, false);
-                container.addView(view, position);
+                container.addView(view);
 
                 // COMPLETANDO OS DADOS NA TELA
                 TextView nomeRestauranteTextView = (TextView) view.findViewById(R.id.nomeRestaurante_textView);
@@ -222,20 +225,14 @@ public class SlidingTabsBasicFragment extends Fragment {
             }
             if(position == 1){
                 view = getActivity().getLayoutInflater().inflate(R.layout.tab_cardapio, container, false);
-
-
                 RecyclerView cardapioRecyclerView = (RecyclerView) view.findViewById(R.id.cardapio_recyclerView);
                 RecyclerView.LayoutManager cardapioLayoutManager = new LinearLayoutManager(getActivity());
                 RecyclerView.Adapter cardapioAdapter = new CardapioAdapter(restaurante, getActivity());
-
                 cardapioRecyclerView.setAdapter(cardapioAdapter);
                 cardapioRecyclerView.setLayoutManager(cardapioLayoutManager);
-
-                container.addView(view,position);
-
+                container.addView(view);
             }
             if (position == 2 && !inflouMapa) {
-
                 inflouMapa = true;
                 view = getActivity().getLayoutInflater().inflate(R.layout.tab_mapa, container, false);
                 if(mapa == null){
@@ -253,9 +250,8 @@ public class SlidingTabsBasicFragment extends Fragment {
                             .build();                   // Creates a CameraPosition from the builder
                     mapa.animateCamera(CameraUpdateFactory.newCameraPosition(posicaoCamera));
                 }
-
                 // Add the newly created View to the ViewPager
-                container.addView(view,position);
+                container.addView(view);
             }
 
             // Return the View
