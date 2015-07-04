@@ -47,13 +47,15 @@ public class RestaurantesAsyncTask extends AsyncTask<String, Void, ArrayList<Res
     @Override
     protected ArrayList<Restaurante> doInBackground(String... params) {
 
-        String url = "http://www.codinglab.com.br/samuel/restaurantes.json";
+        String id = params[0];
+        String url = "http://www.codinglab.com.br/samuel/restaurantesufg/restaurantes.php?campusid=" + id;
         String jsonResposta = "";
         ArrayList<Restaurante> listaRestaurantes = new ArrayList<>();
         Handler handler = new Handler();
         jsonResposta = handler.makeServiceCall(url, Handler.GET);
 
         if (jsonResposta != "") {
+            
             try {
                 JSONObject jsonPrincipal = new JSONObject(jsonResposta);
                 String serverStatus = jsonPrincipal.getString("status");
