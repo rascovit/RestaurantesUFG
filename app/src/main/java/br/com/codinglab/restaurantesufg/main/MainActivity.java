@@ -41,12 +41,14 @@ public class MainActivity extends ActionBarActivity {
         super.onDestroy();
     }
 
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         setarConfiguracoesView();
         toolbar = (Toolbar) findViewById(R.id.tool_bar); // Attaching the layout to the toolbar object
+        toolbar.setElevation(5);
         setSupportActionBar(toolbar);
         gcmRegistro = new GcmRegistro(this);
         if (savedInstanceState == null) {

@@ -4,8 +4,10 @@ package br.com.codinglab.restaurantesufg.tabs;
  * Created by thiagodurante on 29/06/15.
  */
 
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
@@ -14,6 +16,7 @@ import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -85,8 +88,13 @@ public class SlidingTabsBasicFragment extends Fragment {
      *
      * @param view View created in {@link #onCreateView(LayoutInflater, ViewGroup, Bundle)}
      */
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
+
+        Toolbar toolbar = (Toolbar) getActivity().findViewById(R.id.tool_bar); // Attaching the layout to the toolbar object
+        toolbar.setElevation(0);
+
         // BEGIN_INCLUDE (setup_viewpager)
         // Get the ViewPager and set it's PagerAdapter so that it can display items
         mViewPager = (ViewPager) view.findViewById(R.id.viewpager);
@@ -105,6 +113,7 @@ public class SlidingTabsBasicFragment extends Fragment {
             }
         });
         mSlidingTabLayout.setViewPager(mViewPager);
+
         // END_INCLUDE (setup_slidingtablayout)
     }
     // END_INCLUDE (fragment_onviewcreated)
@@ -207,6 +216,7 @@ public class SlidingTabsBasicFragment extends Fragment {
                 }
 
                 botaoFavoritarRestaurante.setOnClickListener(new View.OnClickListener() {
+                    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
                     @Override
                     public void onClick(View v) {
                         SharedPreferences sharedPreferences = getActivity().getSharedPreferences("settings", Context.MODE_PRIVATE);
@@ -215,11 +225,13 @@ public class SlidingTabsBasicFragment extends Fragment {
                             editor.remove(String.valueOf(restaurante.getId())).commit();
                             botaoFavoritarRestaurante.setImageResource(R.mipmap.ic_star);
                             botaoFavoritarRestaurante.setPressed(false);
+                            botaoFavoritarRestaurante.setElevation(6);
                             Toast.makeText(getActivity(), "Removido com sucesso dos favoritos", Toast.LENGTH_SHORT).show();
                         } else {
                             editor.putString(String.valueOf(restaurante.getId()),"favorito").commit();
                             botaoFavoritarRestaurante.setImageResource(R.mipmap.ic_star_favoritado);
                             botaoFavoritarRestaurante.setPressed(true);
+                            botaoFavoritarRestaurante.setElevation(12);
                             Toast.makeText(getActivity(), "Adicionado com sucesso aos favoritos", Toast.LENGTH_SHORT).show();
                         }
                     }
