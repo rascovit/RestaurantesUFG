@@ -188,28 +188,31 @@ public class RestaurantesFragment extends Fragment implements LocationListener, 
 
         @Override
         protected Boolean doInBackground(Location... params) {
-
-            for(int i = 0; i < listaRestaurantes.size(); i++){
-                Log.i("GCM Demo","Pesquisando distancia.");
-                String par = listaRestaurantes.get(i).getLocalizacaoRestaurante().getLatitude() + "," + listaRestaurantes.get(i).getLocalizacaoRestaurante().getLongitude();
-                String urlPesquisa = "https://maps.googleapis.com/maps/api/distancematrix/json?origins=" + params[0].getLatitude() + "," + params[0].getLongitude() + "&destinations=" + par + "&mode=driving&language=pt-BR";
-                String respostaJSON = handlerRequisicoes.makeServiceCall(urlPesquisa, Handler.GET);
-                try {
-                    JSONObject jsonObject = new JSONObject(respostaJSON);
-                    JSONObject rows = jsonObject.getJSONArray("rows").getJSONObject(0);
-                    JSONObject elements = rows.getJSONArray("elements").getJSONObject(0);
-                    JSONObject distancia = elements.getJSONObject("distance");
-                    String distanciaEmKM = distancia.optString("text");
-                    JSONObject tempoAteLocal = elements.getJSONObject("duration");
-                    String tempoEstimado = tempoAteLocal.optString("text");
-                    listaRestaurantes.get(i).getLocalizacaoRestaurante().setDistancia(distanciaEmKM);
-                    listaRestaurantes.get(i).getLocalizacaoRestaurante().setTempoViagem(tempoEstimado);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                    return false;
+            if(listaRestaurantes != null){
+                for(int i = 0; i < listaRestaurantes.size(); i++){
+                    Log.i("GCM Demo","Pesquisando distancia.");
+                    String par = listaRestaurantes.get(i).getLocalizacaoRestaurante().getLatitude() + "," + listaRestaurantes.get(i).getLocalizacaoRestaurante().getLongitude();
+                    String urlPesquisa = "https://maps.googleapis.com/maps/api/distancematrix/json?origins=" + params[0].getLatitude() + "," + params[0].getLongitude() + "&destinations=" + par + "&mode=driving&language=pt-BR";
+                    String respostaJSON = handlerRequisicoes.makeServiceCall(urlPesquisa, Handler.GET);
+                    try {
+                        JSONObject jsonObject = new JSONObject(respostaJSON);
+                        JSONObject rows = jsonObject.getJSONArray("rows").getJSONObject(0);
+                        JSONObject elements = rows.getJSONArray("elements").getJSONObject(0);
+                        JSONObject distancia = elements.getJSONObject("distance");
+                        String distanciaEmKM = distancia.optString("text");
+                        JSONObject tempoAteLocal = elements.getJSONObject("duration");
+                        String tempoEstimado = tempoAteLocal.optString("text");
+                        listaRestaurantes.get(i).getLocalizacaoRestaurante().setDistancia(distanciaEmKM);
+                        listaRestaurantes.get(i).getLocalizacaoRestaurante().setTempoViagem(tempoEstimado);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                        return false;
+                    }
                 }
+                return true;
+            }else{
+                return false;
             }
-            return true;
         }
 
         @Override
