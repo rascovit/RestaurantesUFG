@@ -125,8 +125,8 @@ public class CardapioAdapter extends RecyclerView.Adapter<CardapioAdapter.ViewHo
 
         nomeDoPratoTextView.setText(itensCardapio.get(position).getPrato().getNome());
         descricaoDoPratoTextView.setText(itensCardapio.get(position).getPrato().getDescricao());
-        precoDoPratoTextView.setText("R$ " +Double.toString(itensCardapio.get(position).getPrecoPrato()) + " -  " +itensCardapio.get(position).getServidoDia() + " - " +itensCardapio.get(position).getServidoNo());
-        tipoDoPratoTextView.setText(itensCardapio.get(position).getPrato().getTipo());
+        precoDoPratoTextView.setText("R$ " +Double.toString(itensCardapio.get(position).getPrecoPrato()));
+        tipoDoPratoTextView.setText(itensCardapio.get(position).getPrato().getTipo()  + " -  " +itensCardapio.get(position).getServidoDia() + " - " +itensCardapio.get(position).getServidoNo());
 
         nomeDoPratoTextView.setTypeface(robotoRegular);
         descricaoDoPratoTextView.setTypeface(robotoRegular);
