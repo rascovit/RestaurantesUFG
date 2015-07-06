@@ -62,7 +62,7 @@ public class GcmRegistro {
             return "";
         }
         int registeredVersion = prefs.getInt(PROPERTY_APP_VERSION, Integer.MIN_VALUE);
-        int currentVersion = getAppVersion(context);
+        int currentVersion = getAppVersion(activity);
         if (registeredVersion != currentVersion) {
             Log.i(TAG, "Versão da aplicação mudou.");
             return "";
@@ -81,21 +81,21 @@ public class GcmRegistro {
     public SharedPreferences getGcmPreferences(Context context) {
         return activity.getSharedPreferences(MainActivity.class.getSimpleName(), Context.MODE_PRIVATE);
     }
-    public void registerInBackground() {
 
+    public void registerInBackground() {
         new AsyncTask<Void, Void, String>() {
             @Override
             protected String doInBackground(Void... params) {
                 String msg = "";
                 try {
                     if (gcm == null) {
-                        gcm = GoogleCloudMessaging.getInstance(context);
+                        gcm = GoogleCloudMessaging.getInstance(activity);
                     }
                     regId = gcm.register(SENDER_ID);
                     msg = "Dispositivo registrado. ID=" + regId;
 
                     sendRegistrationIdToBackend(regId);
-                    storeRegistrationId(context, regId);
+                    storeRegistrationId(activity, regId);
                 } catch (IOException ex) {
                     msg = "Erro :" + ex.getMessage();
                 }
@@ -117,7 +117,7 @@ public class GcmRegistro {
     }
     public void storeRegistrationId(Context context, String regId) {
         final SharedPreferences prefs = getGcmPreferences(context);
-        int appVersion = getAppVersion(context);
+        int appVersion = getAppVersion(activity);
         Log.i(TAG, "Salvando regId na versão " + appVersion);
         SharedPreferences.Editor editor = prefs.edit();
         editor.putString(PROPERTY_REG_ID, regId);
