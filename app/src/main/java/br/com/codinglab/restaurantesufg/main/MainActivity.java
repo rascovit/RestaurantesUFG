@@ -36,19 +36,12 @@ public class MainActivity extends ActionBarActivity {
     String regId;
     Context context;
     String SENDER_ID = "126111843784";
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-    }
 
-    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         setarConfiguracoesView();
-        toolbar = (Toolbar) findViewById(R.id.tool_bar); // Attaching the layout to the toolbar object
-        toolbar.setElevation(5);
         setSupportActionBar(toolbar);
         gcmRegistro = new GcmRegistro(this);
         if (savedInstanceState == null) {
@@ -56,9 +49,8 @@ public class MainActivity extends ActionBarActivity {
                     .add(R.id.container, new InicioFragment())
                     .commit();
         }
-
-        if(gcmRegistro.checkPlayServices()){
-            context = getApplicationContext();
+        if(gcmRegistro.checkPlayServices()) {
+            context = this;
             gcm = GoogleCloudMessaging.getInstance(this);
             regId = gcmRegistro.getRegistrationId(context);
             if(regId.isEmpty()){
@@ -92,12 +84,19 @@ public class MainActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+    }
+
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     private void setarConfiguracoesView() {
         Window window = getWindow();
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
         window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         window.setStatusBarColor(getResources().getColor(R.color.primaryColorDark));
+        toolbar = (Toolbar) findViewById(R.id.tool_bar); // Attaching the layout to the toolbar object
+        toolbar.setElevation(5);
     }
 
     /**
