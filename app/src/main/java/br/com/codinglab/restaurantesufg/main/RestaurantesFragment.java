@@ -81,8 +81,10 @@ public class RestaurantesFragment extends Fragment implements LocationListener, 
             restaurantesAsyncTask.execute(String.valueOf(campusId));
         }
         else {
-            dialogNaoEstaConectadoInternet().show();
-            fragmentManager.popBackStack();
+            if (getActivity() != null) {
+                dialogNaoEstaConectadoInternet().show();
+                fragmentManager.popBackStack();
+            }
         }
 
         // Referenciando a RV
@@ -118,12 +120,12 @@ public class RestaurantesFragment extends Fragment implements LocationListener, 
     @Override
     public void obtenhaResultadoAsyncTask(ArrayList<Restaurante> restaurantes) {
         listaRestaurantes = restaurantes;
-        if (listaRestaurantes.isEmpty()) {
+        if (listaRestaurantes.isEmpty() && getActivity() != null) {
             dialogNaoHaRestaurantesCadastrados().show();
             fragmentManager.popBackStack();
         }
         else {
-            if (!locationManager.isProviderEnabled(locationProvider)) {
+            if (!locationManager.isProviderEnabled(locationProvider) && getActivity() != null) {
                 dialogGPSNaoHabilitado().show();
             }
             // Criando e especificando um Adapter para a RV

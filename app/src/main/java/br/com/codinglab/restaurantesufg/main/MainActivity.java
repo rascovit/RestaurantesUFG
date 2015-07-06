@@ -118,11 +118,13 @@ public class MainActivity extends ActionBarActivity {
 
             ArrayList<Campus> listaCampus = new ArrayList<>();
 
-            listaCampus.add(new Campus("Câmpus Colemar Natal e Silva",1,"Avenida Universitária"));
-            listaCampus.add(new Campus("Câmpus Samambaia", 2, "Avenida Samambaia"));
-            listaCampus.add(new Campus("Câmpus Goiás Velho", 3, "Avenida Dario Sampaio"));
-            listaCampus.add(new Campus("Câmpus Jataí",4,"Avenida Jataí"));
-            listaCampus.add(new Campus("Câmpus Catalão",5,"Rua das Amendoeiras"));
+            listaCampus.add(new Campus("Regional Goiânia - Câmpus Colemar Natal e Silva",1,"Avenida Universitária"));
+            listaCampus.add(new Campus("Regional Goiânia - Câmpus Samambaia", 2, "Avenida Samambaia"));
+            listaCampus.add(new Campus("Regional Cidade de Goiás", 3, "Avenida Bom Pastor, nº 8, Setor Areião"));
+            listaCampus.add(new Campus("Regional Jataí - Câmpus Cidade Universitária", 4,"BR 364, km 195, nº 3800"));
+            listaCampus.add(new Campus("Regional Jataí - Câmpus Riachuelo", 5,"Rua Riachuelo, CP 03"));
+            listaCampus.add(new Campus("Regional Catalão - Campus I", 6,"Av. Dr. Lamartine Pinto de Avelar, 1120"));
+            listaCampus.add(new Campus("Regional Catalão - Campus II", 7,"Avenida Castelo Branco, s/n"));
 
             // Referenciando a RV
             campusRecyclerView = (RecyclerView) rootView.findViewById(R.id.campus_recycler_view);
