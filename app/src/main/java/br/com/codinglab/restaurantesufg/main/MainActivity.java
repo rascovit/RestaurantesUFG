@@ -35,14 +35,15 @@ public class MainActivity extends ActionBarActivity {
     GoogleCloudMessaging gcm;
     String regId;
     Context context;
-    String SENDER_ID = "126111843784";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        setarConfiguracoesView();
-        setSupportActionBar(toolbar);
+        if (Build.VERSION.SDK_INT >= 21) {
+            setarConfiguracoesView();
+            setSupportActionBar(toolbar);
+        }
         gcmRegistro = new GcmRegistro(this);
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()

@@ -4,7 +4,6 @@ package br.com.codinglab.restaurantesufg.tabs;
  * Created by thiagodurante on 29/06/15.
  */
 
-import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Build;
@@ -20,8 +19,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -35,11 +32,6 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import br.com.codinglab.restaurantesufg.R;
 import br.com.codinglab.restaurantesufg.modelos.Restaurante;
 
-/**
- * A basic sample which shows how to use {@link com.example.android.common.view.SlidingTabLayout}
- * to display a custom {@link ViewPager} title strip which gives continuous feedback to the user
- * when scrolling.
- */
 public class SlidingTabsBasicFragment extends Fragment {
 
     private GoogleMap mapa = null;
@@ -88,12 +80,13 @@ public class SlidingTabsBasicFragment extends Fragment {
      *
      * @param view View created in {@link #onCreateView(LayoutInflater, ViewGroup, Bundle)}
      */
-    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
 
-        Toolbar toolbar = (Toolbar) getActivity().findViewById(R.id.tool_bar); // Attaching the layout to the toolbar object
-        toolbar.setElevation(0);
+        if (Build.VERSION.SDK_INT >= 21) {
+            Toolbar toolbar = (Toolbar) getActivity().findViewById(R.id.tool_bar); // Attaching the layout to the toolbar object
+            toolbar.setElevation(0);
+        }
 
         // BEGIN_INCLUDE (setup_viewpager)
         // Get the ViewPager and set it's PagerAdapter so that it can display items
@@ -118,13 +111,6 @@ public class SlidingTabsBasicFragment extends Fragment {
     }
     // END_INCLUDE (fragment_onviewcreated)
 
-    /*@Override
-    public void onDestroy() {
-        super.onDestroy();
-        mViewPager.removeView(view);
-    }*/
-
-    
     @Override
     public void onDestroyView()
     {
@@ -216,7 +202,6 @@ public class SlidingTabsBasicFragment extends Fragment {
                 }
 
                 botaoFavoritarRestaurante.setOnClickListener(new View.OnClickListener() {
-                    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
                     @Override
                     public void onClick(View v) {
                         SharedPreferences sharedPreferences = getActivity().getSharedPreferences("settings", Context.MODE_PRIVATE);
@@ -225,13 +210,17 @@ public class SlidingTabsBasicFragment extends Fragment {
                             editor.remove(String.valueOf(restaurante.getId())).commit();
                             botaoFavoritarRestaurante.setImageResource(R.mipmap.ic_star);
                             botaoFavoritarRestaurante.setPressed(false);
-                            botaoFavoritarRestaurante.setElevation(6);
+                            if (Build.VERSION.SDK_INT >= 21) {
+                                botaoFavoritarRestaurante.setElevation(6);
+                            }
                             Toast.makeText(getActivity(), "Removido com sucesso dos favoritos", Toast.LENGTH_SHORT).show();
                         } else {
                             editor.putString(String.valueOf(restaurante.getId()),"favorito").commit();
                             botaoFavoritarRestaurante.setImageResource(R.mipmap.ic_star_favoritado);
                             botaoFavoritarRestaurante.setPressed(true);
-                            botaoFavoritarRestaurante.setElevation(12);
+                            if (Build.VERSION.SDK_INT >= 21) {
+                                botaoFavoritarRestaurante.setElevation(12);
+                            }
                             Toast.makeText(getActivity(), "Adicionado com sucesso aos favoritos", Toast.LENGTH_SHORT).show();
                         }
                     }

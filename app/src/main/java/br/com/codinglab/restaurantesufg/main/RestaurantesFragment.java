@@ -1,7 +1,6 @@
 package br.com.codinglab.restaurantesufg.main;
 
 
-import android.annotation.TargetApi;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
@@ -52,14 +51,15 @@ public class RestaurantesFragment extends Fragment implements LocationListener, 
     ArrayList<Restaurante> listaRestaurantes;
     private int campusId;
 
-    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_restaurantes, container, false);
 
-        Toolbar toolbar = (Toolbar) getActivity().findViewById(R.id.tool_bar); // Attaching the layout to the toolbar object
-        toolbar.setElevation(5);
+        if (Build.VERSION.SDK_INT >= 21) {
+            Toolbar toolbar = (Toolbar) getActivity().findViewById(R.id.tool_bar); // Attaching the layout to the toolbar object
+            toolbar.setElevation(5);
+        }
 
         handlerRequisicoes = new Handler();
         fragmentManager = getActivity().getSupportFragmentManager();
